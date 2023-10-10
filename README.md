@@ -1,30 +1,22 @@
-## Hotel
+## Hotel Booking
 
 ![Booking Hotel](./image/__hotel1.jpg)
 
 ### About:
-
-A Web App Where Users Can Book Rooms For Specific Date.For Administrators permissions With create, update, delete rooms details.
+A Web App Where Users Can Book Rooms For Specific Date.For Administrators permissions With create, update, delete rooms details. 
 <br/>
 
 ### Used Technologies:
-
-##### ElectronJs & ViteJs - Version: (https://electronjs.org/docs ,https://vitejs.dev/guide)
-
-##### ViteJs - Version: (https://vitejs.dev/guide)
+##### [HTML](https://developer.mozilla.org/en-US/docs/web/html)
+##### [CSS](https://developer.mozilla.org/en-US/docs/web/css)
+##### [JAVASCRIPT](https://developer.mozilla.org/en-US/docs/web/javascript)
+##### [PHP](https://www.php.net/docs.php)
+##### [BOOTSTRAP](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
 
 ### Launch:
-
-##### Preview:
-
-Demo: https://z-hotel.uk
+With Xampp ( Apache Httpd + Mysql ) , Imported Database hotel File Via [Database](https://127.0.0.1/phpmyadmin) 
 <br/>
-Meta Demo: Used Cloudflare Hosting Services With Features: Firewall Events ,Level Verbose Logging ,...
-<br/>
-Meta Issue: cloudflare d1 (Database SQL - Variable)
-<br/>
-Meta Insights {mobile|desktop} version: https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fz-hotel.uk%2F
+App Is Accessible On 👉: [Hotel](https://127.0.0.1/index.php)
 
 ### License:
-
 MIT: [http://z4dev.mit-license.org](http://z4dev.mit-license.org)
