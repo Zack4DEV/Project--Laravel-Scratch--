@@ -5,9 +5,9 @@ namespace App\Http\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model {
+class Admin extends Model {
     use HasFactory;
-    protected $table = 'signup';
-    protected $primaryKey = 'UserId';
+    protected $table = 'emp_login';
+    protected $primaryKey = 'empid';
 
 }

@@ -1,3 +1,5 @@
+@extends('Admins.Admin.Payment');
+
 @include('Admins.Admin.Print.PrintHeader')
 @include('Admins.Admin.Print.PrintArticle')
 @include('Admins.Admin.Print.PrintASide')

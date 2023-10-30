@@ -70,4 +70,5 @@ $f1 = $sc - $csc;
 //total available room=>
     $f5 = $r - $cr;
     @if ($f5 <= 0) $f5="NO" ;
-@endif @endphp
+@endif
+@endphp

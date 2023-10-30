@@ -9,5 +9,5 @@
 
 @include('Layouts.Logo')
 @include('Layouts.AuthLoginContainer')
-@include('Layouts.Auth.Signup.SignupUser')
+@include('Layouts.AuthLogin.Signup.SignupUser')
 @inlcude('Layouts.AuthScript')

@@ -1,3 +1,6 @@
+@extends('Admins.Admin.Roombook');
+
+
 @php
 
 $sqlq = "SELECT * FROM roombook;--'";

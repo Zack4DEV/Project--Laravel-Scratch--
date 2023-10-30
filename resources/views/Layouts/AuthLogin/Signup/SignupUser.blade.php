@@ -1,5 +1,5 @@
-@extends('Layouts.Auth.AuthEmployeeLogin')
-@extends('Layouts.Auth.AuthUserLogin')
+@extends('Layouts.AuthLogin.AuthEmployeeLogin')
+@extends('Layouts.AuthLogin.AuthUserLogin')
 
 
 @if (isset($_POST['user_signup_submit']))
@@ -23,7 +23,7 @@ $result = mysqli_query($conn, $sql);
 @if ($result->num_rows > 0)
 echo "<script>
     swal({
-        title: 'Email already exits',
+        title: 'Email already exists',
         icon: 'error',
     });
 </script>";

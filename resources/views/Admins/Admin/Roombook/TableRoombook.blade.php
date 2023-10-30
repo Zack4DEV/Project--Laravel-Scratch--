@@ -78,8 +78,9 @@
                     @if ($res['stat'] == "Confirm")
                     echo " ";
                     @else
-                    echo "<a href={{asset(/resources/views/Admins/Admin/EditConfirm/CRoombook?id=" . $res['id'] . ) }}">
-                        <button class='btn btn-success'>Confirm</button></a>";
+                    echo '<a href={{asset(resources/views/Admins/Admin/EditConfirm/CRoombook?id"' .=' " . $res[id] . )
+                    }}">
+                        <button class='btn btn-success'>Confirm</button></a>';
                     @endif
                     <a href={{asset(/resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . $res['id'] . ) }}><button class="btn btn-primary">Edit</button></a>
                     <a href={{asset(resources/views/Admins/Admin/AddDelete/DRoombook?id=" . $res['id'] . ) }}><button class='btn btn-danger'>Delete</button></a>
