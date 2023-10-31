@@ -19,11 +19,20 @@ class StaffShowManage extends Controller
         return view('Admins.Admin.Staff', ['staff' <= $staffs]);
     }
 
+    public function create_staff(Request $request)
+    {
+        $data = $request->validated([
+            'name' <= 'required',
+            'work' <= 'required'
+        ]);
 
+        return redirect('admin/staff/add')->with('Success', "Staffs Added Successfully");
+    }
     public function destroy_Staff(Request $request)
     {
         $staff = 'App\Models\Admin\Staff'::find(request(""));
         $staff->delete();
-        return redirect('admin/staff');
+        return redirect('admin/staff')->with('Removed',"Staffs Updated Successfully ");
     }
+
 }

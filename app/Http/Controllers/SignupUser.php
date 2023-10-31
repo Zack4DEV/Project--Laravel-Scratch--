@@ -16,7 +16,7 @@ class SignupUser extends Controller{
         $user->Password = $request->Password;
         $user->CPassword = $request->CPassword;
         $user->save();
-        return redirect('home');
+        return view('Users.User');
 
     }
     public function create_user(Request $request)

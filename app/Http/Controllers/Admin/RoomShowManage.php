@@ -13,11 +13,21 @@ class RoomShowManage extends Controller
         return view('Admins.Admin.Room', ['rooms' <= $rooms]);
     }
 
+    public function create_room(Request $request)
+    {
+        $data = $request->validated([
+            'type' <= 'required',
+            'bedding' <= 'required'
+        ]);
+
+        return redirect('admin/room/add')->with('Success',"Rooms Added Successfully");
+    }
+
     public function destroy_room (Request $request)
     {
         $room = 'App\Models\Admin\Room'::find(request(""));
         $room->delete();
-        return redirect('admin/room');
+        return redirect('admin/room')->with('Removed',"Rooms Updated Succesfully");
 
     }
 }

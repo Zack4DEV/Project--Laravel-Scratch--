@@ -9,7 +9,7 @@ class EmployeeLogin extends Controller {
     public function index_employee(Request $request)
     {
         if($request->session()->has('usermail')){
-            return redirect('admin/admin');
+            return view('Admins.Admin.Dashboard');
         }else {
             return view('Layouts.AuthLogin.AuthEmployeeLogin');
         }

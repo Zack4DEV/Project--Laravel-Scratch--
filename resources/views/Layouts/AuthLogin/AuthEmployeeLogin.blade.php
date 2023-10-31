@@ -1,5 +1,17 @@
 @include('Admins.Admin.Admin')
 
+<form class="employee_login authsection" id="employeelogin" action="" method="POST">
+    <div class="form-floating">
+        <input type="email" class="form-control" name="Emp_Email" placeholder=" ">
+        <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" name="Emp_Password" placeholder=" ">
+        <label for="floatingPassword">Password</label>
+    </div>
+    <button type="submit" name="Emp_login_submit" class="auth_btn">Log in</button>
+</form>
+
 @if (isset($_POST['Emp_login_submit']))
 $Email = $_POST['Emp_Email'];
 $Password = $_POST['Emp_Password'];
@@ -21,14 +33,3 @@ echo "<script>
 </script>";
 @endif
 @endif
-<form class="employee_login authsection" id="employeelogin" action="" method="POST">
-    <div class="form-floating">
-        <input type="email" class="form-control" name="Emp_Email" placeholder=" ">
-        <label for="floatingInput">Email</label>
-    </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" name="Emp_Password" placeholder=" ">
-        <label for="floatingPassword">Password</label>
-    </div>
-    <button type="submit" name="Emp_login_submit" class="auth_btn">Log in</button>
-</form>
