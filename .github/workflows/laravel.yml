@@ -13,12 +13,11 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0.30]
         laravel: [9.x-dev]
-        stability: [prefer-lowest]
         include:
           - laravel: 9.x-dev
             testbench: 6.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -42,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer update --prefer-source --no-interaction
 
       - name: Install NPM Dependencies
         run: npm install
