@@ -1,5 +1,4 @@
 @php
-session_start();
 
 // roombook
 $roombooksql = "SELECT * FROM roombook;--'";
