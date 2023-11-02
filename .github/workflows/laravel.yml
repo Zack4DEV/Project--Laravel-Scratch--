@@ -11,7 +11,7 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [7.4]
+        php: [8.0.30]
         laravel: [10.*]
         stability: [prefer-stable]
         include:
