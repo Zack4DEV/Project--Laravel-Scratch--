@@ -1,6 +1,6 @@
-@include(Layouts.AuthLogin.Login)
-@include(Layouts.AuthLogin.AuthUserLogin)
-@include(Layouts.AuthLogin.AuthEmployeeLogin)
+@include('Layouts.AuthLogin.Login')
+@include('Layouts.AuthLogin.AuthUserLogin')
+@include('Layouts.AuthLogin.AuthEmployeeLogin')
 
 <div id="Log_in">
     <h2>Log In</h2>
