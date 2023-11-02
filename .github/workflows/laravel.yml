@@ -15,7 +15,7 @@ jobs:
         laravel: [9.x-dev]
         include:
           - laravel: 9.x-dev
-            testbench: 6.*
+            testbench: 7.x-dev
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
 
