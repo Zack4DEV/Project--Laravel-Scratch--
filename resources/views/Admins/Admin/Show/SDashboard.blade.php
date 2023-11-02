@@ -38,10 +38,10 @@ $query = "SELECT cout,finaltotal FROM payment;--'";
 $result = mysqli_query($conn, $query);
 $chart_data = '';
 $tot = 0;
-@while ($row = mysqli_fetch_array($result))
+while ($row = mysqli_fetch_array($result)){
 $chart_data .= "{ date:'" . $row["cout"] . "', profit:" . $row["finaltotal"] * 10 / 100 . "}, ";
 $tot = $tot + $row["finaltotal"] * 10 / 100;
-@endwhile
+}
 
 $chart_data = substr($chart_data, 0, -2);
 
