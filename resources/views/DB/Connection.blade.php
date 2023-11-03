@@ -3,7 +3,7 @@
 global $conn;
 
 try{
-$conn = new PDO(sqlite:__DIR__.'DB.sql');
+$conn = new PDO("sqlite:__DIR__.'DB.sql'");
 
 }catch(PDOException $e){
 
