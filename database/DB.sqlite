@@ -1,4 +1,4 @@
--- sqlite3 db.sqlite3 -init sqlite.sql
+-- import to SQLite by running: sqlite3.exe db.sqlite3 -init sqlite.sql
 
 PRAGMA journal_mode = MEMORY;
 PRAGMA synchronous = OFF;
@@ -8,6 +8,8 @@ PRAGMA auto_vacuum = NONE;
 PRAGMA secure_delete = OFF;
 BEGIN TRANSACTION;
 
+START TRANSACTION;
+SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `migrations`;
 
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -54,18 +56,17 @@ CREATE TABLE `emp_login` (
 `empid` INTEGER NOT NULL,
 `Emp_Email` TEXT NOT NULL,
 `Emp_Password` TEXT NOT NULL,
-PRIMARY KEY=empid
+PRIMARY KEY (`empid`)
 );
-SET IDENTITY_INSERT "emp_login" ON ;--'
-UPDATE "emp_login" SET "EMPID" = 1,"EMP_EMAIL" = 'admin@z-hotel.uk',"EMP_PASSWORD" = 'admin' WHERE `emp_login`.`EMPID` = 1;--'
-SET IDENTITY_INSERT "emp_login" OFF;--'
+UPDATE `emp_login` SET `EMPID` = 1 ,`EMP_EMAIL` = "admin@z-hotel.uk" ,`EMP_PASSWORD` = "admin" WHERE `emp_login`.`EMPID` = 1;
+UPDATE `emp_login` SET `EMPID` = 2,`EMP_EMAIL` = "staff@z-hotel.uk",`EMP_PASSWORD` = "staff" WHERE `emp_login`.`EMPID` = 2;
 
 CREATE TABLE `signup` (
 `UserID` INTEGER NOT NULL,
 `Username` TEXT NOT NULL,
 `Email` TEXT NOT NULL,
 `Password` TEXT NOT NULL,
-PRIMARY KEY=UserID
+PRIMARY KEY(`UserID`)
 );
 
 CREATE TABLE `payment` (
@@ -83,30 +84,28 @@ CREATE TABLE `payment` (
 `meal` TEXT NOT NULL,
 `mealtotal` double(8,2) NOT NULL,
 `finaltotal` double(8,2) NOT NULL,
-PRIMARY KEY=id
+PRIMARY KEY(`id`)
 );
 
 CREATE TABLE `room` (
 `id` INTEGER NOT NULL,
 `type` TEXT NOT NULL,
 `bedding` TEXT NOT NULL,
-PRIMARY KEY=id
+PRIMARY KEY(`id`)
 );
-SET IDENTITY_INSERT "room" ON ;--'
-UPDATE "room" SET "ID" = 1,"TYPE" = 'Single Room',"BEDDING" = 'Single' WHERE `room`.`ID` = 1;--'
-UPDATE "room" SET "ID" = 2,"TYPE" = 'Single Room',"BEDDING" = 'Double' WHERE `room`.`ID` = 2;--'
-UPDATE "room" SET "ID" = 3,"TYPE" = 'Guest House',"BEDDING" = 'Double' WHERE `room`.`ID` = 3;--'
-UPDATE "room" SET "ID" = 4,"TYPE" = 'Guest House',"BEDDING" = 'Triple' WHERE `room`.`ID` = 4;--'
-UPDATE "room" SET "ID" = 5,"TYPE" = 'Guest House',"BEDDING" = 'Quad' WHERE `room`.`ID` = 5;--'
-UPDATE "room" SET "ID" = 6,"TYPE" = 'Superieur Room',"BEDDING" = 'Single' WHERE `room`.`ID` = 6;--'
-UPDATE "room" SET "ID" = 7,"TYPE" = 'Superieur Room',"BEDDING" = 'Double' WHERE `room`.`ID` = 7;--'
-UPDATE "room" SET "ID" = 8,"TYPE" = 'Superiour Room',"BEDDING" = 'Triple' WHERE `room`.`ID` = 8;--'
-UPDATE "room" SET "ID" = 9,"TYPE" = 'Superieur Room',"BEDDING" = 'Quad' WHERE `room`.`ID` = 9;--'
-UPDATE "room" SET "ID" = 10,"TYPE" = 'Deluxe Room',"BEDDING" = 'Single' WHERE `room`.`ID` = 10;--'
-UPDATE "room" SET "ID" = 11,"TYPE" = 'Deluxe Room',"BEDDING" = 'Double' WHERE `room`.`ID` = 11;--'
-UPDATE "room" SET "ID" = 12,"TYPE" = 'Deluxe Room',"BEDDING" = 'Triple' WHERE `room`.`ID` = 12;--'
-UPDATE "room" SET "ID" = 13,"TYPE" = 'Deluxe Room',"BEDDING" = 'Quad' WHERE `room`.`ID` = 13;--'
-SET IDENTITY_INSERT "room" OFF;--'
+UPDATE `Room` SET `ID` = 1,`TYPE` = "Single Room",`BEDDING` = "Single" WHERE `Room`.`ID` = 1;
+UPDATE `Room` SET `ID` = 2,`TYPE` = "Single Room",`BEDDING` = "Double" WHERE `Room`.`ID` = 2;
+UPDATE `Room` SET `ID` = 3,`TYPE` = "Guest House",`BEDDING` = "Double" WHERE `Room`.`ID` = 3;
+UPDATE `Room` SET `ID` = 4,`TYPE` = "Guest House",`BEDDING` = "Triple" WHERE `Room`.`ID` = 4;
+UPDATE `Room` SET `ID` = 5,`TYPE` = "Guest House",`BEDDING` = "Quad" WHERE `Room`.`ID` = 5;
+UPDATE `Room` SET `ID` = 6,`TYPE` = "Superieur Room",`BEDDING` = "Single" WHERE `Room`.`ID` = 6;
+UPDATE `Room` SET `ID` = 7,`TYPE` = "Superieur Room",`BEDDING` = "Double" WHERE `Room`.`ID` = 7;
+UPDATE `Room` SET `ID` = 8,`TYPE` = "Superiour Room",`BEDDING` = "Triple" WHERE `Room`.`ID` = 8;
+UPDATE `Room` SET `ID` = 9,`TYPE` = "Superieur Room",`BEDDING` = "Quad" WHERE `Room`.`ID` = 9;
+UPDATE `Room` SET `ID` = 10,`TYPE` = "Deluxe Room",`BEDDING` = "Single" WHERE `Room`.`ID` = 10;
+UPDATE `Room` SET `ID` = 11,`TYPE` = "Deluxe Room",`BEDDING` = "Double" WHERE `Room`.`ID` = 11;
+UPDATE `Room` SET `ID` = 12,`TYPE` = "Deluxe Room",`BEDDING` = "Triple" WHERE `Room`.`ID` = 12;
+UPDATE `Room` SET `ID` = 13,`TYPE` = "Deluxe Room",`BEDDING` = "Quad" WHERE `Room`.`ID` = 13;
 
 CREATE TABLE `roombook` (
 `id` INTEGER NOT NULL,
@@ -122,24 +121,22 @@ CREATE TABLE `roombook` (
 `cout` date NOT NULL,
 `nodays` INTEGER NOT NULL,
 `stat` TEXT NOT NULL,
-PRIMARY KEY=id
+PRIMARY KEY(`id`)
 );
 
 CREATE TABLE `staff` (
 `id` INTEGER NOT NULL,
 `name` TEXT NOT NULL,
 `work` TEXT NOT NULL,
-PRIMARY KEY=id
+PRIMARY KEY(`id`)
 );
-SET IDENTITY_INSERT "staff" ON ;--'
-UPDATE "staff" SET "id" = 1,"name" = 'John',"work" = 'Manager' WHERE `staff`.`id` = 1;--'
-UPDATE "staff" SET "id" = 3,"name" = 'Wayn',"work" = 'Manager' WHERE `staff`.`id` = 3;--'
-UPDATE "staff" SET "id" = 4,"name" = 'Arthur',"work" = 'Cook' WHERE `staff`.`id` = 4;--'
-UPDATE "staff" SET "id" = 5,"name" = 'Jessica',"work" = 'Helper' WHERE `staff`.`id` = 5;--'
-UPDATE "staff" SET "id" = 7,"name" = 'Jasmina',"work" = 'Cleaner' WHERE `staff`.`id` = 7;--'
-UPDATE "staff" SET "id" = 8,"name" = 'Ali',"work" = 'Weighter' WHERE `staff`.`id` = 8;--'
-SET IDENTITY_INSERT "staff" OFF;--'
-COMMIT;--'
+UPDATE `staff` SET `id` = 1,`name` = "John",`work` = "Manager" WHERE `staff`.`id` = 1;
+UPDATE `staff` SET `id` = 3,`name` = "Wayn",`work` = "Manager" WHERE `staff`.`id` = 3;
+UPDATE `staff` SET `id` = 4,`name` = "Arthur",`work` = "Cook" WHERE `staff`.`id` = 4;
+UPDATE `staff` SET `id` = 5,`name` = "Jessica",`work` = "Helper" WHERE `staff`.`id` = 5;
+UPDATE `staff` SET `id` = 7,`name` = "Jasmina",`work` = "Cleaner" WHERE `staff`.`id` = 7;
+UPDATE `staff` SET `id` = 8,`name` = "Ali",`work` = "Weighter" WHERE `staff`.`id` = 8;
+COMMIT;
 
 
 
