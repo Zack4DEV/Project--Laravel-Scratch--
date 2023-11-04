@@ -1,4 +1,4 @@
-name: Test
+name: Deploy Laravel
 
 on:
   push:
@@ -52,5 +52,12 @@ jobs:
       - name: Generate Key
         run: php artisan key:generate
 
-      - name: Execute tests
-        run: vendor/bin/phpunit
+      - name: Test
+        uses: nathanheffley/laravel-phpunit-action@master
+    #  - name: Deploy
+    #    uses: yankewei/laravel-deploy-action@v1.0.1
+    #    with:
+    #      host: z-hotel.uk
+    #      username: ${{ variables.CLOUDFLARE_USERNAME }}
+    #      password: ${{ variables.CLOUDFLARE_PASSWORD }}
+    #      app_env_data: production

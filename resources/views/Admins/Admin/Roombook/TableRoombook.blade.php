@@ -75,15 +75,24 @@
                     @php echo "$res['stat']" @endphp
                 </td>
                 <td class="action">
-                    @if ($res['stat'] == "Confirm")
+                    @php
+                    if ($res['stat'] == "Confirm"){
                     echo " ";
-                    @else
-                    echo '<a href={{asset(resources/views/Admins/Admin/EditConfirm/CRoombook?id"' .=' " . $res[id] . )
-                    }}">
-                        <button class='btn btn-success'>Confirm</button></a>';
-                    @endif
-                    <a href={{asset(/resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . $res['id'] . ) }}><button class="btn btn-primary">Edit</button></a>
-                    <a href={{asset(resources/views/Admins/Admin/AddDelete/DRoombook?id=" . $res['id'] . ) }}><button class='btn btn-danger'>Delete</button></a>
+                    }else{
+                    $res_id = $res['id'];
+                    echo <a href='{
+                        asset( "/resources/views/Admins/Admin/EditConfirm/CRoombook?id=" . " $res_id " )
+                    }}'>
+                        <button class='btn btn-success'>Confirm</button></a>;
+                    }
+                    <a href='{{
+                        asset( "/resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . " $res_id " )
+                     }}'><button class="btn btn-primary">Edit</button></a>
+                    <a href='{
+                        asset( "/resources/views/Admins/Admin/AddDelete/DRoombook?id=" . " $res_id " )
+                    }}'><button class='btn btn-danger'>Delete</button></a>
+                    @endphp
+
                 </td>
             </tr>
             @php
