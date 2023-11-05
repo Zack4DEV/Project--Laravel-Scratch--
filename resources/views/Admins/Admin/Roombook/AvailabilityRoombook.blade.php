@@ -1,13 +1,12 @@
 @php
-$rsql = "SELECT type FROM room";
-$rre = mysqli_query($conn, $rsql);
+$rre = DB::select("SELECT type FROM room");
 $r = 0;
 $sc = 0;
 $gh = 0;
 $sr = 0;
 $dr = 0;
 
-@while ($rrow = mysqli_fetch_array($rre))
+@foreach ($rre as $rrow)
 $r = $r + 1;
 $s = $rrow['type'];
 @if ($s == "Superior Room")
@@ -22,17 +21,16 @@ $sr = $sr + 1;
 @if ($s == "Deluxe Room")
 $dr = $dr + 1;
 @endif
-@endwhile
+@endforeach
 
-$csql = "SELECT roomtype FROM payment;--'";
-$cre = mysqli_query($conn, $csql);
+$cre = DB::select("SELECT roomtype FROM payment;--'");
 $cr = 0;
 $csc = 0;
 $cgh = 0;
 $csr = 0;
 $cdr = 0;
 
-@while ($crow = mysqli_fetch_array($cre))
+@foreach ($cre as $crow)
 $cr = $cr + 1;
 $cs = $crow['roomtype'];
 
@@ -49,7 +47,7 @@ $csr = $csr + 1;
 @if ($cs == "Deluxe Room")
 $cdr = $cdr + 1;
 @endif
-@endwhile
+@endforeach
 // room availablity
 // Superior Room =>
 $f1 = $sc - $csc;

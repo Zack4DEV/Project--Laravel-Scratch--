@@ -3,13 +3,12 @@
 
 @php
 
-$sqlq = "SELECT * FROM roombook;--'";
-$result = mysqli_query($conn,$sqlq);
+$result = DB::select("SELECT * FROM roombook;--'");
 $roombook_record = array();
 
-@while( $rows = mysqli_fetch_assoc($result))
+@foreach( $result as $rows)
 $roombook_record[] = $rows;
-@endwhile
+@endforeach
 
 @if(isset($_POST["exportexcel"]))
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models\Admins;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model {
+class Room extends Model {
     use HasFactory;
-    protected $table = 'payment';
+    protected $table = 'room';
     protected $primaryKey = 'id';
 
 }

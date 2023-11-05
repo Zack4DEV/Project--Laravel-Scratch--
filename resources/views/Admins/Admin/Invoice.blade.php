@@ -381,9 +381,10 @@
 ob_start();
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM payment WHERE id = '$id';--'";
-$re = mysqli_query($conn, $sql);
-@while ($row = mysqli_fetch_array($re))
+$re = DB::select("SELECT * FROM payment WHERE id = '$id';--'");
+@endphp
+
+@foreach ( $re as $row)
 $id = $row['id'];
 $idroom = $row['idroom'];
 $Name = $row['Name'];
@@ -431,5 +432,4 @@ $type_of_meal = $type_of_bed * 3;
 $type_of_meal = $type_of_bed * 4;
 @endif
 
-@endwhile
-@endphp
+@endforeach

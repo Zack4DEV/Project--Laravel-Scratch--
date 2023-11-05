@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ExportDataShow extends Controller {
+class ExportData extends Controller {
 
-    public function show_exportdata(Request $request)
+    public function exportdata(Request $request)
     {
         $filename = "hotel_roombook_data_" . date('Ymd') . ".xls";
         $path = $request->file('exportexcel')->storeAs('/Storage/App/Public/Admin', $filename);

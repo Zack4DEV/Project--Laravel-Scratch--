@@ -1,4 +1,3 @@
-@include('Admins.Logout')
 <nav class="uppernav">
         <div class="logo">
             <p>Hotel</p>

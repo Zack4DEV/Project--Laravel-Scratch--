@@ -1,7 +1,6 @@
 @include('Admins.Admin.Roombook.AvailabilityRoombook')
 @include('Admins.Admin.Roombook.SearchRoombook')
 @include('Admins.Admin.Roombook.TableRoombook')
-@include('Admins.Admin.AddDelete.DRoombook')
 
 @push('css')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -31,7 +30,6 @@
                     <option value selected>Select your country</option>
                     @foreach ($countries as $key => $value)
                     echo '<option value="' . $value . '">' . $value . '</option>';
-                    //close your tags!!
                     @endforeach
                 </select>
                 <input class="form-controls" type="text" name="Phone" placeholder="Enter Phoneno" required>

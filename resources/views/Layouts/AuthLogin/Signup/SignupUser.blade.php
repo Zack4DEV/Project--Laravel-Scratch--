@@ -47,8 +47,7 @@ echo "<script>
 </script>";
 @else
 @if ($Password == $CPassword)
-$sql = "SELECT * FROM signup WHERE Email = '$Email'";
-$result = mysqli_query($conn, $sql);
+$result = DB::select("SELECT * FROM signup WHERE Email = '$Email'");
 
 @if ($result->num_rows > 0)
 echo "<script>
@@ -58,8 +57,7 @@ echo "<script>
     });
 </script>";
 @else
-$sql = "INSERT INTO signup (Username,Email,Password) VALUES ('$Username', '$Email', '$Password')";
-$result = mysqli_query($conn, $sql);
+$result = DB::insert("INSERT INTO signup (Username,Email,Password) VALUES ('$Username', '$Email', '$Password')");
 
 @if ($result)
 $_SESSION['usermail'] = $Email;

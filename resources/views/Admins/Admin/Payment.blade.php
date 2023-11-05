@@ -1,5 +1,4 @@
 @include('Admins.Admin.Invoice')
-@include('Admins.Admin.AddDelete.DPayment')
 
 @push('css')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -16,8 +15,7 @@
 <div class="roombooktable" class="table-responsive-xl">
 
     @php
-    $paymanttablesql = "SELECT * FROM payment;--'";
-    $paymantresult = mysqli_query($conn, $paymanttablesql);
+    $paymantresult = DB::select("SELECT * FROM payment;--'");
     $nums = mysqli_num_rows($paymantresult);
     @endphp
 
@@ -44,11 +42,9 @@
         </thead>
 
         <tbody>
-            @php
-            @while ($res = mysqli_fetch_array($paymantresult))
+            @foreach ($paymantresult as $res)
             $r2=$res['id'] + 6;
-
-            @endphp
+            $res_id = $res['id'];
             <tr>
                 <td>
                     @php echo $res['id'] @endphp
@@ -93,12 +89,16 @@
                     @php echo $res['finaltotal'] @endphp
                 </td>
                 <td class="action">
-                    <a href="{{asset('/resources/views/Admins/Invoice?id= @php echo $res[id] @endphp')}}"><button class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button></a>
-                    <!-- <a href="{{asset('/resources/views/Admins/AddDelete/DPayment?id= @php echo $res[id] @endphp ')}}"><button class="btn btn-danger">Delete</button></a> -->
+                    <a href='{{
+                        asset( "/resources/views/Admins/Invoice?id=" . " $res_id " )
+                     }}'><button class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button></a>
+                    <!--
+                        <a href='{{
+                        asset( "/resources/views/Admins/Admin/AddDelete/DPayment?id=" . " $res_id " )
+                     }}'><button class="btn btn-danger">Delete</button></a>
+                    -->
                 </td>
             </tr>
-            @php
-            @endwhile
-            @endphp
+            @endforeach
         </tbody>
     </table>

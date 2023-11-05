@@ -1,5 +1,3 @@
-@include('Admins.Admin.AddDelete.ADRoom')
-
 <div class="addroomsection">
     <form action="" method="POST">
         <label for="troom">Name :</label>

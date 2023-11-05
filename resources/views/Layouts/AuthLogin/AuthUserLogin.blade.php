@@ -2,8 +2,7 @@
                     $Email = $_POST['Email'];
                     $Password = $_POST['Password'];
 
-                    $sql = "SELECT * FROM signup WHERE Email = '$Email' AND Password = BINARY'$Password'";
-                    $result = mysqli_query($conn, $sql);
+                    $result = DB::select("SELECT * FROM signup WHERE Email = '$Email' AND Password = BINARY'$Password'");
 
                     @if ($result->num_rows > 0)
                         $_SESSION['usermail'] = $Email;

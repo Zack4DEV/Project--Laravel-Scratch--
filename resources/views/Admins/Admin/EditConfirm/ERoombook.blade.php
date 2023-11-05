@@ -1,8 +1,7 @@
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM roombook WHERE id = '$id';--'";
-$re = mysqli_query($conn, $sql);
-@while ($row = mysqli_fetch_array($re))
+$re = DB::select("SELECT * FROM roombook WHERE id = '$id';--'");
+@foreach ($re as $row)
 $Name = $row['Name'];
 $Email = $row['Email'];
 $Country = $row['Country'];
@@ -11,7 +10,7 @@ $cin = $row['cin'];
 $cout = $row['cout'];
 $noofday = $row['nodays'];
 $stat = $row['stat'];
-@endwhile
+@endforeach
 
 @if (isset($_POST['guestdetailedit']))
 $EditName = $_POST['Name'];
@@ -25,9 +24,7 @@ $EditMeal = $_POST['Meal'];
 $Editcin = $_POST['cin'];
 $Editcout = $_POST['cout'];
 
-$sql = "UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = dated@iff('$Editcout','$Editcin') WHERE id = '$id';--'";
-
-$result = mysqli_query($conn, $sql);
+$result = DB::update("UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = dated@iff('$Editcout','$Editcin') WHERE id = '$id';--'");
 
 $type_of_room = 0;
 @if ($Editroomtype == "Superior Room")
@@ -62,12 +59,11 @@ $type_of_meal = $type_of_bed * 4;
 @endif
 
 // noofday update
-$psql = "SELECT * FROM roombook WHERE id = '$id';--'";
-$presult = mysqli_query($conn, $psql);
+$presult = DB::select("SELECT * FROM roombook WHERE id = '$id';--'");
 $prow = mysqli_fetch_array($presult);
-$ndays = "SELECT nodays FROM roombook;--'";
+$ndays = DB::select("SELECT nodays FROM roombook;--'");
 $Editnoofday = $prow[$ndays];
-$nroom = "SELECT roomtotal FROM roombook;--'";
+$nroom = DB::select("SELECT roomtotal FROM roombook;--'");
 $EditNoofRoom = $prow[$nroom];
 
 $editttot = $type_of_room * $Editnoofday * $EditNoofRoom;
@@ -76,9 +72,7 @@ $editbtot = $type_of_bed * $Editnoofday;
 
 $editfintot = $editttot + $editmepr + $editbtot;
 
-$psql = "UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id';--'";
-
-$paymentresult = mysqli_query($conn, $psql);
+$paymentresult = DB::update("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id';--'");
 
 @if ($paymentresult)
 header("Location:roombook");

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models\Admins;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Staff extends Model {
+class Roombook extends Model {
     use HasFactory;
-    protected $table = 'staff';
+    protected $table = 'roombook';
     protected $primaryKey = 'id';
 
 }

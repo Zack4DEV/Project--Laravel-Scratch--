@@ -1,7 +1,6 @@
 <div class="roombooktable" class="table-responsive-xl">
     @php
-    $roombooktablesql = "SELECT * FROM roombook;--'";
-    $roombookresult = mysqli_query($conn, $roombooktablesql);
+    $roombookresult = DB::select("SELECT * FROM roombook;--'");
     $nums = mysqli_num_rows($roombookresult);
     @endphp
     <table class="table table-bordered" id="table-data">
@@ -28,9 +27,9 @@
 
         <tbody>
 
-            @while ($res = mysqli_fetch_array($roombookresult))
+            @foreach ($roombookresult as $res)
             $r2 = $res['id'] + 6;
-            @endwhile
+            @enforeach
             <tr>
                 <td>
                     @php echo "$res['id']" @endphp

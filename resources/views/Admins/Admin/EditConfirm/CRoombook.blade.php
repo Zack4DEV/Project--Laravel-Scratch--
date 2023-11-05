@@ -1,9 +1,8 @@
 @php
 
 
-$sql = "SELECT * FROM roombook;--'";
-$re = mysqli_query($conn, $sql);
-@while ($row = mysqli_fetch_array($re))
+$re = DB::select("SELECT * FROM roombook;--'");
+@foreach ($re as $row)
     $id = $row['id'];
     $idRoom = $row['idroom'];
     $Name = $row['Name'];
@@ -18,7 +17,7 @@ $re = mysqli_query($conn, $sql);
     $cout = $row['cout'];
     $noofday = $row['nodays'];
     $stat = $row['stat'];
-@endwhile
+@endforeach
 
 
 @while ($stat == "NotConfirm")
@@ -30,9 +29,8 @@ $re = mysqli_query($conn, $sql);
     @endif else
         $st = "Confirm";
     @endif
-    $sql = "UPDATE roombook SET stat = '$st'  WHERE id = '$id';--'";
+    $result = DB::update("UPDATE roombook SET stat = '$st'  WHERE id = '$id';--'");
 
-    $result = mysqli_query($conn, $sql);
 
     @if ($result)
 
@@ -75,9 +73,7 @@ $re = mysqli_query($conn, $sql);
 
         $fintot = $ttot + $mepr + $btot;
 
-        $psql = "INSERT INTO payment VALUES ('$id','$idRoom', '$Name', '$Email', '$Roomtype', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot');--'";
-
-        mysqli_query($conn, $psql);
+        $psql = DB::insert("INSERT INTO payment VALUES ('$id','$idRoom', '$Name', '$Email', '$Roomtype', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot');--'");
 
         header("Location:roombook");
     @endif

@@ -2,5 +2,3 @@
 
 @include('Layouts.Auth')
 @inlcude('Layouts.Carousel')
-
-@include('DB.Connection')

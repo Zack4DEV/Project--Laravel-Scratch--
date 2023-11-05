@@ -111,8 +111,7 @@
       </script>';
       @else
       $sta = "NotConfirm";
-      $sql = "INSERT INTO roombook(Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays) VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))";
-      $result = mysqli_query($conn, $sql);
+      $result = DB::insert("INSERT INTO roombook(Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays) VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
 
 
       @if ($result)
