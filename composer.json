@@ -8,10 +8,10 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0.30",
+        "php": "^8",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.x-dev",
-        "laravel/tinker": "^2.8.2",
+        "laravel/framework": "11.x-dev",
+        "laravel/tinker": "dev-master",
         "laravel/sanctum": "dev-master"
     },
     "require-dev": {
@@ -19,19 +19,23 @@
         "laravel/pint": "^1.0",
         "laravel/sail": "dev-develop",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.x-dev",
-        "phpunit/phpunit": "^9.1"
+        "nunomaduro/collision": "7.x",
+        "nunomaduro/termwind": "dev-feat/select",
+        "phpunit/phpunit": "^10.1"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
+        "files": [
+            "tests/Database/stubs/MigrationCreatorFakeMigration.php"
+        ],
         "psr-4": {
-            "Tests\\": "tests/"
+            "Illuminate\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -51,7 +55,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "9.x-dev"
+            "dev-master": "11.x-dev"
         },
         "laravel": {
             "dont-discover": []
@@ -65,7 +69,5 @@
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
         }
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    }
 }

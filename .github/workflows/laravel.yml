@@ -11,11 +11,11 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.0.30]
-        laravel: [9.x-dev]
+        php: [8]
+        laravel: [11.x-dev]
         include:
-          - laravel: 9.x-dev
-            testbench: 7.x-dev
+          - laravel: 11.x-dev
+            testbench: 9.x-dev
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
 
