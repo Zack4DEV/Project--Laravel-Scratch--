@@ -1,4 +1,4 @@
-name: Test
+name: Laravel Test PHPUnit
 
 on:
   push:
@@ -11,11 +11,11 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [7.4]
-        laravel: [10.*]
+        php: [8.0]
+        laravel: [8.*]
         stability: [prefer-stable]
         include:
-          - laravel: 10.*
+          - laravel: 8.*
             testbench: 6.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
@@ -42,7 +42,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-source --no-interaction --with-all-dependencies
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Install NPM Dependencies
         run: npm install
