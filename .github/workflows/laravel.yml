@@ -1,4 +1,4 @@
-name: Test ,Deploy Laravel
+name: Test
 
 on:
   push:
@@ -11,13 +11,14 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.0]
-        laravel: [9.0.1]
+        php: [7.4]
+        laravel: [10.*]
+        stability: [prefer-stable]
         include:
-          - laravel: 9.x-dev
-            testbench: 9.x-dev
+          - laravel: 10.*
+            testbench: 6.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -41,23 +42,16 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --prefer-source --no-interaction
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Install NPM Dependencies
         run: npm install
 
       - name: Compile Assets
-        run: npm run build
+        run: npm run production
 
       - name: Generate Key
         run: php artisan key:generate
 
-      - name: Test
-        uses: nathanheffley/laravel-phpunit-action@master
-    #  - name: Deploy
-    #    uses: yankewei/laravel-deploy-action@v1.0.1
-    #    with:
-    #      host: z-hotel.uk
-    #      username: ${{ variables.CLOUDFLARE_USERNAME }}
-    #      password: ${{ variables.CLOUDFLARE_PASSWORD }}
-    #      app_env_data: production
+      - name: Execute tests
+        run: vendor/bin/phpunit
