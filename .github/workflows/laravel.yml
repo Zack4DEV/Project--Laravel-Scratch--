@@ -45,7 +45,9 @@ jobs:
           composer update --${{ matrix.stability }} --quiet  --no-interaction --no-scripts --no-ansi --no-progress --prefer-source 
       
       - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
+        run: |
+          chmod -R 777 storage bootstrap/cache
+          chmod -R 777 vendor
     
       - name: Generate Key
         run: php artisan key:generate
