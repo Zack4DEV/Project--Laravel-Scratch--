@@ -42,7 +42,8 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --no-autoloader --prefer-source --no-interaction --with-all-dependencies
+          composer dump-autoload --optimize --with-all-dependencies
+          composer update --${{ matrix.stability }} --prefer-source --no-interaction --with-all-dependencies --no-autoloader 
 
       - name: Install NPM Dependencies
         run: npm install
