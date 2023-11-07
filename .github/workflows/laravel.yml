@@ -42,16 +42,21 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-source --no-interaction --with-all-dependencies --no-autoloader 
-
-      - name: Install NPM Dependencies
-        run: npm install
-
-      - name: Compile Assets
-        run: npm run build
-
+          composer update --${{ matrix.stability }} --quiet  --no-interaction --no-scripts --no-ansi --no-progress --prefer-source 
+      
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+    
       - name: Generate Key
         run: php artisan key:generate
+
+  #    - name: Create Database - sqlite - DB.sqlite
+  #      run: |
+  #        mkdir -p /database
+  #        cp -rf /storage/app/public/database/DB.sqlite /database
+    
+      - name: Install NPM Dependencies
+        run: npm install
 
       - name: Execute tests
         run: vendor/bin/phpunit
