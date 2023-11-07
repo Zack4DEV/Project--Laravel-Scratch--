@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require
           composer update --${{ matrix.stability }} --quiet  --no-interaction --no-scripts --no-ansi --no-progress --prefer-source 
       
       - name: Directory Permissions
