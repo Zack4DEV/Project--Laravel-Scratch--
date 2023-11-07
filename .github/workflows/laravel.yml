@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require
+          composer require --dry-run --prefer-source --no-progress
           composer update --${{ matrix.stability }} --quiet  --no-interaction --no-scripts --no-ansi --no-progress --prefer-source 
       
       - name: Directory Permissions
