@@ -1,0 +1,152 @@
+-- import to SQLite by running: sqlite3.exe db.sqlite3 -init sqlite.sql
+
+PRAGMA journal_mode = MEMORY;
+PRAGMA synchronous = OFF;
+PRAGMA foreign_keys = OFF;
+PRAGMA ignore_check_constraints = OFF;
+PRAGMA auto_vacuum = NONE;
+PRAGMA secure_delete = OFF;
+BEGIN TRANSACTION;
+
+START TRANSACTION;
+SET time_zone = "+00:00";
+DROP TABLE IF EXISTS `migrations`;
+
+CREATE TABLE IF NOT EXISTS `migrations` (
+`id` INTEGER  NOT NULL ,
+`migration` TEXT  NOT NULL,
+`batch` INTEGER NOT NULL,
+PRIMARY KEY (`id`)
+);
+DROP TABLE IF EXISTS `failed_jobs`;
+
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+`id` bigINTEGER  NOT NULL ,
+`uuid` TEXT  NOT NULL,
+`connection` text  NOT NULL,
+`queue` text  NOT NULL,
+`payload` TEXT  NOT NULL,
+`exception` TEXT  NOT NULL,
+`failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`)
+);
+DROP TABLE IF EXISTS `password_resets`;
+
+CREATE TABLE IF NOT EXISTS `password_resets` (
+`email` TEXT  NOT NULL,
+`token` TEXT  NOT NULL,
+`created_at` timestamp NULL DEFAULT NULL
+);
+DROP TABLE IF EXISTS `personal_access_tokens`;
+
+CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
+`id` bigINTEGER  NOT NULL ,
+`tokenable_type` TEXT  NOT NULL,
+`tokenable_id` bigINTEGER  NOT NULL,
+`name` TEXT  NOT NULL,
+`token` TEXT  NOT NULL,
+`abilities` text
+`last_used_at` timestamp NULL DEFAULT NULL,
+`created_at` timestamp NULL DEFAULT NULL,
+`updated_at` timestamp NULL DEFAULT NULL,
+PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `emp_login` (
+`empid` INTEGER NOT NULL,
+`Emp_Email` TEXT NOT NULL,
+`Emp_Password` TEXT NOT NULL,
+PRIMARY KEY (`empid`)
+);
+UPDATE `emp_login` SET `EMPID` = 1 ,`EMP_EMAIL` = "admin@z-hotel.uk" ,`EMP_PASSWORD` = "admin" WHERE `emp_login`.`EMPID` = 1;
+UPDATE `emp_login` SET `EMPID` = 2,`EMP_EMAIL` = "staff@z-hotel.uk",`EMP_PASSWORD` = "staff" WHERE `emp_login`.`EMPID` = 2;
+
+CREATE TABLE `signup` (
+`UserID` INTEGER NOT NULL,
+`Username` TEXT NOT NULL,
+`Email` TEXT NOT NULL,
+`Password` TEXT NOT NULL,
+PRIMARY KEY(`UserID`)
+);
+
+CREATE TABLE `payment` (
+`id` INTEGER NOT NULL,
+`Name` TEXT NOT NULL,
+`Email` TEXT NOT NULL,
+`RoomType` TEXT NOT NULL,
+`Bed` TEXT NOT NULL,
+`NoofRoom` INTEGER NOT NULL,
+`cin` date NOT NULL,
+`cout` date NOT NULL,
+`noofdays` INTEGER NOT NULL,
+`roomtotal` double(8,2) NOT NULL,
+`bedtotal` double(8,2) NOT NULL,
+`meal` TEXT NOT NULL,
+`mealtotal` double(8,2) NOT NULL,
+`finaltotal` double(8,2) NOT NULL,
+PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `room` (
+`id` INTEGER NOT NULL,
+`type` TEXT NOT NULL,
+`bedding` TEXT NOT NULL,
+PRIMARY KEY(`id`)
+);
+UPDATE `Room` SET `ID` = 1,`TYPE` = "Single Room",`BEDDING` = "Single" WHERE `Room`.`ID` = 1;
+UPDATE `Room` SET `ID` = 2,`TYPE` = "Single Room",`BEDDING` = "Double" WHERE `Room`.`ID` = 2;
+UPDATE `Room` SET `ID` = 3,`TYPE` = "Guest House",`BEDDING` = "Double" WHERE `Room`.`ID` = 3;
+UPDATE `Room` SET `ID` = 4,`TYPE` = "Guest House",`BEDDING` = "Triple" WHERE `Room`.`ID` = 4;
+UPDATE `Room` SET `ID` = 5,`TYPE` = "Guest House",`BEDDING` = "Quad" WHERE `Room`.`ID` = 5;
+UPDATE `Room` SET `ID` = 6,`TYPE` = "Superieur Room",`BEDDING` = "Single" WHERE `Room`.`ID` = 6;
+UPDATE `Room` SET `ID` = 7,`TYPE` = "Superieur Room",`BEDDING` = "Double" WHERE `Room`.`ID` = 7;
+UPDATE `Room` SET `ID` = 8,`TYPE` = "Superiour Room",`BEDDING` = "Triple" WHERE `Room`.`ID` = 8;
+UPDATE `Room` SET `ID` = 9,`TYPE` = "Superieur Room",`BEDDING` = "Quad" WHERE `Room`.`ID` = 9;
+UPDATE `Room` SET `ID` = 10,`TYPE` = "Deluxe Room",`BEDDING` = "Single" WHERE `Room`.`ID` = 10;
+UPDATE `Room` SET `ID` = 11,`TYPE` = "Deluxe Room",`BEDDING` = "Double" WHERE `Room`.`ID` = 11;
+UPDATE `Room` SET `ID` = 12,`TYPE` = "Deluxe Room",`BEDDING` = "Triple" WHERE `Room`.`ID` = 12;
+UPDATE `Room` SET `ID` = 13,`TYPE` = "Deluxe Room",`BEDDING` = "Quad" WHERE `Room`.`ID` = 13;
+
+CREATE TABLE `roombook` (
+`id` INTEGER NOT NULL,
+`Name` TEXT NOT NULL,
+`Email` TEXT NOT NULL,
+`Country` TEXT NOT NULL,
+`Phone` TEXT NOT NULL,
+`RoomType` TEXT NOT NULL,
+`Bed` TEXT NOT NULL,
+`Meal` TEXT NOT NULL,
+`NoofRoom` TEXT NOT NULL,
+`cin` date NOT NULL,
+`cout` date NOT NULL,
+`nodays` INTEGER NOT NULL,
+`stat` TEXT NOT NULL,
+PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `staff` (
+`id` INTEGER NOT NULL,
+`name` TEXT NOT NULL,
+`work` TEXT NOT NULL,
+PRIMARY KEY(`id`)
+);
+UPDATE `staff` SET `id` = 1,`name` = "John",`work` = "Manager" WHERE `staff`.`id` = 1;
+UPDATE `staff` SET `id` = 3,`name` = "Wayn",`work` = "Manager" WHERE `staff`.`id` = 3;
+UPDATE `staff` SET `id` = 4,`name` = "Arthur",`work` = "Cook" WHERE `staff`.`id` = 4;
+UPDATE `staff` SET `id` = 5,`name` = "Jessica",`work` = "Helper" WHERE `staff`.`id` = 5;
+UPDATE `staff` SET `id` = 7,`name` = "Jasmina",`work` = "Cleaner" WHERE `staff`.`id` = 7;
+UPDATE `staff` SET `id` = 8,`name` = "Ali",`work` = "Weighter" WHERE `staff`.`id` = 8;
+COMMIT;
+
+
+
+CREATE UNIQUE INDEX `failed_jobs_failed_jobs_uuid_unique` ON `failed_jobs` (`uuid`);
+CREATE INDEX `password_resets_password_resets_email_index` ON `password_resets` (`email`);
+CREATE UNIQUE INDEX `personal_access_tokens_personal_access_tokens_token_unique` ON `personal_access_tokens` (`token`);
+CREATE INDEX `personal_access_tokens_personal_access_tokens_tokenable_type_tokenable_id_index` ON `personal_access_tokens` (`tokenable_type`);
+
+COMMIT;
+PRAGMA ignore_check_constraints = ON;
+PRAGMA foreign_keys = ON;
+PRAGMA journal_mode = WAL;
+PRAGMA synchronous = NORMAL;
