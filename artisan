@@ -15,9 +15,10 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require dirname(__FILE__).'/vendor/composer/autoload_real.php';
-
 $app = require dirname(__FILE__).'/bootstrap/app.php';
+
+require dirname(__FILE__).'/vendor/autoload.php';
+
 
 /*
 |--------------------------------------------------------------------------
