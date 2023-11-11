@@ -13,6 +13,7 @@
         "laravel/framework": "9.x-dev",
         "laravel/tinker": "3.x-dev",
         "laravel/sanctum": "^2.8",
+        "orchestra/workbench": "7.x-dev",
         "orchestra/testbench": "7.x-dev"
     },
     "require-dev": {
