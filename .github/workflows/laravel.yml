@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require --dry-run
+          composer require --dry-run --with-all-dependencies --ignore-platform-reqs
           composer update --${{ matrix.stability }} --no-scripts --no-ansi --prefer-dist  --with-all-dependencies
 
       - name: Directory Permissions
@@ -50,10 +50,10 @@ jobs:
           chmod -R 777 vendor
 
       - name: Package Discover
-        run: php artisan package:discover
+        run: composer post-discover-package
     
       - name: Generate Key
-        run: php artisan key:generate
+        run: composer post-create-project
 
   #    - name: Create Database - sqlite - DB.sqlite
   #      run: |
@@ -64,4 +64,4 @@ jobs:
         run: npm install
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: composer post-test-project
