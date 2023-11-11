@@ -50,7 +50,10 @@ jobs:
       - name: Directory Permissions
         run: |
           chmod -R 777 storage bootstrap/cache
-          chmod -R 777 vendor  
+          chmod -R 777 vendor 
+          
+      - name: Import AutoLoader Init
+        run: composer post-import-autoloaderinit
 
       - name: Generate Key
         run: composer post-create-project
