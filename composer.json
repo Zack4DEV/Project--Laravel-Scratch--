@@ -13,7 +13,7 @@
         "laravel/framework": "8.x-dev",
         "laravel/tinker": "3.x-dev",
         "laravel/sanctum": "^2.8",
-        "orchestra/testbunch-core": "^6.38.0"
+        "orchestra/testbunch": "^6.38.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -36,7 +36,7 @@
     },
     "autoload-dev": {
         "files": [
-            ""
+            "App\\Models\\Admin.php"
         ],
         "psr-4": {
             "Illuminate\\Tests\\": "tests/"
@@ -48,9 +48,6 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ],
-        "post-clear-compiled": [
-            "@php artisan clear-compiled"
         ]
     },
     "extra": {
