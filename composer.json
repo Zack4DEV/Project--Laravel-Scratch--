@@ -47,16 +47,16 @@
             "composer dump-autoload --optimize"  
         ],
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-discover-package": [
-            "@php artisan package:discover"
+            "php artisan package:discover"
         ],
         "post-create-project": [
-            "@php artisan key:generate --ansi"
+            "php artisan key:generate --ansi"
         ],
         "post-test-project": [
-            "@php artisan test"
+            "php artisan test"
         ]
     },
     "extra": {
