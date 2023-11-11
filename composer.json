@@ -13,7 +13,7 @@
         "laravel/framework": "8.x-dev",
         "laravel/tinker": "3.x-dev",
         "laravel/sanctum": "^2.8",
-        "orchestra/testbunch": "^6.38.0"
+        "orchestra/testbunch-core": "^6.38.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
