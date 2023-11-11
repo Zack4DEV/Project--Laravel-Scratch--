@@ -12,10 +12,10 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.0]
-        laravel: [8.83.11]
+        laravel: [8.83.27]
         stability: [prefer-stable]
       #  include:
-      #    - laravel: 8.83.11
+      #    - laravel: 8.83.27
       #      testbench: 6.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require laravel/framework@${{ matrix.laravel }} --dry-run --prefer-dist
+          composer require laravel/framework:${{ matrix.laravel }} --dry-run --prefer-dist
           composer update --${{ matrix.stability }} --no-scripts --no-ansi --prefer-dist 
       
       - name: Directory Permissions
