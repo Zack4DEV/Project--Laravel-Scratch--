@@ -49,6 +49,9 @@ jobs:
           chmod -R 777 storage bootstrap/cache
           chmod -R 777 vendor
 
+      - name: Package Dump
+        run: composer post-dump-autoload
+
       - name: Package Discover
         run: composer post-discover-package
     
