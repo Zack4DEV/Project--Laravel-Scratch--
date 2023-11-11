@@ -1,4 +1,4 @@
-name: Laravel Test PHPUnit
+name: Laravel Test With PHPUnit
 
 on:
   push:
@@ -41,8 +41,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require laravel/framework:${{ matrix.laravel }} --dry-run --prefer-dist
-          composer update --${{ matrix.stability }} --no-scripts --no-ansi --prefer-dist 
+          composer require laravel/framework:${{ matrix.laravel }} --dry-run --prefer-dist --with-all-dependencies
+          composer update --${{ matrix.stability }} --no-scripts --no-ansi --prefer-dist  --with-all-dependencies
       
       - name: Directory Permissions
         run: |
