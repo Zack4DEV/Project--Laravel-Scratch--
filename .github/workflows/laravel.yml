@@ -1,5 +1,4 @@
-name: Laravel Test
-
+name: PHPUnit Laravel Test
 on:
   push:
     branches: ["core","develop","framework","scratch","laravel"]
@@ -13,12 +12,11 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0.2]
         laravel: [8.x-dev]
-        stability: [prefer-lowest]
         include:
-         - laravel: 8.x-dev
-         - testbench: 6.x-dev
+          - laravel: 8.x-dev
+            testbench: 6.x-dev
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -35,36 +33,27 @@ jobs:
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
       - name: Copy ENV Laravel Configuration for CI
-        run: "cp .env.example .env"
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       - name: Install dependencies
         run: |
-          composer require --dry-run --with-all-dependencies --ignore-platform-reqs | composer install
-          composer update --${{ matrix.stability }} --no-scripts --no-ansi --prefer-dist  --with-all-dependencies
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --prefer-source --no-interaction
+
+      - name: Install NPM Dependencies
+        run: npm install
+
+      - name: Compile Assets
+        run: npm run build
 
       - name: Directory Permissions
         run: |
           chmod -R 777 storage bootstrap/cache
-          chmod -R 777 vendor
+          chmod -R 777 vendor  
 
-      - name: Package Dump
-        run: composer post-dump-autoload
-
-      - name: Package Discover
-        run: composer post-discover-package
-    
       - name: Generate Key
         run: composer post-create-project
 
-  #    - name: Create Database - sqlite - DB.sqlite
-  #      run: |
-  #        mkdir -p /database
-  #        cp -rf /storage/app/public/database/DB.sqlite /database
-    
-      - name: Install NPM Dependencies
-        run: npm install
-
-      - name: Execute tests
-        run: composer post-test-project
+      - name: PHPUnit Test 
+        uses: nathanheffley/laravel-phpunit-action@master
