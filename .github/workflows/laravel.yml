@@ -37,7 +37,7 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Copy ENV Laravel Configuration for CI
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run: "cp .env.example .env"
 
       - name: Install dependencies
         run: |
