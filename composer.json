@@ -46,8 +46,14 @@
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
-        "post-create-project-cmd": [
+        "post-discover-package": [
+            "@php artisan package:discover"
+        ],
+        "post-create-project": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-test-project": [
+            "/vendor/bin/phpunit"
         ]
     },
     "extra": {
