@@ -36,6 +36,7 @@
     },
     "autoload-dev": {
         "files": [
+            "ComposerAutoloaderInit05d91bfe007515f7767c03192dff8e8e",
             "App\\Models\\Admin.php"
         ],
         "psr-4": {
@@ -55,7 +56,7 @@
         "post-create-project": [
             "php artisan key:generate --no-ansi"
         ],
-        "post-import-autoloderinit": [
+        "post-import-autoloaderinit": [
             "ComposerAutoloaderInit05d91bfe007515f7767c03192dff8e8e::getLoader()"
         ],
         "post-test-project": [
