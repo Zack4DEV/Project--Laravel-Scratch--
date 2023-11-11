@@ -8,9 +8,9 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "8.x-dev",
+        "laravel/framework": "9.x-dev",
         "laravel/tinker": "3.x-dev",
         "laravel/sanctum": "^2.8",
         "orchestra/testbench": "7.x-dev"
@@ -24,7 +24,6 @@
         "nunomaduro/termwind": "^1.13",
         "phpunit/phpunit": "^9.1",
         "spatie/laravel-ignition": "1.x-dev",
-        "illuminate/support": "^8.83.27"
 
     },
     "autoload": {
