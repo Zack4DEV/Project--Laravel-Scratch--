@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer install --prefer-dist --with-all-dependencies
+          composer install --prefer-dist --ignore-platform-reqs
           composer update --${{ matrix.stability }} --no-scripts --no-ansi --prefer-dist  --with-all-dependencies
           composer require orchestra/testbunch:'6.38.0'
 
