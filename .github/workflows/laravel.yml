@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require --dry-run --with-all-dependencies --ignore-platform-reqs
+          composer require --dry-run --with-all-dependencies --ignore-platform-reqs | composer install
           composer update --${{ matrix.stability }} --no-scripts --no-ansi --prefer-dist  --with-all-dependencies
 
       - name: Directory Permissions
