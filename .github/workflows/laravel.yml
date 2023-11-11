@@ -12,10 +12,11 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.0.2]
-        laravel: [9.x-dev]
+        laravel: [8.x-dev]
         stability: [prefer-stable]
         include:
-         - laravel: 9.x-dev
+         - laravel: 8.x-dev
+         - testbunch: 6.x-dev
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -40,9 +41,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require laravel/framework:${{ matrix.laravel }} --dry-run --prefer-dist --with-all-dependencies
+          composer install --prefer-dist --with-all-dependencies
           composer update --${{ matrix.stability }} --no-scripts --no-ansi --prefer-dist  --with-all-dependencies
-      
+          composer require orchestra/testbunch:'6.38.0'
+
       - name: Directory Permissions
         run: |
           chmod -R 777 storage bootstrap/cache
