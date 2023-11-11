@@ -16,7 +16,7 @@ jobs:
         stability: [prefer-lowest]
         include:
          - laravel: 8.x-dev
-         - testbunch-core: 6.x-dev
+         - testbunch: 6.x-dev
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer install --ignore-platform-reqs
+          composer require --dry-run
           composer update --${{ matrix.stability }} --no-scripts --no-ansi --prefer-dist  --with-all-dependencies
 
       - name: Directory Permissions
