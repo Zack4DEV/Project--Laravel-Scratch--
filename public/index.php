@@ -44,7 +44,7 @@ require dirname(__FILE__).'/../vendor/composer/autoload_real.php';
 |
 */
 
-$app = require_once dirname(__FILE__).'/../bootstrap/app.php';
+$app = require dirname(__FILE__).'/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
