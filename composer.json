@@ -56,7 +56,7 @@
             "@php artisan key:generate --ansi"
         ],
         "post-test-project": [
-            "/vendor/bin/phpunit"
+            "@php artisan test"
         ]
     },
     "extra": {
