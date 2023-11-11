@@ -31,7 +31,7 @@ if (file_exists($maintenance = dirname(__FILE__).'/../storage/framework/maintena
 |
 */
 
-require dirname(__FILE__).'/../vendor/autoload.php';
+require dirname(__FILE__).'/../vendor/composer/autoload_real.php';
 
 /*
 |--------------------------------------------------------------------------
