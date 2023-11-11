@@ -16,7 +16,6 @@ jobs:
         stability: [prefer-stable]
         include:
          - laravel: 9.x-dev
-           testbench: 7.x-dev
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
