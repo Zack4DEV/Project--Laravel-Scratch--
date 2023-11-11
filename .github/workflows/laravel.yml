@@ -12,17 +12,17 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.0]
-        laravel: [8.83.27]
+        laravel: [8.x-dev]
         stability: [prefer-stable]
       #  include:
-      #    - laravel: 8.83.27
+      #    - laravel: 8.x-dev
       #      testbench: 6.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
