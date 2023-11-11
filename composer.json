@@ -53,7 +53,7 @@
             "php artisan package:discover"
         ],
         "post-create-project": [
-            "php artisan key:generate --ansi"
+            "php artisan key:generate --no-ansi"
         ],
         "post-test-project": [
             "php artisan test"
