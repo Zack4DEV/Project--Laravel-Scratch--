@@ -32,12 +32,12 @@
             "App\\": "app/",
             "Database\\Seeders\\": "database/seeders/",
             "Database\\Factories\\": "database/factories/",
-            "github\\Workspace\\Tests": "github/workspace/tests"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Illuminate\\Tests\\": "tests/"
+            "Illuminate\\Tests\\": "tests/",
+            "github\\Workspace\\Tests": "github/workspace/tests"
         },
         "files": [
              "vendor/autoload.php"
@@ -71,7 +71,7 @@
     "config": {
         "optimize-autoloader": true,
         "prefer-lowest": true,
-        "preferred-install": "dist",
+        "preferred-install": "source",
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
