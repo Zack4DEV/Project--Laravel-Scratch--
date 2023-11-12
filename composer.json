@@ -32,12 +32,12 @@
             "App\\": "app/",
             "Database\\Seeders\\": "database/seeders/",
             "Database\\Factories\\": "database/factories/"
+
         }
     },
     "autoload-dev": {
         "files": [
-            "ComposerAutoloaderInit05d91bfe007515f7767c03192dff8e8e",
-            "App\\Models\\Admin.php"
+             "vendor/autoload.php"
         ],
         "psr-4": {
             "Illuminate\\Tests\\": "tests/"
