@@ -36,9 +36,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Illuminate\\Tests\\": "tests/",
-            "github\\workspace\\": "/github/workspace/",
-            "github\\Workspace\\Tests\\": "github/workspace/tests/"
+            "Tests\\": "tests/"
         }
     },
     "scripts": {
