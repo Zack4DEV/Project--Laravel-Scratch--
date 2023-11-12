@@ -43,17 +43,18 @@
         ]
     },
     "scripts": {
-        "post-dump-autoload": [
-            "composer dump-autoload --optimize"  
-        ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-discover-package": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
         "post-create-project": [
             "@php artisan key:generate --no-ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-test-project": [
             "/vendor/bin/phpunit"
