@@ -56,9 +56,6 @@
         "post-create-project": [
             "php artisan key:generate --no-ansi"
         ],
-        "post-import-autoloaderinit": [
-            "ComposerAutoloaderInit05d91bfe007515f7767c03192dff8e8e::getLoader()"
-        ],
         "post-test-project": [
             "php artisan test"
         ]
