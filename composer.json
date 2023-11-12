@@ -57,7 +57,7 @@
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-test-project": [
-            "/vendor/bin/phpunit"
+            "/vendor/bin/phpunit  --testsuite=Unit --bootstrap /vendor/autoload.php tests"
         ]
     },
     "extra": {
