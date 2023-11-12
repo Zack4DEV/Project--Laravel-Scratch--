@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use PHPUnit_Framework_TestCase as PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase as PHPUnit_Framework_TestCase;
 
 class ExampleTest extends PHPUnit_Framework_TestCase
 {
