@@ -57,7 +57,7 @@
             "@php artisan key:generate --no-ansi"
         ],
         "post-test-project": [
-            "/vendor/bin/phpunit --testsuite=Unit --bootstrap /vendor/autoload.php tests"
+            "/vendor/bin/phpunit --testsuite=Feature --bootstrap /vendor/autoload.php tests"
         ]
     },
     "extra": {
