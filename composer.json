@@ -41,8 +41,7 @@
             "github\\Workspace\\Tests": "github/workspace/tests"
         },
         "files": [
-             "vendor/autoload.php",
-             "vendor/composer/autoload_real/php"
+             "vendor/autoload.php"
         ]
     },
     "scripts": {
