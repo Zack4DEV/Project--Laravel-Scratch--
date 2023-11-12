@@ -37,13 +37,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Illuminate\\Tests\\": "tests/"
+            "Illuminate\\Tests\\": "tests/",
+            "github\\Workspace\\Tests": "github/workspace/tests"
         },
         "files": [
-             "vendor/autoload.php"
-        ],
-        "classmap": [
-            "tests/TestCase.php"
+             "vendor/autoload.php",
+             "vendor/composer/autoload_real/php"
         ]
     },
     "scripts": {
