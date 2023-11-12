@@ -36,12 +36,15 @@
         }
     },
     "autoload-dev": {
+        "psr-4": {
+            "Illuminate\\Tests\\": "tests/"
+        },
         "files": [
              "vendor/autoload.php"
         ],
-        "psr-4": {
-            "Illuminate\\Tests\\": "tests/"
-        }
+        "classmap": [
+            "tests/TestCase.php"
+        ]
     },
     "scripts": {
         "post-dump-autoload": [
