@@ -1,4 +1,4 @@
-name: Deploy Php
+name: Build Deploy To Github Pages
 
 on:
   # Runs on pushes targeting the default branch
