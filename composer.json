@@ -68,7 +68,6 @@
     "config": {
         "optimize-autoloader": true,
         "prefer-lowest": true,
-        "preferred-install": "source",
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
