@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use tests\TestCase;
+use \tests\TestCase as tests_testcase;
 
-class ExampleTest extends TestCase
+class ExampleTest extends tests_testcase
 {
     /**
      * A basic test example.
