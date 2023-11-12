@@ -58,4 +58,4 @@ jobs:
         run: composer post-create-project
 
       - name: PHPUnit Test 
-        run: composer post-test-project
+        uses: chindit/actions-phpunit@1.0.0
