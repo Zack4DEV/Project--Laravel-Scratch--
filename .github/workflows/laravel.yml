@@ -50,6 +50,9 @@ jobs:
       - name: Directory Permissions
         run: |
           chmod -R 777 storage bootstrap/cache
+      
+      - name: Discover Package
+        run: composer post-discover-package
 
       - name: Generate Key
         run: composer post-create-project
