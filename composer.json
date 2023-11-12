@@ -38,10 +38,7 @@
         "psr-4": {
             "Illuminate\\Tests\\": "tests/",
             "github\\Workspace\\Tests": "github/workspace/tests"
-        },
-        "files": [
-             "vendor/autoload.php"
-        ]
+        }
     },
     "scripts": {
         "post-dump-autoload": [
