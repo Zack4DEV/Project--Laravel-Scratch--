@@ -63,4 +63,4 @@ jobs:
           chmod -R 777 storage bootstrap/cache
       
       - name: PHPUnit Test 
-        uses: chindit/actions-phpunit@1.0.0
+        run: composer post-test-project
