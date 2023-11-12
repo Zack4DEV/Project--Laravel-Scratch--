@@ -27,7 +27,5 @@ class Handler extends ExceptionHandler
             //
         });
 
-        $this->reportable(function render($request, Throwable $e){
-        });
     }
 }
