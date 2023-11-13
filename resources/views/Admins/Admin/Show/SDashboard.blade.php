@@ -18,19 +18,25 @@ $chart_data = substr($chart_data, 0, -2);
     <div class="box roombookbox">
         <h2>Total Booked Room</h1>
             <h1>
-                @php(echo "$roombookrow / $roomrow")
+                @php 
+                echo "$roombookrow / $roomrow" ;
+                @endphp
             </h1>
     </div>
     <div class="box guestbox">
         <h2>Total Staff</h1>
             <h1>
-                @php(echo "$staffrow")
+                @php 
+                echo "$staffrow";
+                @endphp
             </h1>
     </div>
     <div class="box profitbox">
         <h2>Profit</h1>
             <h2>
-                @php(echo "$tot")
+                @php
+                echo "$tot";
+                @endphp
             <span>$</span></h2>
     </div>
 </div>
