@@ -1,6 +1,6 @@
 ## Hotel Booking
 
-![Booking Hotel](/storage/app/public/image/__hotel1.jpg)
+<!--![Booking Hotel](/storage/app/public/image/__hotel1.jpg) -->
 
 ### About:
 A Web App Where Users Can Book Rooms For Specific Date.For Administrators permissions With create, update, delete rooms details.
