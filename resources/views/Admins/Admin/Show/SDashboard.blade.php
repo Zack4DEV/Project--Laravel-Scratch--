@@ -12,28 +12,28 @@ $chart_data .= "{ date:'" . $row["cout"] . "', profit:" . $row["finaltotal"] * 1
 $tot = $tot + $row["finaltotal"] * 10 / 100;
 }
 $chart_data = substr($chart_data, 0, -2);
+@endphp
 
 <div class="databox">
     <div class="box roombookbox">
         <h2>Total Booked Room</h1>
             <h1>
-                echo "$roombookrow / $roomrow"
+                @php(echo "$roombookrow / $roomrow")
             </h1>
     </div>
     <div class="box guestbox">
         <h2>Total Staff</h1>
             <h1>
-                echo "$staffrow"
+                @php(echo "$staffrow")
             </h1>
     </div>
     <div class="box profitbox">
         <h2>Profit</h1>
             <h2>
-                echo "$tot"
+                @php(echo "$tot")
             <span>$</span></h2>
     </div>
 </div>
-@endphp
 <div class="chartbox">
     <div class="bookroomchart">
         <canvas id="bookroomchart"></canvas>
