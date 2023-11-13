@@ -12,11 +12,13 @@
             <directory>./tests/Feature</directory>
         </testsuite>
     </testsuites>
-    <source>
+    <!--
+        <source>
         <include>
             <directory>./app</directory>
         </include>
     </source>
+    -->
     <php>
         <env name="APP_ENV" value="testing"/>
        <!-- <env name="APP_KEY" value="App under test"/> -->
