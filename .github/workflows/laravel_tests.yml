@@ -8,15 +8,22 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
-      fail-fast: true
-      matrix:
+       matrix:
         os: [ubuntu-latest]
         php: [8.0.2]
+        phpunit: [9.6.x-dev]
         laravel: [8.x-dev]
         include:
           - laravel: 8.x-dev
             testbench: 6.x-dev
+        dependencies:
+          - "locked"
+          - "lowest"
+          - "highest"
+        experimental:
+          - false
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
 
@@ -37,6 +44,10 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - name: Copy ENV Laravel Configuration for CI
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Install PHPUnit ${{ matrix.phpunit }}
+        run: |
+          composer require "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
 
       - name: Install dependencies
         run: |
@@ -62,5 +73,7 @@ jobs:
       - name: Prepare Test
         run: composer post-prepare-test
 
-      - name: PHPUnit Test 
-        uses: chindit/actions-phpunit@1.0.0
+   #   - name: PHPUnit Test 
+   #     uses: chindit/actions-phpunit@1.0.0
+      - name: Tests PHPUnit
+        run: composer post-test-project
