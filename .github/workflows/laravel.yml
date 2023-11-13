@@ -52,9 +52,6 @@ jobs:
       - name: Copy environment file
         run: cp .env.example .env
       
-      - name: Discover Package
-        run: composer post-discover-package
-
       - name: Generate Key
         run: composer post-create-project
         
@@ -62,5 +59,8 @@ jobs:
         run: |
           chmod -R 777 storage bootstrap/cache
       
+      - name: Prepare Test
+        run: composer post-prepare-test
+
       - name: PHPUnit Test 
         uses: chindit/actions-phpunit@1.0.0
