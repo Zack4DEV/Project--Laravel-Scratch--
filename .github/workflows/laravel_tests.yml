@@ -61,7 +61,7 @@ jobs:
         run: npm run build
 
       - name: Copy environment file
-        run: cp .env.example .env
+        run: cp .env.example .env.testing
       
       - name: Generate Key
         run: composer post-create-project
