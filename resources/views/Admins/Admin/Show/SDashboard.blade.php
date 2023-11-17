@@ -5,6 +5,7 @@ $staffrow = DB::select("SELECT * FROM staff");
 $roomrow = DB::select("SELECT * FROM room");
 
 $result = DB::select("SELECT cout,finaltotal FROM payment");
+
 $chart_data = '';
 $tot = 0;
 foreach ($result as $row) {
@@ -18,7 +19,7 @@ $chart_data = substr($chart_data, 0, -2);
     <div class="box roombookbox">
         <h2>Total Booked Room</h1>
             <h1>
-                @php 
+                @php
                 echo "$roombookrow / $roomrow" ;
                 @endphp
             </h1>
@@ -26,7 +27,7 @@ $chart_data = substr($chart_data, 0, -2);
     <div class="box guestbox">
         <h2>Total Staff</h1>
             <h1>
-                @php 
+                @php
                 echo "$staffrow";
                 @endphp
             </h1>
