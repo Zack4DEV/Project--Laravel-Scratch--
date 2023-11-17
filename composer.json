@@ -9,11 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "doctrine/dbal": "^3.7",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "8.x-dev",
-        "laravel/tinker": "3.x-dev",
         "laravel/sanctum": "^2.8",
+        "laravel/tinker": "3.x-dev",
         "orchestra/testbench": "^6.38.0"
     },
     "require-dev": {
