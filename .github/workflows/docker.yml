@@ -16,24 +16,32 @@ permissions:
     pull-requests: write
 
 jobs:
-    default:
+  call:
+      runs-on: ubuntu-latest
+      continue-on-error: ${{ matrix.experimental }}
+      strategy:
+        fail-fast: false
+        matrix:
+          node-version: [16.x]
+          dependencies:
+            - "locked"
+            - "lowest"
+            - "highest"
+          experimental:
+            - false
+      
+      name: Call
+      
+      steps:
+        - uses: actions/checkout@v3
 
-        runs-on: ubuntu-latest
+        - name: Install Job
+          uses: ./.github/workflows/dockerJobInstall@develop
+          with:
+            node-version: 16.x
 
-        strategy:
-            matrix:
-                node-version: [16.x]
+        - name: Build Job
+          uses: ./.github/workflows/dockerJobBuild@develop
 
-        steps:
-            - uses: actions/checkout@v3
-
-            - name: Install Job
-              uses: '.github/workflows/dockerJobInstall'
-              with:
-                  node-version: 16.x
-
-            - name: Build Job
-              uses: '.github/workflows/dockerJobBuild'
-
-            - name: Release Job ,Publish Job
-              uses: '.github/workflows/dockerJobReleasePublish'
+        - name: Release Job ,Publish Job
+          uses: .github/workflows/dockerJobReleasePublish@develop
