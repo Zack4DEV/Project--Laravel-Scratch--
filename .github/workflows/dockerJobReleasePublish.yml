@@ -12,17 +12,15 @@ runs:
               @semantic-release/changelog
               @semantic-release/git
 
-     - uses: tada5hi/action-docker-image-publish@master
-       if: steps.semantic.outputs.new_release_published == 'true'
-       with:
-            dockerFileName: 'Dockerfile'
-            dockerFilePath: ''
+      - name: Publish
+        uses: tada5hi/action-docker-image-publish@v3.2.0
+        if: steps.semantic.outputs.new_release_published == 'true'
+        with:
+            dockerFileName: './docker/php-fpm/Dockerfile'
             gitTag: 'true'
+            registryTag: 'latest'
             registryHost: 'ghcr.io'
+            registryUser: ${{ secrets.DOCKER_HUB_USERNAME }}
             registryPassword: ${{ secrets.DOCKER_HUB_TOKEN }}
             registryRepository: project
-            registryUser: ${{ github.actor }}
-            registryPassword: ${{ github.token }}
-            registryRepository: ${{ github.repository }}
-            registryTag: 'latest'
             cleanup: 'true'
