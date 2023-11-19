@@ -1,4 +1,4 @@
-name: docker ci
+name: docker_build
 on: [push, pull_request]
   branches: ['scratch','laravel']
 default:
