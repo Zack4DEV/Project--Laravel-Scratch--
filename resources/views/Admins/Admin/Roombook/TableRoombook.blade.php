@@ -27,46 +27,46 @@
             @foreach ($roombookresult as $res)
             <tr>
                 <td>
-                    @php('echo "$res[id]"')
+                    @php('echo "$res['id']"')
                 </td>
                 <td>
-                    @php('echo "$res[id]"')
+                    @php('echo "$res['id']"')
                 </td>
                 <td>
-                    @php('echo "$res[Name]"')
+                    @php('echo "$res['Name']"')
                 </td>
                 <td>
-                    @php('echo "$res[Email]"')
+                    @php('echo "$res['Email']"')
                 </td>
                 <td>
-                    @php('echo "$res[Country]"')
+                    @php('echo "$res['Country']"')
                 </td>
                 <td>
-                    @php('echo "$res[Phone]"')
+                    @php('echo "$res['Phone']"')
                 </td>
                 <td>
-                    @php('echo "$res[roomtype]"')
+                    @php('echo "$res['roomtype']"')
                 </td>
                 <td>
-                    @php('echo "$res[Bed]"')
+                    @php('echo "$res['Bed']"')
                 </td>
                 <td>
-                    @php('echo "$res[NoofRoom]"')
+                    @php('echo "$res['NoofRoom']"')
                 </td>
                 <td>
-                    @php('echo "$res[Meal]"')
+                    @php('echo "$res['Meal']"')
                 </td>
                 <td>
-                    @php('echo "$res[cin]"')
+                    @php('echo "$res['cin']"')
                 </td>
                 <td>
-                    @php('echo "$res[cout]"')
+                    @php('echo "$res['cout']"')
                 </td>
                 <td>
-                    @php('echo "$res[nodays]"')
+                    @php('echo "$res['nodays']"')
                 </td>
                 <td>
-                    @php('echo "$res[stat]"')
+                    @php('echo "$res['stat']"')
                 </td>
                 <td class="action">
                     @php
