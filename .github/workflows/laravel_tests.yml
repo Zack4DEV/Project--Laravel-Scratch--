@@ -76,4 +76,4 @@ jobs:
    #   - name: PHPUnit Test
    #     uses: chindit/actions-phpunit@1.0.0
       - name: Tests PHPUnit
-        run: /vendor/bin/phpunit --configuration phpunit.xml --coverage-text --colors=never
+        run: composer post-test-project
