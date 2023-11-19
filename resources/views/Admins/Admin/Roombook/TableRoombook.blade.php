@@ -17,7 +17,6 @@
                 <th scope="col">No of Day</th>
                 <th scope="col">Status</th>
                 <th scope="col" class="action">Action</th>
-                <!-- <th>Delete</th> -->
             </tr>
         </thead>
 
@@ -27,7 +26,6 @@
             @endphp
             @foreach ($roombookresult as $res)
             $r2 = $res['id'];
-            @endforeach
             <tr>
                 <td>
                     @php('echo "$res[id]"')
@@ -79,16 +77,17 @@
                     $res_id = $res['id'];
                     }
                     <a href='{{
-                        asset( "resources/views/Admins/Admin/EditConfirm/CRoombook?id=$res_id" )
+                        asset( "/resources/views/Admins/Admin/EditConfirm/CRoombook?id=$res_id" )
                     }}'><button class='btn btn-success'>Confirm</button></a>
                     <a href='{{
-                        asset( "resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . " $res_id " )
+                        asset( "/resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . " $res_id " )
                      }}'><button class="btn btn-primary">Edit</button></a>
                     <a href='{{
-                        asset( "resources/views/Admins/Admin/AddDelete/DRoombook?id=" . " $res_id " )
+                        asset( "/resources/views/Admins/Admin/AddDelete/DRoombook?id=" . " $res_id " )
                     }}'><button class='btn btn-danger'>Delete</button></a>
                     @endphp
                 </td>
+                @endforeach
             </tr>
         </tbody>
     </table>
