@@ -26,7 +26,7 @@
             $roombookresult = array();
             @endphp
             @foreach ($roombookresult as $res)
-            $r2 = $res['id'] + 6;
+            $r2 = $res['id'];
             @endforeach
             <tr>
                 <td>
@@ -79,13 +79,13 @@
                     $res_id = $res['id'];
                     }
                     <a href='{{
-                        asset( "/resources/views/Admins/Admin/EditConfirm/CRoombook?id=$res_id" )
+                        asset( "resources/views/Admins/Admin/EditConfirm/CRoombook?id=$res_id" )
                     }}'><button class='btn btn-success'>Confirm</button></a>
                     <a href='{{
-                        asset( "/resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . " $res_id " )
+                        asset( "resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . " $res_id " )
                      }}'><button class="btn btn-primary">Edit</button></a>
                     <a href='{{
-                        asset( "/resources/views/Admins/Admin/AddDelete/DRoombook?id=" . " $res_id " )
+                        asset( "resources/views/Admins/Admin/AddDelete/DRoombook?id=" . " $res_id " )
                     }}'><button class='btn btn-danger'>Delete</button></a>
                     @endphp
                 </td>
