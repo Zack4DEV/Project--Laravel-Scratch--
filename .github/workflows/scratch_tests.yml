@@ -53,7 +53,5 @@ jobs:
       - name: Prepare Test
         run: composer post-prepare-test
 
-   #   - name: PHPUnit Test
-   #     uses: chindit/actions-phpunit@1.0.0
       - name: PHPUnit Test
-        run: composer post-test-project
+        uses: chindit/actions-phpunit@1.0.0
