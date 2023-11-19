@@ -33,7 +33,7 @@ jobs:
                   node-version: 16.x
 
             - name: Build Job
-              uses: ./.github/workflows/actionJobBuild
+              uses: ./.github/workflows/dockerJobBuild
 
             - name: Release Job ,Publish Job
-              uses: ./.github/workflows/actionJobReleasePublish
+              uses: ./.github/workflows/dockerJobReleasePublish
