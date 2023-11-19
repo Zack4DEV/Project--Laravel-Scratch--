@@ -1,5 +1,5 @@
 #Prepares the repo for a job by running the build
-name: 'DockerJobBuild@develop'
+name: 'Docker Job Build'
 on:
     push:
         branches: [scratch ,master, master, next, beta, alpha]
