@@ -1,5 +1,10 @@
 name: 'Docker Job Release,Publish'
 description: 'Prepares the repo for job release semantic and Image Publish On Docker Registry'
+on:
+    push:
+        branches: [scratch ,master, master, next, beta, alpha]
+    pull_request:
+        branches: [scratch, master, master, next, beta, alpha]
 runs:
   steps:
       - name: Release
