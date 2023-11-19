@@ -1,5 +1,10 @@
 name: 'Docker Job Install'
 description: 'Prepares the repo for a job by checking out and installing dependencies'
+on:
+    push:
+        branches: [scratch ,master, master, next, beta, alpha]
+    pull_request:
+        branches: [scratch, master, master, next, beta, alpha]
 inputs:
     node-version:
         description: 'The node version to setup'
