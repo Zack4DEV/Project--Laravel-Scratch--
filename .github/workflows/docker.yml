@@ -1,0 +1,39 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Docker
+
+on:
+    push:
+        branches: [ scratch ,master, master, next, beta, alpha]
+    pull_request:
+        branches: [ scratch ,master, master, next, beta, alpha]
+
+permissions:
+    packages: write
+    contents: write
+    issues: write
+    pull-requests: write
+
+jobs:
+    default:
+
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [16.x]
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Install Job
+              uses: ./.github/workflows/dockerJobInstall
+              with:
+                  node-version: 16.x
+
+            - name: Build Job
+              uses: ./.github/workflows/actionJobBuild
+
+            - name: Release Job ,Publish Job
+              uses: ./.github/workflows/actionJobReleasePublish
