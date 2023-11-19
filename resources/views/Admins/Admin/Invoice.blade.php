@@ -5,7 +5,7 @@
 @include('Admins.Admin.Print.PrintASide')
 
 @push('css')
-<link rel="stylesheet" href="{{ '/public/admin/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('/public/admin/css/style.css') }}">
 @endpush
 
 <style>
@@ -377,14 +377,10 @@
 </style>
 
 @php
-
-ob_start();
-$id = $_GET['id'];
-
-$re = DB::select("SELECT * FROM payment WHERE id = '$id'");
+$re = array();
 @endphp
 
-@foreach ( $re as $row)
+@foreach($re as $row)
 $id = $row['id'];
 $idroom = $row['idroom'];
 $Name = $row['Name'];
@@ -403,32 +399,32 @@ $days = $row['noofdays'];
 $type_of_room = 0;
 @if ($troom == "Superior Room")
 $type_of_room = 320;
-@endif else@if ($troom == "Deluxe Room")
+@elseif ($troom == "Deluxe Room")
 $type_of_room = 220;
-@endif else@if ($troom == "Guest House")
+@elseif ($troom == "Guest House")
 $type_of_room = 180;
-@endif else@if ($troom == "Single Room")
+@elseif ($troom == "Single Room")
 $type_of_room = 150;
 @endif
 
 @if ($bed == "Single")
 $type_of_bed = $type_of_room * 1 / 100;
-@endif else@if ($bed == "Double")
+@elseif ($bed == "Double")
 $type_of_bed = $type_of_room * 2 / 100;
-@endif else@if ($bed == "Triple")
+@elseif ($bed == "Triple")
 $type_of_bed = $type_of_room * 3 / 100;
-@endif else@if ($bed == "Quad")
+@elseif ($bed == "Quad")
 $type_of_bed = $type_of_room * 4 / 100;
 @endif
 
 $type_of_meal = 0;
 @if ($meal == "Room only")
 $type_of_meal = $type_of_bed * 0;
-@endif else@if ($meal == "Breakfast")
+@elseif ($meal == "Breakfast")
 $type_of_meal = $type_of_bed * 2;
-@endif else@if ($meal == "Half Board")
+@elseif ($meal == "Half Board")
 $type_of_meal = $type_of_bed * 3;
-@endif else@if ($meal == "Full Board")
+@elseif ($meal == "Full Board")
 $type_of_meal = $type_of_bed * 4;
 @endif
 

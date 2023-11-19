@@ -1,8 +1,4 @@
 <div class="roombooktable" class="table-responsive-xl">
-    @php
-    $roombookresult = DB::select("SELECT * FROM roombook");
-    $nums = mysqli_num_rows($roombookresult);
-    @endphp
     <table class="table table-bordered" id="table-data">
         <thead>
             <tr>
@@ -26,10 +22,12 @@
         </thead>
 
         <tbody>
-
+            @php
+            $roombookresult = array();
+            @endphp
             @foreach ($roombookresult as $res)
             $r2 = $res['id'] + 6;
-            @enforeach
+            @endforeach
             <tr>
                 <td>
                     @php('echo "$res[id]"')
@@ -74,20 +72,22 @@
                     @php('echo "$res[stat]"')
                 </td>
                 <td class="action">
-                    @if($res['stat'] == "Confirm")
+                    @php
+                    if($res[stat] == "Confirm"){
                     echo " ";
-                    @else
+                    } else{
                     $res_id = $res['id'];
-                    @endif
+                    }
                     <a href='{{
-                        asset( "/resources/views/Admins/Admin/EditConfirm/CRoombook?id=" . " $res_id " )
-                    }}' ><button class='btn btn-success'>Confirm</button></a>
+                        asset( "/resources/views/Admins/Admin/EditConfirm/CRoombook?id=$res_id" )
+                    }}'><button class='btn btn-success'>Confirm</button></a>
                     <a href='{{
                         asset( "/resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . " $res_id " )
                      }}'><button class="btn btn-primary">Edit</button></a>
                     <a href='{{
                         asset( "/resources/views/Admins/Admin/AddDelete/DRoombook?id=" . " $res_id " )
                     }}'><button class='btn btn-danger'>Delete</button></a>
+                    @endphp
                 </td>
             </tr>
         </tbody>

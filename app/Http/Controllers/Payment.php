@@ -20,7 +20,7 @@ class Payment extends Controller {
         $payment->delete();
         return redirect()->back();
     }
-    public function check_availability_roombook()
+    public function check_payment()
     {
         $rre = DB::select("SELECT type FROM room");
         $r = 0;

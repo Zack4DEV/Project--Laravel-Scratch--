@@ -1,6 +1,7 @@
-$id = $_GET['id'];
+@php
+$re = array();
+@endphp
 
-$re = DB::select("SELECT * FROM roombook WHERE id = '$id'");
 @foreach ($re as $row)
 $Name = $row['Name'];
 $Email = $row['Email'];

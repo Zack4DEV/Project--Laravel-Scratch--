@@ -36,13 +36,17 @@ Route::group(
 
                 Route::post('/exportData', 'ExportData@exportdata')->name('exportdata');
 
-
+                Route::get('/invoice', 'Invoice@check_invoice')->name('check_invoice');
                 Route::post('/invoice', 'Invoice@show_invoice')->name('show_invoice');
 
+                Route::get('/payment', 'Payment@check_payment')->name('payment_check');
                 Route::get('/payment', 'Payment@show_payment')->name('payment_show');
+
 
                 Route::post('/payment/delete', 'Payment@destroy_payment')->name('payment_delete');
 
+                Route::get('/roombook', 'Payment@check_roombook')->name('roombook_check');
+                Route::get('/roombook', 'Roombook@show_roombook_result')->name('roombook_result_show');
                 Route::get('/roombook', 'Roombook@show_roombook')->name('roombook_show');
                 Route::post('/roombook/add', 'Roombook@create_roombook')->name('roombook_add');
                 Route::post('/roombook/delete', 'Roombook@destroy_roombook')->name('roombook_delete');

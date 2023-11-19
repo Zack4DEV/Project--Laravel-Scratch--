@@ -8,10 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class Roombook extends Controller
 {
+
     public function show_roombook()
     {
         $roombook = 'App\Models\Admin\Roombook'::all();
         return view('Admins.Admin.Roombook', compact('roombook'));
+    }
+    public function show_roombook_result()
+    {
+        $roombookresult = DB::select("SELECT * FROM roombook");
+        return view('Admins.Admin.Roombook.TableRoombook', compact('roombookresult'));
     }
 
     public function create_roombook(Request $request): RedirectResponse
@@ -35,7 +41,7 @@ class Roombook extends Controller
         return redirect()->back();
     }
 
-    public function check_availability_roombook()
+    public function check_roombook()
     {
         $rre = DB::select("SELECT type FROM room");
         $r = 0;
