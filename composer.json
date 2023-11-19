@@ -5,24 +5,36 @@
     "keywords": [
         "framework",
         "laravel"
-    ],
+        ],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
    "suggest": {
-   },
+        },
    "require-dev": {
 		"mikey179/vfsStream": "1.1.*",
 		"phpunit/phpunit": "9.6.x-dev"
-  },
+        },
   "scripts": {
     "post-create-project": [
-      "composer dump-autoload -o"
-    ],
+        "composer dump-autoload -o"
+        ],
     "post-prepare-test": [
-            "@php testbench package:discover --ansi"
+        "@php testbench package:discover --ansi"
         ],
     "post-test-project": [
-      "@php /vendor/bin/phpunit  --testsuite=Unit"
-    ]
+        "@php /vendor/bin/phpunit  --testsuite=Unit"
+        ]
+  },
+  "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+   },
+  "config": {
+        "optimize-autoloader": true,
+        "prefer-lowest": true,
+        "sort-packages": true,
+        "allow-plugins": {
   }
+}	    
