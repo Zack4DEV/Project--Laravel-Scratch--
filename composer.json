@@ -1,17 +1,15 @@
 {
-    "name": "project/app-scratch",
-    "type": "project",
-    "description": "Hotel Bookings Web App Manager based on { Php , HTML , Js , Css } From Scratch .",
-    "keywords": [
+  "name": "project/app-scratch",
+  "type": "project",
+  "description": "Hotel Bookings Web App Manager based on { Php , HTML , Js , Css } From Scratch .",
+  "keywords": [
         "framework",
         "laravel"
         ],
-    "license": "MIT",
-    "require": {
-        "php": "^8.0.2",
-   "suggest": {
-        },
-   "require-dev": {
+  "license": "MIT",
+  "require": {
+        "php": "^8.0.2"
+  "require-dev": {
 		"mikey179/vfsStream": "1.1.*",
 		"phpunit/phpunit": "9.6.x-dev"
         },
@@ -25,16 +23,16 @@
     "post-test-project": [
         "@php /vendor/bin/phpunit  --testsuite=Unit"
         ]
-  },
+        },
   "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         }
-   },
+        },
   "config": {
         "optimize-autoloader": true,
 	"prfer-dist": true,
         "prefer-lowest": false,
         "sort-packages": true
-   }	    
+        }	    
 }
