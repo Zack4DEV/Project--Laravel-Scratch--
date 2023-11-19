@@ -1,7 +1,7 @@
 {
-    "name": "project/app-laravel",
+    "name": "project/app-scratch",
     "type": "project",
-    "description": "Hotel Bookings Web App Manager based on { Blade || Php , HTML , Js , Css } From Scratch .",
+    "description": "Hotel Bookings Web App Manager based on { Php , HTML , Js , Css } From Scratch .",
     "keywords": [
         "framework",
         "laravel"
@@ -9,12 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-	"suggest": {
-	},
-	"require-dev": {
+   "suggest": {
+   },
+   "require-dev": {
 		"mikey179/vfsStream": "1.1.*",
 		"phpunit/phpunit": "9.6.x-dev"
-	}
+  },
   "scripts": {
     "post-create-project": [
       "composer dump-autoload -o"
