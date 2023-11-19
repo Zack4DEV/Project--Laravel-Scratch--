@@ -4,5 +4,5 @@
         <p>HOTEL,</p>
         <p>(+212)5-37809882</p>
     </address>
-    <span><img alt="" src="asset(/storage/app/public/Admin/image/logo.jpg)"></span>
+    <span><img alt="" src="asset(/public/Admin/image/logo.jpg)"></span>
 </header>

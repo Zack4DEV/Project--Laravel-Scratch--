@@ -5,6 +5,7 @@ $sc = 0;
 $gh = 0;
 $sr = 0;
 $dr = 0;
+@endphp
 
 @foreach ($rre as $rrow)
 $r = $r + 1;
@@ -23,12 +24,14 @@ $dr = $dr + 1;
 @endif
 @endforeach
 
+@php
 $cre = DB::select("SELECT roomtype FROM payment;--'");
 $cr = 0;
 $csc = 0;
 $cgh = 0;
 $csr = 0;
 $cdr = 0;
+@endphp
 
 @foreach ($cre as $crow)
 $cr = $cr + 1;
@@ -69,4 +72,3 @@ $f1 = $sc - $csc;
     $f5 = $r - $cr;
     @if ($f5 <= 0) $f5="NO" ;
 @endif
-@endphp

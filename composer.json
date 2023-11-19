@@ -24,6 +24,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.4.28",
         "nunomaduro/termwind": "^1.13",
+        "mikey179/vfsstream": "2.0.x-dev",
         "phpunit/phpunit": "9.6.x-dev",
         "spatie/laravel-ignition": "1.x-dev",
         "facade/ignition": "^2.5",

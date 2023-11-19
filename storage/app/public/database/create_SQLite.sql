@@ -1,9 +1,7 @@
--- TODO get table name from config.yml
-
 PRAGMA journal_mode = MEMORY;
-PRAGMA synchronous = OFF;
+PRAGMA synchronous = ON;
 PRAGMA foreign_keys = OFF;
-PRAGMA ignore_check_constraints = OFF;
+PRAGMA ignore_check_constraints = ON;
 PRAGMA auto_vacuum = NONE;
 PRAGMA secure_delete = OFF;
 BEGIN TRANSACTION;
@@ -107,7 +105,7 @@ COMMIT;
 
 
 COMMIT;
-PRAGMA ignore_check_constraints = ON;
-PRAGMA foreign_keys = OFF;
+PRAGMA ignore_check_constraints = OFF;
+PRAGMA foreign_keys = ON;
 PRAGMA journal_mode = WAL;
 PRAGMA synchronous = NORMAL;

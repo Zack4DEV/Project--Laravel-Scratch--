@@ -27,34 +27,34 @@ Route::group(
         'namespace' => 'App\\Http\\Controllers',
     ],
     function () {
-        Route::post('/logout', 'App\Http\Controllers\EmployeeLogin@logout_employee')->name('employee_logout');
-        Route::post('/login', 'App\Http\Controllers\EmployeeLogin@login_employee')->name('employee_login');
+        Route::post('/logout', 'EmployeeLogin@logout_employee')->name('employee_logout');
+        Route::post('/login', 'EmployeeLogin@login_employee')->name('employee_login');
 
         Route::middleware(['auth:admin'])->group(
             function () {
-                Route::get('/dashboard', 'App\Http\Controllers\EmployeeLogin@showDashboard_employee')->name('dashboard');
+                Route::get('/dashboard', 'EmployeeLogin@showDashboard_employee')->name('dashboard');
 
-                Route::post('/exportData', 'App\Http\Controllers\ExportData@exportdata')->name('exportdata');
-
-
-                Route::post('/invoice', 'App\Http\Controllers\Invoice@show_invoice')->name('show_invoice');
-
-                Route::get('/payment', 'App\Http\Controllers\Payment@show_payment')->name('payment_show');
-
-                Route::post('/payment/delete', 'App\Http\Controllers\Payment@destroy_payment')->name('payment_delete');
-
-                Route::get('/roombook', 'App\Http\Controllers\Roombook@show_roombook')->name('roombook_show');
-                Route::post('/roombook/add', 'App\Http\Controllers\Roombook@create_roombook')->name('roombook_add');
-                Route::post('/roombook/delete', 'App\Http\Controllers\Roombook@destroy_roombook')->name('roombook_delete');
+                Route::post('/exportData', 'ExportData@exportdata')->name('exportdata');
 
 
-                Route::get('/room', 'App\Http\Controllers\Room@show_room')->name('room_show');
-                Route::post('/room/add', 'App\Http\Controllers\Room@create_room')->name('room_add');
-                Route::post('/room/delete', 'App\Http\Controllers\Room@destroy_room')->name('room_delete');
+                Route::post('/invoice', 'Invoice@show_invoice')->name('show_invoice');
 
-                Route::get('/staff', 'App\Http\Controllers\Staff@show_staff')->name('staff_show');
-                Route::post('/staff/add', 'App\Http\Controllers\Staff@create_staff')->name('staff_add');
-                Route::post('/staff/delete', 'App\Http\Controllers\Staff@destroy_staff')->name('staff_delete');
+                Route::get('/payment', 'Payment@show_payment')->name('payment_show');
+
+                Route::post('/payment/delete', 'Payment@destroy_payment')->name('payment_delete');
+
+                Route::get('/roombook', 'Roombook@show_roombook')->name('roombook_show');
+                Route::post('/roombook/add', 'Roombook@create_roombook')->name('roombook_add');
+                Route::post('/roombook/delete', 'Roombook@destroy_roombook')->name('roombook_delete');
+
+
+                Route::get('/room', 'Room@show_room')->name('room_show');
+                Route::post('/room/add', 'Room@create_room')->name('room_add');
+                Route::post('/room/delete', 'Room@destroy_room')->name('room_delete');
+
+                Route::get('/staff', 'Staff@show_staff')->name('staff_show');
+                Route::post('/staff/add', 'Staff@create_staff')->name('staff_add');
+                Route::post('/staff/delete', 'Staff@destroy_staff')->name('staff_delete');
             }
         );
     }

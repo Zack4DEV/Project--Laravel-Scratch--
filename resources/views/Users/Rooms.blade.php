@@ -1,5 +1,5 @@
 <section id="secondsection">
-    <img src="{{ asset('/storage/app/public/image/homeanimatebg.svg') }}">
+    <img src="{{ asset('/public/image/homeanimatebg.svg') }}">
     <div class="ourroom">
         <h1 class="head">≼ Our room ≽</h1>
         <div class="roomselect">

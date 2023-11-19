@@ -2,7 +2,7 @@
 
 @push('css')
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<link rel="stylesheet" href="{{ asset('/storage/app/public/Admin/css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ asset('/public/Admin/css/dashboard.css') }}">
 @endpush
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -19,35 +19,40 @@
     ];
 
     const data = {
-        labels: labels,
-        datasets: [{
-            label: 'My First dataset',
-            backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(153, 102, 255, 1)',
-            ],
-            borderColor: 'black',
-            data: [<?php echo $chartroom1row ?>, <?php echo $chartroom2row ?>, <?php echo $chartroom3row ?>, <?php echo $chartroom4row ?>],
-        }]
-    };
+            labels: labels,
+            datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderColor: 'black',
+                    data: array(
+                            'echo "$chartroom1row"',
+                            'echo "$chartroom1row"',
+                            'echo "$chartroom1row"',
+                            'echo "$chartroom1row"'
+                    )
+                    }],
+};
 
-    const doughnutchart = {
-        type: 'doughnut',
-        data: data,
-        options: {}
-    };
+            const doughnutchart = {
+                type: 'doughnut',
+                data: data,
+                options: {}
+            };
 
-    const myChart = new Chart(
-        document.getElementById('bookroomchart'),
-        doughnutchart);
+            const myChart = new Chart(
+                document.getElementById('bookroomchart'),
+                doughnutchart);
 </script>
 
 <script>
     Morris.Bar({
         element: 'profitchart',
-        data: [<?php echo $chart_data; ?>],
+        data: 'echo "$chart_data"',
         xkey: 'date',
         ykeys: ['profit'],
         labels: ['Profit'],
