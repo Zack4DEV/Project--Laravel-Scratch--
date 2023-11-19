@@ -1,7 +1,7 @@
 @include('Users.Logout')
 <nav>
     <div class="logo">
-      <img class="hotellogo" src="{{ asset('storage/app/public/image/hotellogo.jpg') }}" alt="">
+      <img class="hotellogo" src="{{ asset('/public/image/hotellogo.jpg') }}" alt="">
       <p>Hotel</p>
     </div>
     <ul>

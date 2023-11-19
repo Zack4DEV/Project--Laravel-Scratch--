@@ -5,7 +5,7 @@
 @include('Admins.Admin.Print.PrintASide')
 
 @push('css')
-<link rel="stylesheet" href="{{ 'storage/app/public/admin/css/style.css') }}">
+<link rel="stylesheet" href="{{ '/public/admin/css/style.css') }}">
 @endpush
 
 <style>
@@ -381,7 +381,7 @@
 ob_start();
 $id = $_GET['id'];
 
-$re = DB::select("SELECT * FROM payment WHERE id = '$id';--'");
+$re = DB::select("SELECT * FROM payment WHERE id = '$id'");
 @endphp
 
 @foreach ( $re as $row)

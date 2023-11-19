@@ -1,6 +1,6 @@
 <div class="roombooktable" class="table-responsive-xl">
     @php
-    $roombookresult = DB::select("SELECT * FROM roombook;--'");
+    $roombookresult = DB::select("SELECT * FROM roombook");
     $nums = mysqli_num_rows($roombookresult);
     @endphp
     <table class="table table-bordered" id="table-data">
@@ -32,70 +32,64 @@
             @enforeach
             <tr>
                 <td>
-                    @php echo "$res['id']" @endphp
+                    @php('echo "$res[id]"')
                 </td>
                 <td>
-                    @php echo "$r2" @endphp
+                    @php('echo "$r2"')
                 </td>
                 <td>
-                    @php echo "$res['Name']" @endphp
+                    @php('echo "$res[Name]"')
                 </td>
                 <td>
-                    @php echo "$res['Email']" @endphp
+                    @php('echo "$res[Email]"')
                 </td>
                 <td>
-                    @php echo "$res['Country']" @endphp
+                    @php('echo "$res[Country]"')
                 </td>
                 <td>
-                    @php echo "$res['Phone']" @endphp
+                    @php('echo "$res[Phone]"')
                 </td>
                 <td>
-                    @php echo "$res['roomtype']" @endphp
+                    @php('echo "$res[roomtype]"')
                 </td>
                 <td>
-                    @php echo "$res['Bed']" @endphp
+                    @php('echo "$res[Bed]"')
                 </td>
                 <td>
-                    @php echo "$res['NoofRoom']" @endphp
+                    @php('echo "$res[NoofRoom]"')
                 </td>
                 <td>
-                    @php echo "$res['Meal']" @endphp
+                    @php('echo "$res[Meal]"')
                 </td>
                 <td>
-                    @php echo "$res['cin']" @endphp
+                    @php('echo "$res[cin]"')
                 </td>
                 <td>
-                    @php echo "$res['cout']" @endphp
+                    @php('echo "$res[cout]"')
                 </td>
                 <td>
-                    @php echo "$res['nodays']" @endphp
+                    @php('echo "$res[nodays]"')
                 </td>
                 <td>
-                    @php echo "$res['stat']" @endphp
+                    @php('echo "$res[stat]"')
                 </td>
                 <td class="action">
-                    @php
-                    if ($res['stat'] == "Confirm"){
+                    @if($res['stat'] == "Confirm")
                     echo " ";
-                    }else{
+                    @else
                     $res_id = $res['id'];
-                    echo <a href='{
+                    @endif
+                    <a href='{{
                         asset( "/resources/views/Admins/Admin/EditConfirm/CRoombook?id=" . " $res_id " )
-                    }}'>
-                        <button class='btn btn-success'>Confirm</button></a>;
-                    }
+                    }}' ><button class='btn btn-success'>Confirm</button></a>
                     <a href='{{
                         asset( "/resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . " $res_id " )
                      }}'><button class="btn btn-primary">Edit</button></a>
-                    <a href='{
+                    <a href='{{
                         asset( "/resources/views/Admins/Admin/AddDelete/DRoombook?id=" . " $res_id " )
                     }}'><button class='btn btn-danger'>Delete</button></a>
-                    @endphp
-
                 </td>
             </tr>
-            @php
-            @endphp
         </tbody>
     </table>
 </div>

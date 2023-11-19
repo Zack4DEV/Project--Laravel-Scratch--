@@ -15,7 +15,7 @@
 <div class="roombooktable" class="table-responsive-xl">
 
     @php
-    $paymantresult = DB::select("SELECT * FROM payment;--'");
+    $paymantresult = DB::select("SELECT * FROM payment");
     $nums = mysqli_num_rows($paymantresult);
     @endphp
 

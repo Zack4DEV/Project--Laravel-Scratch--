@@ -1,7 +1,7 @@
 @php
 
 
-$re = DB::select("SELECT * FROM roombook;--'");
+$re = DB::select("SELECT * FROM roombook");
 @foreach ($re as $row)
     $id = $row['id'];
     $idRoom = $row['idroom'];
@@ -29,7 +29,7 @@ $re = DB::select("SELECT * FROM roombook;--'");
     @endif else
         $st = "Confirm";
     @endif
-    $result = DB::update("UPDATE roombook SET stat = '$st'  WHERE id = '$id';--'");
+    $result = DB::update("UPDATE roombook SET stat = '$st'  WHERE id = '$id'");
 
 
     @if ($result)
@@ -73,7 +73,7 @@ $re = DB::select("SELECT * FROM roombook;--'");
 
         $fintot = $ttot + $mepr + $btot;
 
-        $psql = DB::insert("INSERT INTO payment VALUES ('$id','$idRoom', '$Name', '$Email', '$Roomtype', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot');--'");
+        $psql = DB::insert("INSERT INTO payment VALUES ('$id','$idRoom', '$Name', '$Email', '$Roomtype', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot')");
 
         header("Location:roombook");
     @endif

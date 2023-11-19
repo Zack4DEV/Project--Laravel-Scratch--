@@ -3,7 +3,7 @@
 
 @php
 
-$result = DB::select("SELECT * FROM roombook;--'");
+$result = DB::select("SELECT * FROM roombook");
 $roombook_record = array();
 
 @foreach( $result as $rows)

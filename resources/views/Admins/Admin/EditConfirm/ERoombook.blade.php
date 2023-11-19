@@ -1,6 +1,6 @@
 $id = $_GET['id'];
 
-$re = DB::select("SELECT * FROM roombook WHERE id = '$id';--'");
+$re = DB::select("SELECT * FROM roombook WHERE id = '$id'");
 @foreach ($re as $row)
 $Name = $row['Name'];
 $Email = $row['Email'];
@@ -24,7 +24,7 @@ $EditMeal = $_POST['Meal'];
 $Editcin = $_POST['cin'];
 $Editcout = $_POST['cout'];
 
-$result = DB::update("UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = dated@iff('$Editcout','$Editcin') WHERE id = '$id';--'");
+$result = DB::update("UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = dated@iff('$Editcout','$Editcin') WHERE id = '$id'");
 
 $type_of_room = 0;
 @if ($Editroomtype == "Superior Room")
@@ -59,11 +59,11 @@ $type_of_meal = $type_of_bed * 4;
 @endif
 
 // noofday update
-$presult = DB::select("SELECT * FROM roombook WHERE id = '$id';--'");
+$presult = DB::select("SELECT * FROM roombook WHERE id = '$id'");
 $prow = mysqli_fetch_array($presult);
-$ndays = DB::select("SELECT nodays FROM roombook;--'");
+$ndays = DB::select("SELECT nodays FROM roombook");
 $Editnoofday = $prow[$ndays];
-$nroom = DB::select("SELECT roomtotal FROM roombook;--'");
+$nroom = DB::select("SELECT roomtotal FROM roombook");
 $EditNoofRoom = $prow[$nroom];
 
 $editttot = $type_of_room * $Editnoofday * $EditNoofRoom;
@@ -72,7 +72,7 @@ $editbtot = $type_of_bed * $Editnoofday;
 
 $editfintot = $editttot + $editmepr + $editbtot;
 
-$paymentresult = DB::update("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id';--'");
+$paymentresult = DB::update("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
 
 @if ($paymentresult)
 header("Location:roombook");

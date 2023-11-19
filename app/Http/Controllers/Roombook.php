@@ -4,6 +4,7 @@ namespace  App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Roombook extends Controller
 {
@@ -32,5 +33,16 @@ class Roombook extends Controller
         $roombook = 'App\Models\Admin\Roombook'::find($id);
         $roombook->delete();
         return redirect()->back();
+    }
+
+    public function check_availability_roombook()
+    {
+        $rre = DB::select("SELECT type FROM room");
+        $r = 0;
+        $sc = 0;
+        $gh = 0;
+        $sr = 0;
+        $dr = 0;
+        return view('Admins.Admin.Roombook.AvailabilityRoombook', compact('rre', 'r', 'sc', 'gh', 'sr', 'dr'));
     }
 }

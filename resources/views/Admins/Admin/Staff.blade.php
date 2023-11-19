@@ -34,7 +34,7 @@
         $staffname = $_POST['staffname'];
         $staffwork = $_POST['staffwork'];
 
-        $result = DB::insert("INSERT INTO staff(name,work) VALUES ('$staffname', '$staffwork');--'");
+        $result = DB::insert("INSERT INTO staff(name,work) VALUES ('$staffname', '$staffwork')");
 
         @while ($result)
             header("Location:staff");
