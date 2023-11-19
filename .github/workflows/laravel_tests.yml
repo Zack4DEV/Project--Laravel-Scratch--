@@ -73,7 +73,7 @@ jobs:
       - name: Prepare Test
         run: composer post-prepare-test
 
-      - name: PHPUnit Test
-        uses: chindit/actions-phpunit@1.0.0
-   #   - name: Tests PHPUnit
-   #     run: composer post-test-project
+   #   - name: PHPUnit Test
+   #     uses: chindit/actions-phpunit@1.0.0
+      - name: Tests PHPUnit
+        run: /vendor/bin/phpunit --configuration phpunit.xml --coverage-text --colors=never
