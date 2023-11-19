@@ -1,6 +1,10 @@
 name: 'Docker Job Build'
 description: 'Prepares the repo for a job by running the build'
-
+on:
+    push:
+        branches: [scratch ,master, master, next, beta, alpha]
+    pull_request:
+        branches: [scratch, master, master, next, beta, alpha]
 runs:
     using: 'composite'
     steps:
