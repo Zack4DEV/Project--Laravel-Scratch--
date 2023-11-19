@@ -1,21 +1,23 @@
-name: 'Docker Job Build'
-description: 'Prepares the repo for a job by running the build'
+#Prepares the repo for a job by running the build
+name: 'DockerJobBuild@develop'
 on:
     push:
         branches: [scratch ,master, master, next, beta, alpha]
     pull_request:
         branches: [scratch, master, master, next, beta, alpha]
-runs:
-    using: 'composite'
-    steps:
-        -   uses: actions/cache@v3
-            id: build-cache
-            with:
-                path: '**/dist/**'
-                key: ${{ runner.os }}-build-${{ github.sha }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:    
+      -  uses: actions/cache@v3
+         id: build-cache
+         with:
+             path: '**/dist/**'
+             key: ${{ runner.os }}-build-${{ github.sha }}
 
-        -   name: Build
-            shell: bash
-            if: steps.build-cache.outputs.cache-hit != 'true'
-            run: |
-                npm run build
+      -   name: Build
+          shell: bash
+          if: steps.build-cache.outputs.cache-hit != 'true'
+          run: |
+            npm run build
