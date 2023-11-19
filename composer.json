@@ -26,4 +26,3 @@
       "@php /vendor/bin/phpunit  --testsuite=Unit"
     ]
   }
-}
