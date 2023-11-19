@@ -25,13 +25,12 @@
             $roombookresult = array();
             @endphp
             @foreach ($roombookresult as $res)
-            $r2 = $res['id'];
             <tr>
                 <td>
                     @php('echo "$res[id]"')
                 </td>
                 <td>
-                    @php('echo "$r2"')
+                    @php('echo "$res[id]"')
                 </td>
                 <td>
                     @php('echo "$res[Name]"')
