@@ -43,10 +43,13 @@ jobs:
             - name: Install
               uses: ./.github/actions/install
               with:
-                  node-version: 16.x
+                branch_name: ${{ env.NAME }}
+                node-version: 16.x
 
             - name: Build
               uses: ./.github/actions/build
+              with: 
+                branch_name: ${{ env.NAME }}
 
             - name: Release
               id: semantic
