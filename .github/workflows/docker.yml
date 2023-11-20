@@ -5,9 +5,21 @@ name: Docker
 
 on:
     push:
-        branches: [ scratch ,master, master, next, beta, alpha]
+        branches: [ scratch ]
     pull_request:
-        branches: [ scratch ,master, master, next, beta, alpha]
+        branches: [ scratch ]
+    
+    workflow_dispatch:
+      inputs:
+        logLevel:
+          required: false
+          default: 'warning'
+        
+    workflow_call:
+      secrets:
+        access-tokens:
+          description: "Secrets Passed From .Docker"
+          required: true
 
 permissions:
     packages: write
@@ -16,32 +28,45 @@ permissions:
     pull-requests: write
 
 jobs:
-  call:
-      runs-on: ubuntu-latest
-      continue-on-error: ${{ matrix.experimental }}
-      strategy:
-        fail-fast: false
-        matrix:
-          node-version: [16.x]
-          dependencies:
-            - "locked"
-            - "lowest"
-            - "highest"
-          experimental:
-            - false
-      
-      name: Call
-      
-      steps:
-        - uses: actions/checkout@v3
+    default:
 
-        - name: Install Job
-          uses: ./.github/workflows/dockerJobInstall@develop
-          with:
-            node-version: 16.x
+        runs-on: ubuntu-latest
 
-        - name: Build Job
-          uses: ./.github/workflows/dockerJobBuild@develop
+        strategy:
+            matrix:
+                node-version: [16.x]
 
-        - name: Release Job ,Publish Job
-          uses: .github/workflows/dockerJobReleasePublish@develop
+        steps:
+
+            - uses: actions/checkout@v3
+
+            - name: Install
+              uses: ./.github/actions/Install
+              with:
+                  node-version: 16.x
+
+            - name: Build
+              uses: ./.github/actions/Build
+
+            - name: Release
+              id: semantic
+              uses: cycjimmy/semantic-release-action@v3
+              env:
+                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  extra_plugins: |
+                    @semantic-release/changelog
+                    @semantic-release/git
+
+            - name: Publish
+              uses: tada5hi/action-docker-image-publish@v3.2.0
+              if: steps.semantic.outputs.new_release_published == 'true'
+              with:
+                dockerFileName: './docker/php-fpm/Dockerfile'
+                gitTag: 'true'
+                registryTag: 'latest'
+                registryHost: 'ghcr.io'
+                registryUser: ${{ secrets.DOCKER_HUB_USERNAME }}
+                registryPassword: ${{ secrets.DOCKER_HUB_PASSWD }}
+                registryRepository: project
+                cleanup: 'true'
