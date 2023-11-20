@@ -43,13 +43,15 @@ jobs:
             - name: Install
               uses: ./.github/actions/install
               with:
-                branch_name: ${{ env.NAME }}
+                branch: scratch
+                github_token: ${{  secrets.GITHUB_TOKEN  }}
                 node-version: 16.x
 
             - name: Build
               uses: ./.github/actions/build
-              with: 
-                branch_name: ${{ env.NAME }}
+              with:
+                branch: scratch
+                github_token: ${{  secrets.GITHUB_TOKEN  }}
 
             - name: Release
               id: semantic
