@@ -38,15 +38,19 @@ jobs:
 
         steps:
 
-            - uses: actions/checkout@v4
+            - name: Checkout
+              uses: actions/checkout@v4.1.1
 
             - name: Install
-              uses: .github/actions/install@ad50022c286e417f131fa91fcf4057acefa837e5
+              uses: ./.github/actions/install@ad50022c286e417f131fa91fcf4057acefa837e5
               with:
                 node-version: 16.x
+                branch_name: ${{ env.NAME }}
 
             - name: Build
-              uses: .github/actions/build@c04e5f09bf9d69db6fea7a573d898c7fd8139131
+              uses: ./.github/actions/build@c04e5f09bf9d69db6fea7a573d898c7fd8139131
+              with:
+                branch_name: ${{ env.NAME }}
 
             - name: Release
               id: semantic
