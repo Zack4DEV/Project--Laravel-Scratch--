@@ -41,12 +41,12 @@ jobs:
             - uses: actions/checkout@v4
 
             - name: Install
-              uses: ./.github/actions/install@scratch
+              uses: ./.github/actions/install@ad50022c286e417f131fa91fcf4057acefa837e5
               with:
                 node-version: 16.x
 
             - name: Build
-              uses: ./.github/actions/build@scratch
+              uses: ./.github/actions/build@c04e5f09bf9d69db6fea7a573d898c7fd8139131
 
             - name: Release
               id: semantic
