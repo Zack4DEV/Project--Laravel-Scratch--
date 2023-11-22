@@ -1,13 +1,19 @@
 @php
-$rre = array("Superior Room","Deluxe Room","Guest House","Single Room");
-$cre = array("Superior Room","Deluxe Room","Guest House","Single Room");
-$s="";
-$cs="";
+$rre = DB::table('room')
+->select('type')
+->where('id', "=", "$id")
+->get();
+
+$r = 0;
+$sc = 0;
+$gh = 0;
+$sr = 0;
+$dr = 0;
 @endphp
 
 @foreach ($rre as $rrow)
 $r = $r + 1;
-$s = $rrow['type'];
+$s = $rrow->type;
 @if($s == "Superior Room")
 $sc = $sc + 1;
 @endif
@@ -22,9 +28,24 @@ $dr = $dr + 1;
 @endif
 @endforeach
 
+@php
+
+$cre = DB::table('payment')
+->select('roomtype')
+->where('id', "=", "$id")
+->get();
+
+$cr = 0;
+$csc = 0;
+$cgh = 0;
+$csr = 0;
+$cdr = 0;
+
+@endphp
+
 @foreach ($cre as $crow)
 $cr = $cr + 1;
-$cs = $crow['roomtype'];
+$cs = $crow->roomtype;
 
 @if($cs == "Superior Room")
 $csc = $csc + 1;
@@ -46,5 +67,9 @@ $cdr = $cdr + 1;
 $f4=$dr - $cdr;
 @endif
 
+@if ($f5 <= 0) $f5="NO";
+@endif
+@php
 $f5=$r - $cr;
+@endphp
 @endforeach

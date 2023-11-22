@@ -13,6 +13,7 @@
 
 <div id="guestdetailpanel">
     <form action="" method="POST" class="guestdetailpanelform">
+        @method('POST')
         <div class="head">
             <h3>RESERVATION</h3>
             <i class="fa-solid fa-circle-xmark" onclick="adduserclose()"></i>
@@ -28,8 +29,8 @@
 
                 <select name="Country" class="form-controls" required>
                     <option value selected>Select your country</option>
-                    @foreach ($countries as $key => $value)
-                    echo '<option value="' . $value . '">' . $value . '</option>';
+                    @foreach ($countries as $value)
+                    echo '<option value="' . $value . '">' . {{ $value }} . '</option>';
                     @endforeach
                 </select>
                 <input class="form-controls" type="text" name="Phone" placeholder="Enter Phoneno" required>

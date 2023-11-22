@@ -22,72 +22,75 @@
 
         <tbody>
             @php
-            $roombookresult = array();
+            $id = $request->session()->get('id');
+            $roombookresult = DB::table("roombook");
+            ->select(array("id","Name","Email","Country","Phone","roomtype","Bed","NoofRoom","Meal","cin","cout","nodays","stat"))
+            ->where('id',"=","$id");
+            ->get();
             @endphp
             @foreach ($roombookresult as $res)
             <tr>
                 <td>
-                    @php('echo "$res['id']"')
+                    {{ $res->id }}
                 </td>
                 <td>
-                    @php('echo "$res['id']"')
+                    {{ $res->id }}
                 </td>
                 <td>
-                    @php('echo "$res['Name']"')
+                    {{ $res->Name }}
                 </td>
                 <td>
-                    @php('echo "$res['Email']"')
+                    {{ $res->Email }}
                 </td>
                 <td>
-                    @php('echo "$res['Country']"')
+                    {{ $res->Country }}
                 </td>
                 <td>
-                    @php('echo "$res['Phone']"')
+                    {{ $res->Phone }}
                 </td>
                 <td>
-                    @php('echo "$res['roomtype']"')
+                    {{ $res->roomtype }}
                 </td>
                 <td>
-                    @php('echo "$res['Bed']"')
+                    {{ $res->Bed }}
                 </td>
                 <td>
-                    @php('echo "$res['NoofRoom']"')
+                    {{ $res->NoofRoom }}
                 </td>
                 <td>
-                    @php('echo "$res['Meal']"')
+                    {{ $res->Meal }}
                 </td>
                 <td>
-                    @php('echo "$res['cin']"')
+                    {{ $res->cin }}
                 </td>
                 <td>
-                    @php('echo "$res['cout']"')
+                    {{ $res->cout }}
                 </td>
                 <td>
-                    @php('echo "$res['nodays']"')
+                    {{ $res->nodays }}
                 </td>
                 <td>
-                    @php('echo "$res['stat']"')
+                    {{ $res->stat }}
                 </td>
                 <td class="action">
                     @php
-                    if($res[stat] == "Confirm"){
+                    if($res->stat] == "Confirm"){
                     echo " ";
                     } else{
-                    $res_id = $res['id'];
                     }
                     <a href='{{
-                        asset( "/resources/views/Admins/Admin/EditConfirm/CRoombook?id=$res_id" )
+                        asset( "/resources/views/Admins/Admin/EditConfirm/CRoombook?id=$res->id" )
                     }}'><button class='btn btn-success'>Confirm</button></a>
                     <a href='{{
-                        asset( "/resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . " $res_id " )
+                        asset( "/resources/views/Admins/Admin/EditConfirm/ERoombook?id=" . " $res->id " )
                      }}'><button class="btn btn-primary">Edit</button></a>
                     <a href='{{
-                        asset( "/resources/views/Admins/Admin/AddDelete/DRoombook?id=" . " $res_id " )
+                        asset( "/resources/views/Admins/Admin/AddDelete/DRoombook?id=" . " $res->id " )
                     }}'><button class='btn btn-danger'>Delete</button></a>
                     @endphp
                 </td>
-                @endforeach
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

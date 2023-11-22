@@ -30,10 +30,10 @@
                     ],
                     borderColor: 'black',
                     data: array(
-                            'echo "$chartroom1row"',
-                            'echo "$chartroom1row"',
-                            'echo "$chartroom1row"',
-                            'echo "$chartroom1row"'
+                            "{{ $chartroom1row }}",
+                            "{{ $chartroom1row }}",
+                            "{{ $chartroom1row }}",
+                            "{{ $chartroom1row }}"
                     )
                     }],
 };
@@ -52,10 +52,10 @@
 <script>
     Morris.Bar({
         element: 'profitchart',
-        data: 'echo "$chart_data"',
+        data: "{{ $chart_data }}",
         xkey: 'date',
-        ykeys: ['profit'],
-        labels: ['Profit'],
+        ykeys: 'profit',
+        labels: 'Profit',
         hideHover: 'auto',
         stacked: true,
         barColors: [

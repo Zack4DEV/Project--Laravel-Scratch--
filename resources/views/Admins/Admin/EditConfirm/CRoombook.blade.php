@@ -1,40 +1,79 @@
 @php
-$re = array();
+$re = DB::table("roombook")
+->select(array("id", "idroom", "Name", "Email", "Country", "Phone", "roomtype", "Bed", "NoofRoom", "Meal", "cin",
+"cout", "nodays", "stat"))
+->where('id', "=", "$id")
+->get();
 @endphp
 
 @foreach ($re as $row)
-$id = $row['id'];
-$idRoom = $row['idroom'];
-$Name = $row['Name'];
-$Email = $row['Email'];
-$Country = $row['Country'];
-$Phone = $row['Phone'];
-$Roomtype = $row['roomtype'];
-$Bed = $row['Bed'];
-$NoofRoom = $row['NoofRoom'];
-$Meal = $row['Meal'];
-$cin = $row['cin'];
-$cout = $row['cout'];
-$noofday = $row['nodays'];
-$stat = $row['stat'];
+session()->put('id', $id);
+session()->put('idRoom', $idRoom);
+session()->put('Name', $Email);
+session()->put('Country', $Country);
+session()->put('Phone', $Phone);
+session()->put('roomtype', $Roomtype);
+session()->put('Noofroom', $NoofRoom);
+session()->put('Meal', $Meal);
+session()->put('cin', $cin);
+session()->put('cout', $cout);
+session()->put('noofday', $nodays);
+session()->put('stat', $stat);
 @endforeach
-
-
-@php
-$stat= array("NotConfirm","Confirm");
-@endphp
 
 @while ($stat == "NotConfirm")
 $datetime2 = new DateTime("now");
 $datetime1 = date_create($cout);
-@if ($datetime1<$datetime2)
-$st="Closed";
+
+@if ($datetime1<$datetime2) $st="Closed" ;
 @else
 $st="Confirm";
 @endif
+$result=DB::table('roombook')
+->update(array(
+    'stat' => $st
+    ))
+    ->where('id', "=", "$id");
 
+    @if ($Roomtype == " Superior Room")
+    $type_of_room=3000;
+    @elseif ($Roomtype=="Deluxe Room" )
+    $type_of_room=2000;
+    @elseif ($Roomtype=="Guest House" )
+    $type_of_room=1500;
+    @elseif ($Roomtype=="Single Room" )
+    $type_of_room=1000;
+    @endif
 
-    @if ($result)
+    @if ($Bed=="Single" )
+    $type_of_bed=$type_of_room * 1 / 100;
+    @elseif ($Bed=="Double" )
+    $type_of_bed=$type_of_room * 2 / 100;
+    @elseif ($Bed=="Triple" )
+    $type_of_bed=$type_of_room * 3 / 100;
+    @elseif($Bed=="Quad" )
+    $type_of_bed=$type_of_room * 4 / 100;
+    @endif
 
-        $type_of_room = 0;
-        @if ($Roomtype == " Superior Room") $type_of_room=3000; @elseif ($Roomtype=="Deluxe Room" ) $type_of_room=2000; @elseif ($Roomtype=="Guest House" ) $type_of_room=1500; @elseif ($Roomtype=="Single Room" ) $type_of_room=1000; @endif @if ($Bed=="Single" ) $type_of_bed=$type_of_room * 1 / 100; @elseif ($Bed=="Double" ) $type_of_bed=$type_of_room * 2 / 100; @elseif ($Bed=="Triple" ) $type_of_bed=$type_of_room * 3 / 100; @elseif ($Bed=="Quad" ) $type_of_bed=$type_of_room * 4 / 100; @endif @if ($Meal=="Room only" ) $type_of_meal=$type_of_bed * 0; @elseif ($Meal=="Breakfast" ) $type_of_meal=$type_of_bed * 2; @elseif ($Meal=="Half Board" ) $type_of_meal=$type_of_bed * 3; @elseif ($Meal=="Full Board" ) $type_of_meal=$type_of_bed * 4; @endif $ttot=$type_of_room * $noofday * $NoofRoom; $mepr=$type_of_meal * $noofday; $btot=$type_of_bed * $noofday; $fintot=$ttot + $mepr + $btot; $psql=DB::insert("INSERT INTO payment VALUES ('$id','$idRoom', '$Name' , '$Email' , '$Roomtype' , '$Bed' , '$NoofRoom' , '$cin' , '$cout' , '$noofday' , '$ttot' , '$btot' , '$Meal' , '$mepr' , '$fintot' )"); header("Location:roombook"); @endif @endwhile
+    @if ($Meal=="Room only" )
+    $type_of_meal=$type_of_bed * 0;
+    @elseif ($Meal=="Breakfast" )
+    $type_of_meal=$type_of_bed * 2;
+    @elseif ($Meal=="Half Board" )
+    $type_of_meal=$type_of_bed * 3;
+    @elseif ($Meal=="Full Board" )
+    $type_of_meal=$type_of_bed * 4;
+    @endif
+
+    $ttot = $type_of_room * $noofday * $NoofRoom;
+    $mepr = $type_of_meal * $noofday;
+    $btot = $type_of_bed * $noofday;
+    $fintot = $ttot + $mepr + $btot;
+
+    $psql = DB::table("roombook")
+    ->update(array(
+    'Total' => $fintot
+    ))
+    ->where('id', "=", "$id");
+
+    @endwhile

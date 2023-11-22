@@ -1,5 +1,6 @@
 <div class="addroomsection">
     <form action="" method="POST">
+        @method('POST')
         <label for="troom">Name :</label>
         <input type="text" name="staffname" class="form-control">
 

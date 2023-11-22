@@ -377,24 +377,28 @@
 </style>
 
 @php
-$re = array();
+$id = $request->session()->get('id');
+$re = DB::table('payment')
+     ->select('*')
+     ->where('id', $id)
+     ->get();
 @endphp
 
 @foreach($re as $row)
-$id = $row['id'];
-$idroom = $row['idroom'];
-$Name = $row['Name'];
-$troom = $row['roomtype'];
-$bed = $row['Bed'];
-$nroom = $row['noofroom'];
-$cin = $row['cin'];
-$cout = $row['cout'];
-$meal = $row['meal'];
-$ttot = $row['roomtotal'];
-$mepr = $row['mealtotal'];
-$btot = $row['bedtotal'];
-$fintot = $row['finaltotal'];
-$days = $row['noofdays'];
+$id = $row->id;
+$idroom = $row->idroom;
+$Name = $row->Name;
+$troom = $row->roomtype;
+$bed = $row->Bed;
+$nroom = $row->noofroom;
+$cin = $row->cin;
+$cout = $row->cout;
+$meal = $row->meal;
+$ttot = $row->roomtotal;
+$mepr = $row->mealtotal;
+$btot = $row->bedtotal;
+$fintot = $row->finaltotal;
+$days = $row->noofdays;
 
 $type_of_room = 0;
 @if ($troom == "Superior Room")

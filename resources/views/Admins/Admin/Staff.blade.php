@@ -14,6 +14,7 @@
 
 <div class="addroomsection">
     <form action="" method="POST">
+        @method('POST')
         <label for="troom">Name :</label>
         <input type="text" name="staffname" class="form-control">
 
@@ -30,14 +31,18 @@
         <button type="submit" class="btn btn-success" name="addstaff">Add Staff</button>
     </form>
 
-    @if (isset($_POST['addstaff']))
-        $staffname = $_POST['staffname'];
-        $staffwork = $_POST['staffwork'];
+    @php
+    $staffname = session().put('staffname');
+    $staffwork = session().put('staffwork');
 
-        $result = DB::insert("INSERT INTO staff(name,work) VALUES ('$staffname', '$staffwork')");
+    $result = DB::table("staff")
+    ->insert(array(
+    'staffname' => $staffname,
+    'staffwork' => $staffwork
+    ));
 
-        @while ($result)
-            header("Location:staff");
-        @endwhile
-    @endif
+    @while ($result)
+    header("Location:staff");
+    @endwhile
+    @endphp
 </div>

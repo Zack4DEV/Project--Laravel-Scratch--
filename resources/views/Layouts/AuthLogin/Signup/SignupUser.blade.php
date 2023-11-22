@@ -5,6 +5,7 @@
     <h2>Sign Up</h2>
 
     <form class="user_signup" id="usersignup" action="" method="POST">
+        @method('POST')
         <div class="form-floating">
             <input type="text" class="form-control" name="Username" placeholder=" ">
             <label for="Username">Username</label>
@@ -32,24 +33,36 @@
 </div>
 
 
-@if (isset($_POST['user_signup_submit']))
-$Username = $_POST['Username'];
-$Email = $_POST['Email'];
-$Password = $_POST['Password'];
-$CPassword = $_POST['CPassword'];
+@php
+
+$Username = session().get('Username');
+$Email = session().get('Email');
+$Password = session().get('Password');
+$CPassword = session().get('CPassword');
+
+@endphp
 
 @if ($Username == "" || $Email == "" || $Password == "")
+
 echo "<script>
     swal({
         title: 'Fill the proper details',
         icon: 'error',
     });
 </script>";
-@else
-@if ($Password == $CPassword)
-$result = DB::select("SELECT * FROM signup WHERE Email = '$Email'");
 
-@if ($result->num_rows > 0)
+@elseif ($Password == $CPassword)
+$result_up = DB::table("signup")
+->select(array(
+'Username' => $Username,
+'Email' => $Email,
+'Password' => $Password,
+'CPassword' => $CPassword
+))
+->where('Email', "=", "{{ $Email }}")
+->get();
+
+@if ($result_up)
 echo "<script>
     swal({
         title: 'Email already exists',
@@ -57,15 +70,21 @@ echo "<script>
     });
 </script>";
 @else
-$result = DB::insert("INSERT INTO signup (Username,Email,Password) VALUES ('$Username', '$Email', '$Password')");
+$result_in = DB::table("signup")
+->insert(array(
+'Username' => $Username,
+'Email' => $Email,
+'Password' => $Password,
+'CPassword' => $CPassword
+));
+@endif
 
-@if ($result)
-$_SESSION['usermail'] = $Email;
-$Username = "";
-$Email = "";
-$Password = "";
-$CPassword = "";
-//header("Location: home");
+@if ($result_up)
+session().put('Username', $Username);
+session().put('Email', $Email);
+session().put('Password', $Password);
+session().put('CPassword', $CPassword);
+header("Location: home");
 @else
 echo "<script>
     swal({
@@ -74,7 +93,7 @@ echo "<script>
     });
 </script>";
 @endif
-@endif
+
 @else
 echo "<script>
     swal({
@@ -82,6 +101,4 @@ echo "<script>
         icon: 'error',
     });
 </script>";
-@endif
-@endif
 @endif

@@ -1,31 +1,53 @@
 @php
-$re = array();
+$id = session()->get('id');
+$re = DB::table("roombook");
+->select(array("id","Name","Email","Country","Phone","roomtype","Bed","NoofRoom","Meal","cin","cout","nodays","stat"))
+->where('id',"=","$id");
+->get();
 @endphp
 
 @foreach ($re as $row)
-$Name = $row['Name'];
-$Email = $row['Email'];
-$Country = $row['Country'];
-$Phone = $row['Phone'];
-$cin = $row['cin'];
-$cout = $row['cout'];
-$noofday = $row['nodays'];
-$stat = $row['stat'];
+session()->put('id', $id);
+session()->put('idRoom', $idRoom);
+session()->put('Name', $Email);
+session()->put('Country', $Country);
+session()->put('Phone', $Phone);
+session()->put('roomtype', $Roomtype);
+session()->put('Noofroom', $NoofRoom);
+session()->put('Meal', $Meal);
+session()->put('cin', $cin);
+session()->put('cout', $cout);
+session()->put('noofday', $nodays);
+session()->put('stat', $stat);
 @endforeach
 
-@if (isset($_POST['guestdetailedit']))
-$EditName = $_POST['Name'];
-$EditEmail = $_POST['Email'];
-$EditCountry = $_POST['Country'];
-$EditPhone = $_POST['Phone'];
-$Editroomtype = $_POST['roomtype'];
-$EditBed = $_POST['Bed'];
-$EditNoofRoom = $_POST['noofroom'];
-$EditMeal = $_POST['Meal'];
-$Editcin = $_POST['cin'];
-$Editcout = $_POST['cout'];
+$EditName = $Name;
+$EditEmail = $Email;
+$EditCountry = $Country;
+$EditPhone = $Phone;
+$Editroomtype = $Roomtype;
+$EditBed = $Bed;
+$EditNoofRoom = $NoofRoom;
+$EditMeal = $Meal;
+$Editcin = $cin;
+$Editcout = $cout;
 
-$result = DB::update("UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = dated@iff('$Editcout','$Editcin') WHERE id = '$id'");
+$result = DB::table('roombook')'
+->update(array(
+'Name' => $EditName,
+'Email' => $EditEmail,
+'Country' => $EditCountry,
+'Phone' => $EditPhone,
+'roomtype' => $Editroomtype,
+'Bed' => $EditBed,
+'NoofRoom' => $EditNoofRoom,
+'Meal' => $EditMeal,
+'cin' => $Editcin,
+'cout' => $Editcout,
+'nodays' => $Editnoofday,
+'stat' => $stat
+))
+->where('id',"=","$id");
 
 $type_of_room = 0;
 @if ($Editroomtype == "Superior Room")
@@ -59,12 +81,22 @@ $type_of_meal = $type_of_bed * 3;
 $type_of_meal = $type_of_bed * 4;
 @endif
 
-// noofday update
-$presult = DB::select("SELECT * FROM roombook WHERE id = '$id'");
-$prow = mysqli_fetch_array($presult);
-$ndays = DB::select("SELECT nodays FROM roombook");
+$presult = DB::table("roombook")
+->select(array("nodays"))
+->where('id',"=","$id");
+
+@foreach($presult as $prow)
+
+$ndays = DB::table("roombook")
+->select(array("nodays"))
+->where('id',"=","$id");
+
 $Editnoofday = $prow[$ndays];
-$nroom = DB::select("SELECT roomtotal FROM roombook");
+
+$nroom = DB::table("roombook");
+->select(array("NoofRoom"))
+->where('id',"=","$id);
+
 $EditNoofRoom = $prow[$nroom];
 
 $editttot = $type_of_room * $Editnoofday * $EditNoofRoom;
@@ -73,9 +105,9 @@ $editbtot = $type_of_bed * $Editnoofday;
 
 $editfintot = $editttot + $editmepr + $editbtot;
 
-$paymentresult = DB::update("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
-
-@if ($paymentresult)
-header("Location:roombook");
-@endif
-@endif
+$paymentresult = DB::table("roombook")
+->update(array(
+'tot' => $editfintot
+))
+->where('id',"=","$id");
+@endforeach

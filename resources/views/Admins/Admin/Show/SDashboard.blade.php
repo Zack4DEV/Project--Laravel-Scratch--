@@ -2,19 +2,19 @@
     <div class="box roombookbox">
         <h2>Total Booked Room</h1>
             <h1>
-                @php('echo "$roombookrow / $roomrow"')
+                {{ '$roombookrow / $roomrow' }}
             </h1>
     </div>
     <div class="box guestbox">
         <h2>Total Staff</h1>
             <h1>
-                @php('echo "$staffrow" ')
+                {{ $staffrow }}
             </h1>
     </div>
     <div class="box profitbox">
         <h2>Profit</h1>
             <h2>
-                @php('echo "$tot"')
+                {{ $tot }}
             <span>$</span></h2>
     </div>
 </div>

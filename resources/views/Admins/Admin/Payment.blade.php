@@ -15,9 +15,13 @@
 <div class="roombooktable" class="table-responsive-xl">
 
     @php
-    $paymantresult = DB::select("SELECT * FROM payment");
-    $nums = mysqli_num_rows($paymantresult);
+    $paymantresult = DB::table("payment")
+    ->select('*')
+    ->where('id', "=", "$id")
+    ->get();
+
     @endphp
+    @foreach ($paymantresult as $res);
 
     <table class="table table-bordered" id="table-data">
         <thead>
@@ -37,68 +41,58 @@
                 <th scope="col">Meals</th>
                 <th scope="col">Total Bill</th>
                 <th scope="col">Action</th>
-                <!-- <th>Delete</th> -->
             </tr>
         </thead>
 
         <tbody>
-            @foreach ($paymantresult as $res)
-            $r2=$res['id'] + 6;
-            $res_id = $res['id'];
             <tr>
                 <td>
-                    @php echo $res['id'] @endphp
+                    {{ $res->id }}
                 </td>
                 <td>
-                    @php echo $r2 @endphp
+                    {{ $res->id }}
                 </td>
                 <td>
-                    @php echo $res['Name'] @endphp
+                    {{ $res->Name }}
                 </td>
                 <td>
-                    @php echo $res['roomtype'] @endphp
+                    {{ $res->roomtype }}
                 </td>
                 <td>
-                    @php echo $res['Bed'] @endphp
+                    {{ $res->Bed }}
                 </td>
                 <td>
-                    @php echo $res['cin'] @endphp
+                    {{ $res->cin }}
                 </td>
                 <td>
-                    @php echo $res['cout'] @endphp
+                    {{ $res->cout }}
                 </td>
                 <td>
-                    @php echo $res['noofdays'] @endphp
+                    {{ $res->noofdays }}
                 </td>
                 <td>
-                    @php echo $res['NoofRoom'] @endphp
+                    {{ $res->NoofRoom }}
                 </td>
                 <td>
-                    @php echo $res['meal'] @endphp
+                    {{ $res->meal }}
                 </td>
                 <td>
-                    @php echo $res['roomtotal'] @endphp
+                    {{ $res->roomtotal }}
                 </td>
                 <td>
-                    @php echo $res['bedtotal'] @endphp
+                    {{ $res->bedtotal }}
                 </td>
                 <td>
-                    @php echo $res['mealtotal'] @endphp
+                    {{ $res->mealtotal }}
                 </td>
                 <td>
-                    @php echo $res['finaltotal'] @endphp
+                    {{ $res->finaltotal }}
                 </td>
                 <td class="action">
-                    <a href='{{
-                        asset( "/resources/views/Admins/Invoice?id=" . " $res_id " )
-                     }}'><button class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button></a>
-                    <!--
-                        <a href='{{
-                        asset( "/resources/views/Admins/Admin/AddDelete/DPayment?id=" . " $res_id " )
-                     }}'><button class="btn btn-danger">Delete</button></a>
-                    -->
+                    <a href="{{ URL::to( '/invoice' ) }}"><button class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button></a>
                 </td>
             </tr>
-            @endforeach
         </tbody>
     </table>
+    @endforeach
+</div>
