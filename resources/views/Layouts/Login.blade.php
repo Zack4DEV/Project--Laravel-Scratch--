@@ -38,17 +38,6 @@
 
                 </form>
 
-                @if ($user_result_up)
-                redirect()->route('to_roombook_create_user');
-                @else
-                echo "<script>
-                    swal({
-                        title: 'Something went wrong',
-                        icon: 'error',
-                    });
-                </script>";
-                @endif
-
             </div>
 
             <div id="Employee_Log_In">
@@ -65,17 +54,6 @@
                     </div>
                     <button type="submit" name="Emp_login_submit" class="auth_btn">Log in</button>
                 </form>
-
-            @if ($employee_result_up)
-            redirect()->route('to_employee_dashboard'');
-            @else
-            echo "<script>
-                swal({
-                    title: 'Something went wrong',
-                    icon: 'error',
-                });
-            </script>";
-            @endif
         </div>
 
         <div id="sign_up">
@@ -107,48 +85,6 @@
                     </h6>
                 </div>
             </form>
-
-            @if ($Username == "" || $Email == "" || $Password == "")
-
-            echo "<script>
-                swal({
-                    title: 'Fill the proper details',
-                    icon: 'error',
-                });
-            </script>";
-
-            @elseif ($Password == $CPassword)
-
-            @if ($result_up)
-            echo "<script>
-                swal({
-                    title: 'Email already exists',
-                    icon: 'error',
-                });
-            </script>";
-            @endif
-
-            @if ($result_in)
-            header("Location: home");
-            @else
-            echo "<script>
-                swal({
-                    title: 'Something went wrong',
-                    icon: 'error',
-                });
-            </script>";
-            @endif
-
-            @else
-            echo "<script>
-                swal({
-                    title: 'Password does not matched',
-                    icon: 'error',
-                });
-            </script>";
-            @endif
-
         </div>
-
     </div>
 @endsection

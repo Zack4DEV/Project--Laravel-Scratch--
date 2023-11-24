@@ -135,32 +135,7 @@
                     <button class="btn btn-success" name="guestdetailsubmit">Submit</button>
                 </div>
             </form>
-            @if ($Name == "" || $Email == "" || $Country == "")
-            echo '<script>
-                swal({
-                    title: "Fill the proper details",
-                    icon: "error",
-                });
-            </script>';
-            @endif
-
-            $sta = "NotConfirm";
-
-            @if ($result)
-            echo '<script>
-                swal({
-                    title: "Reservation successful",
-                    icon: "success",
-                });
-            </script>';
-            @else
-            echo '<script>
-                swal({
-                    title: "Something went wrong",
-                    icon: "error",
-                });
-            </script>';
-            @endif
+            
         </div>
 
     </div>
