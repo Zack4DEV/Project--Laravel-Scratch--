@@ -39,8 +39,8 @@ Route::group(
 
         Route::middleware(['auth:admin'])->group(
             function () {
-                Route::get('/dashboard', 'Admin@dashboard_Employee_To')->name('to_employee_dashboard');
-                Route::post('/dashboard', 'Admin@dashboard_Employee_Edit')->name('edit_employee_dashboard');
+                Route::get('/dashboard', 'Employee@dashboard_Employee_To')->name('to_employee_dashboard');
+                Route::post('/dashboard', 'Employee@dashboard_Employee_Edit')->name('edit_employee_dashboard');
 
                 Route::get('/exportData', 'ExportData@export_Data_Up')->name('up_data_export');
                 Route::post('/exportData', 'ExportData@export_Data_In')->name('in_data_export');
