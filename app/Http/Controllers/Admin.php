@@ -2,29 +2,60 @@
 
 namespace  App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class Admin extends Controller {
 
-public function show_dashboard()
-{
-$roombookrow = DB::select("SELECT * FROM roombook");
-$staffrow = DB::select("SELECT * FROM staff");
-$roomrow = DB::select("SELECT * FROM room");
+    public function dashboard_Employee_To()
+    {
+        $chartroom1row = DB::table("roombook")
+            ->select('*')
+            ->where('roomtype', "=", "Superior Room")
+            ->count();
 
-$result = DB::select("SELECT cout,finaltotal FROM payment");
+        $chartroom2row = DB::table("roombook")
+            ->select('*')
+            ->where('roomtype', "=", "Deluxe Room")
+            ->count();
 
-$chart_data = '';
-$tot = 0;
-foreach ($result as $row) {
-$chart_data .= "{ date:'" . $row["cout"] . "', profit:" . $row["finaltotal"] * 10 / 100 . "}, ";
-$tot = $tot + $row["finaltotal"] * 10 / 100;
-}
+        $chartroom3row = DB::table("roombook")
+            ->select('*')
+            ->where('roomtype', "=", "Guest House")
+            ->count();
 
-$chart_data = substr($chart_data, 0, -2);
+        $chartroom4row = DB::table("roombook")
+            ->select('*')
+            ->where('roomtype', "=", "Single Room")
+            ->count();
 
-return view('Admins.Admin.Show.SDashboard');
+        $roombookrow = DB::table("roombook")
+            ->select('*')
+            ->count();
 
-}
+        $staffrow = DB::table("staff")
+            ->select('*')
+            ->count();
+
+        $roomrow = DB::table("room")
+            ->select('*')
+            ->count();
+
+        return view('Admins.Admin.Dashboard')
+            ->with('chartroom1row', $chartroom1row)
+            ->with('chartroom2row', $chartroom2row)
+            ->with('chartroom3row', $chartroom3row)
+            ->with('chartroom4row', $chartroom4row)
+            ->with('roombookrow', $roombookrow)
+            ->with('staffrow', $staffrow)
+            ->with('roomrow', $roomrow);
+        }
+    public function dashboard_Employee_Edit()
+    {
+        $result = DB::table('payment')
+               ->select('cout', 'finaltotal')
+               ->count();
+
+        return redirect()->route('to_employee_dashboard')->with('result', $result);
+    }
+
 }

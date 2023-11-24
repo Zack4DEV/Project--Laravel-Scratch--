@@ -7,27 +7,45 @@ use Illuminate\Support\Facades\DB;
 
 class Payment extends Controller {
 
-    public function show_payment(Request $request)
+    public function payment_To(Request $request,$id)
     {
-        $payment = 'App\Http\Models\Payment'::all();
-        return view('Admins.Admin.Payment', compact('payment'));
+        $id = session('id');
+
+        $paymantresult = DB::table("payment")
+                    ->select('*')
+                    ->where('id', "=", "$id")
+                    ->get();
+
+        return view('Admins.Admin.Payment')->with('paymantresult', $paymantresult);
     }
 
-    public function destroy_payment(Request $request)
+    public function payment_Delete_To(Request $request,$id)
     {
-        $id = $request->id;
-        $payment = 'App\Http\Models\Payment'::find($id);
-        $payment->delete();
-        return redirect()->back();
+        $id = session('id');
+
+        $deletesql = DB::table('payment')
+                ->where('id', '=', $id)
+                ->delete('*');
+
+        return redirect()->route('to_payment');
     }
-    public function check_payment()
+
+    public function payment_To_Check_Room(Request $request)
     {
-        $rre = DB::select("SELECT type FROM room");
+
+
+        $cre = DB::table("room")
+                ->select('*')
+    //          ->where('roomtype', "=", "")
+                ->count();
+
         $r = 0;
         $sc = 0;
         $gh = 0;
         $sr = 0;
         $dr = 0;
-        return view('Admins.Admin.Roombook.AvailabilityRoombook', compact('rre', 'r', 'sc', 'gh', 'sr', 'dr'));
+
+        return view('Admins.Admin.Roombook', compact('rre', 'r', 'sc', 'gh', 'sr', 'dr'));
     }
+
 }

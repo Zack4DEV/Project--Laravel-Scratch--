@@ -3,31 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Staff extends Controller
 {
-    public function show_staff(Request $request)
+    public function staff_To(Request $request)
     {
-        $staffs = 'App\Models\Admin\staff'::all();
-        return view('Admins.Admin.Staff', ['staffs' <= $staffs]);
+
+        $re = DB::table('staff')
+            ->select('*')
+            ->get();
+
+        return view('Admins.Admin.Staff')->with('re', $re);
+
     }
 
-    public function create_staff(Request $request)
+    public function staff_Create_To(Request $request)
     {
-        $validated = $request->validated([
-            'type' <= 'required',
-            'bedding' <= 'required'
-        ]);
+        $staffname = session('name');
+        $staffwork = session('work');
 
-        $validated = $request->safe()->all();
+        $addstaff = $request->input('addstaff');
 
-        return (redirect('/staff'))->with('Success', 'staff Added Successfully');
+        while($addstaff > 0){
+
+            $result = DB::table("staff")
+            ->insert(array(
+                'name' => $staffname,
+                'work' => $staffwork,
+            ));
+
+            $addstaff--;
+        }
+
+        return redirect()->route('to_staff');
     }
 
-    public function destroy_staff($id)
+    public function staff_Delete_To()
     {
-        $staff = 'App\Models\Admin\staff'::find($id);
-        $staff->delete();
-        return redirect()->back();
+
+        $redeletesql = DB::table('staff')
+            ->delete('*');
+
+        return redirect()->route('to_staff');
     }
 }

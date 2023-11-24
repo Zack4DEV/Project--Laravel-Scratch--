@@ -1,13 +1,7 @@
 @extends('Admins.Admin.Payment');
 
-@include('Admins.Admin.Print.PrintHeader')
-@include('Admins.Admin.Print.PrintArticle')
-@include('Admins.Admin.Print.PrintASide')
-
 @push('css')
 <link rel="stylesheet" href="{{ asset('/public/admin/css/style.css') }}">
-@endpush
-
 <style>
     /* reset */
 
@@ -339,6 +333,7 @@
     }
 
     .cut {
+        transition: opacity 100ms ease-in;
         -webkit-transition: opacity 100ms ease-in;
     }
 
@@ -348,6 +343,7 @@
 
     @media print {
         * {
+            print-color-adjust: exact;
             -webkit-print-color-adjust: exact;
         }
 
@@ -375,32 +371,95 @@
         margin: 0;
     }
 </style>
+@endpush
 
-@php
-$id = $request->session()->get('id');
-$re = DB::table('payment')
-     ->select('*')
-     ->where('id', $id)
-     ->get();
-@endphp
+@section('invoice_section')
+<header>
+    <h1>Invoice</h1>
+    <address>
+        <p>HOTEL,</p>
+        <p>(+212)5-37809882</p>
+    </address>
+    <span><img alt="" src="asset( '/public/admin/image/logo.jpg' )"></span>
+</header>
 
-@foreach($re as $row)
-$id = $row->id;
-$idroom = $row->idroom;
-$Name = $row->Name;
-$troom = $row->roomtype;
-$bed = $row->Bed;
-$nroom = $row->noofroom;
-$cin = $row->cin;
-$cout = $row->cout;
-$meal = $row->meal;
-$ttot = $row->roomtotal;
-$mepr = $row->mealtotal;
-$btot = $row->bedtotal;
-$fintot = $row->finaltotal;
-$days = $row->noofdays;
+<aside>
+    <h1><span>Contact us</span></h1>
+    <div>
+        <p position="center">Email :- admin@z-hotel.com || Web :- www.z-hotel.com || Phone :- (+32)5-37809882</p>
+    </div>
+</aside>
 
-$type_of_room = 0;
+<article>
+    <h1>Recipient</h1>
+    <address>
+        <p>
+            <{{ $Name }}<br>
+        </p>
+    </address>
+    <table class="meta">
+        <tr>
+            <th><span>Invoice #</span></th>
+            <td><span>{{ $id }}</span></td>
+        </tr>
+        <tr>
+            <th><span>Date</span></th>
+            <td><span>{{ $cout }}</span></td>
+        </tr>
+
+    </table>
+    <table class="inventory">
+        <thead>
+            <tr>
+                <th><span>Item</span></th>
+                <th><span>No of Days</span></th>
+                <th><span>Rate</span></th>
+                <th><span>Quantity</span></th>
+                <th><span>Price</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span>{{ $troom }}</span></td>
+                <td><span>{{ $days }}</span></td>
+                <td><span data-prefix>$</span><span>{{ $type_of_room }}</span></td>
+                <td><span>{{ $nroom }}</span></td>
+                <td><span data-prefix>$</span><span>{{ $ttot }}</span></td>
+            </tr>
+            <tr>
+                <td><span>{{ $bed }}</span></td>
+                <td><span>{{ $days }}</span></td>
+                <td><span data-prefix>$</span><span>{{ $type_of_bed }}</span></td>
+                <td><span>{{ $nroom }}</span></td>
+                <td><span data-prefix>$</span><span>{{ $btot }}</span></td>
+            </tr>
+            <tr>
+                <td><span>{{ $meal }}</span></td>
+                <td><span>{{ $days }}</span></td>
+                <td><span data-prefix>$</span><span>{{ $type_of_meal }}</span></td>
+                <td><span>{{ $nroom }}</span></td>
+                <td><span data-prefix>$</span><span>{{ $mepr }}</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="balance">
+        <tr>
+            <th><span>Total</span></th>
+            <td><span data-prefix>$</span><span>{{ $fintot }}</span></td>
+        </tr>
+        <tr>
+            <th><span>Amount Paid</span></th>
+            <td><span data-prefix>$</span><span>0.00</span></td>
+        </tr>
+        <tr>
+            <th><span>Balance Due</span></th>
+            <td><span data-prefix>$</span><span>{{ $fintot }}</span></td>
+        </tr>
+    </table>
+</article>
+
+
 @if ($troom == "Superior Room")
 $type_of_room = 320;
 @elseif ($troom == "Deluxe Room")
@@ -431,5 +490,4 @@ $type_of_meal = $type_of_bed * 3;
 @elseif ($meal == "Full Board")
 $type_of_meal = $type_of_bed * 4;
 @endif
-
-@endforeach
+@endsection

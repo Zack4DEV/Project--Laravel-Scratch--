@@ -2,53 +2,79 @@
 
 namespace  App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class Roombook extends Controller
 {
 
-    public function show_roombook()
+   public function roombook_To()
     {
-        $roombook = 'App\Models\Admin\Roombook'::all();
-        return view('Admins.Admin.Roombook', compact('roombook'));
-    }
-    public function show_roombook_result()
-    {
-        $roombookresult = DB::select("SELECT * FROM roombook");
-        return view('Admins.Admin.Roombook.TableRoombook', compact('roombookresult'));
+        $roombookresult = DB::table("roombook")
+                        ->select('*')
+                        ->get();
+
+        return view('Admins.Admin.Roombook')->with('roombookresult', $roombookresult);
     }
 
-    public function create_roombook(Request $request): RedirectResponse
+    public function roombook_To_Add(Request $request,$id)
     {
-        $validated = $request->validated([
-            'Name' <= 'required', 'Email' <= 'required', 'Country' <= 'required',
-            'Phone' <= 'required', 'roomtype' <= 'required', 'Bed' <= 'required',
-            'NoofRoom' <= 'required', 'Meal' <= 'required', 'cin' <= 'required', 'cout' <= 'required', 'stat' <= 'required', 'noofdays' <= 'required',
 
-        ]);
+        $id = session('id');
+        $sta = session('stat');
 
-        $validated = $request->safe()->all();
+        $Name = $request->input('Name');
+        $Email = $request->input('Email');
+        $Country = $request->input('Country');
+        $Phone = $request->input('Phone');
+        $Roomtype = $request->input('roomtype');
+        $Bed = $request->input('Bed');
+        $NoofRoom = $request->input('NoofRoom');
+        $Meal = $request->input('Meal');
+        $cin = $request->input('cin');
+        $cout = $request->input('cout');
 
-        return redirect('/roombook')->with('success', 'Room Booked Successfully');
+        $result = DB::table("roombook")
+        ->insert(array(
+            'Name' => $Name,
+            'Email' => $Email,
+            'Country' => $Country,
+            'Phone' => $Phone,
+            'roomtype' => $Roomtype,
+            'Bed' => $Bed,
+            'NoofRoom' => $NoofRoom,
+            'Meal' => $Meal,
+            'cin' => $cin,
+            'cout' => $cout,
+            'stat' => $sta
+        ));
+
+        return redirect()->route('to_roombook')->with('success', 'Room Booked Successfully');
+
     }
 
-    public function destroy_roombook($id)
+    public function roombook_To_Confirm(Request $request)
     {
-        $roombook = 'App\Models\Admin\Roombook'::find($id);
-        $roombook->delete();
-        return redirect()->back();
+        $id = session('id');
+
+        $result = DB::table('roombook')
+        ->where('id', $id)
+        ->update(['stat' => 'Confirm']);
+
+        return redirect()->route('to_roombook');
+
     }
 
-    public function check_roombook()
+
+    public function roombook_To_Delete(Request $request, $id)
     {
-        $rre = DB::select("SELECT type FROM room");
-        $r = 0;
-        $sc = 0;
-        $gh = 0;
-        $sr = 0;
-        $dr = 0;
-        return view('Admins.Admin.Roombook.AvailabilityRoombook', compact('rre', 'r', 'sc', 'gh', 'sr', 'dr'));
+        $id = session('id');
+
+        $deletesql = DB::table('payment')
+                   ->where('id', '=', $id)
+                   ->delete('*');
+
+        return redirect()->route('to_roombook');
     }
+
 }

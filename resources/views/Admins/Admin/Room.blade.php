@@ -1,19 +1,50 @@
+@section('room_section')
 <div class="addroomsection">
     <form action="" method="POST">
         @method('POST')
-        <label for="troom">Name :</label>
-        <input type="text" name="staffname" class="form-control">
-
-        <label for="bed">Work :</label>
-        <select name="staffwork" class="form-control">
+        <label for="troom">Type of Room :</label>
+        <select name="troom" class="form-control">
             <option value selected></option>
-            <option value="Manager">Manager</option>
-            <option value="Cook">Cook</option>
-            <option value="Helper">Helper</option>
-            <option value="cleaner">Cleaner</option>
-            <option value="weighter">weighter</option>
+            <option value="Superior Room">SUPERIOR ROOM</option>
+            <option value="Deluxe Room">DELUXE ROOM</option>
+            <option value="Guest House">GUEST HOUSE</option>
+            <option value="Single Room">SINGLE ROOM</option>
         </select>
 
-        <button type="submit" class="btn btn-success" name="addstaff">Add Staff</button>
+        <label for="bed">Type of Bed :</label>
+        <select name="bed" class="form-control">
+            <option value selected></option>
+            <option value="Single">Single</option>
+            <option value="Double">Double</option>
+            <option value="Triple">Triple</option>
+            <option value="Quad">Quad</option>
+        </select>
+
+        <button type="submit" class="btn btn-success" name="addroom">Add Room</button>
     </form>
 </div>
+
+<div class="room">
+    @foreach($re as $row)
+    echo "<div class='roombox'>
+        <div class='text-center no-border'>
+            <i class='fa fa-users fa-5x'></i>
+            <h3>" . {{ $row['type'] }} . "</h3>
+            <div class='mb-1'>" . {{ $row['bedding'] }} . "</div>
+            <a href="asset('URL::to('/room/delete')')"><button class='btn btn-danger'>Delete</button></a>
+        </div>
+    </div>";
+    @endforeach
+</div>
+
+@while($redeletesql)
+<div class="roombox">
+    <div class="text-center no-border">
+        <i class="fa fa-users fa-5x"></i>
+        <h3>{{ $row['type'] }}</h3>
+        <div class="mb-1">{{ $row['bedding'] }}</div>
+        <a href="asset('URL::to('/room/delete')')"><button class="btn btn-danger">Delete</button></a>
+    </div>
+</div>
+@endwhile
+@endsection

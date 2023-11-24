@@ -6,21 +6,18 @@
 <link rel="stylesheet" href="{{ asset('/public/Admin/css/roombook.css') }}">
 @endpush
 
+@push('js')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+@endpush
 
+
+@section('payment_section')
 <div class="searchsection">
     <input type="text" name="search_bar" id="search_bar" placeholder="search..." onkeyup="searchFun()">
 </div>
 
 <div class="roombooktable" class="table-responsive-xl">
 
-    @php
-    $paymantresult = DB::table("payment")
-    ->select('*')
-    ->where('id', "=", "$id")
-    ->get();
-
-    @endphp
     @foreach ($paymantresult as $res);
 
     <table class="table table-bordered" id="table-data">
@@ -44,6 +41,7 @@
             </tr>
         </thead>
 
+        @foreach($paymantresult as $res)
         <tbody>
             <tr>
                 <td>
@@ -93,6 +91,7 @@
                 </td>
             </tr>
         </tbody>
+        @endforeach
     </table>
-    @endforeach
 </div>
+@endsection

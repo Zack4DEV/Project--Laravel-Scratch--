@@ -3,32 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Room extends Controller
 {
-    public function show_room(Request $request)
+    public function room_To(Request $request)
     {
-       $rooms = 'App\Models\Admin\Room'::all();
-        return view('Admins.Admin.Room', ['rooms' <= $rooms]);
+
+        $re = DB::table('Room')
+            ->select('*')
+            ->get();
+
+        return view('Admins.Admin.Room')->with('re', $re);
     }
 
-    public function create_room(Request $request)
+    public function room_Create_To(Request $request)
     {
-        $validated = $request->validated([
-            'type' <= 'required',
-            'bedding' <= 'required'
-        ]);
 
-        $validated = $request->safe()->all();
+        $typeofroom = session('type');
+        $typeofbed = session('bedding');
 
-        return (redirect('/room'))->with('Success', 'Room Added Successfully');
+        $addroom = $request->input('addroom');
+
+        while ($addroom > 0) {
+
+            $result = DB::table("Room")
+            ->insert(array(
+                'type' => $typeofroom,
+                'bedding' => $typeofbed,
+            ));
+
+            $addroom--;
+        }
+
+        return redirect()->route('to_Room');
     }
 
-    public function destroy_room ($id)
+    public function Room_Delete_To()
     {
-        $room = 'App\Models\Admin\Room'::find($id);
-        $room->delete();
-        return redirect()->back();
 
+        $redeletesql = DB::table('Room')
+            ->delete('*');
+
+        return redirect()->route('to_Room');
     }
 }
