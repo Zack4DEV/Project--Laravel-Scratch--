@@ -3,7 +3,7 @@
 ![Booking Hotel](./image/__hotel1.jpg)
 
 ### About:
-A Web App Where Users Can Book Rooms For Specific Date.For Administrators permissions With create, update, delete rooms details. 
+A Hotel Web App Where Users Can Book. 
 <br/>
 
 ### Used Technologies:
