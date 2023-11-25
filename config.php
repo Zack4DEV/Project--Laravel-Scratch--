@@ -9,7 +9,7 @@ $dbname = "database_hotel";
 global $conn;
 
 try {
-    $conn = new PDO(sqlite:".__DIR__/database/DB.sql");
+    $conn = new PDO(sqlite:".__DIR__/database/DB.db");
     /**
     $conn = new PDO("mysql:host=$servername;port=;dbname=$dbname",
         $username, $password);
