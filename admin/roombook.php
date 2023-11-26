@@ -1,5 +1,6 @@
 <?php
 
+inlucde('../config');
 session_start();
 ?>
 
@@ -109,15 +110,16 @@ session_start();
         <?php
 // <!-- room availablity start-->
 
-$rsql = "SELECT type FROM room";
-$rre = mysqli_query($conn, $rsql);
+$rsql = $conn->prepare("SELECT type FROM room");
+$rsql->execute();
+$rre = $rsql->fetchAll(PDO::FETCH_ASSOC);
 $r = 0;
 $sc = 0;
 $gh = 0;
 $sr = 0;
 $dr = 0;
 
-while ($rrow = mysqli_fetch_array($rre)) {
+foreach ($rre as $rrow )) {
     $r = $r + 1;
     $s = $rrow['type'];
     if ($s == "Superior Room") {
@@ -134,14 +136,15 @@ while ($rrow = mysqli_fetch_array($rre)) {
     }
 }
 
-$csql = "SELECT roomtype FROM payment;--'";
-$cre = mysqli_query($conn, $csql);
+$csql = $conn->prepare("SELECT roomtype FROM payment");
+$csql->execute();
+$cre = $csql->fetchAll();
 $cr = 0;
 $csc = 0;
 $cgh = 0;
 $csr = 0;
 $cdr = 0;
-while ($crow = mysqli_fetch_array($cre)) {
+foreach ($cre as $crow) {
     $cr = $cr + 1;
     $cs = $crow['roomtype'];
 
@@ -210,8 +213,9 @@ if (isset($_POST['guestdetailsubmit'])) {
                     </script>';
     } else {
         $sta = "NotConfirm";
-        $sql = "INSERT INTO roombook(idroom,Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays) VALUES ('$idroom','$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'));--'";
-        $result = mysqli_query($conn, $sql);
+        $sql = $conn->prepare("INSERT INTO roombook(idroom,Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays) VALUES ('$idroom','$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
+        $sql->execute([$idroom,$Name,$Email,$Country,$Phone,$Roomtype,$Bed,$NofRoom,$Meal,$cin,$cout,$sta,datediff('$cout','$cin')]);
+        $result = $sql->fetchAll();
 
         // if($f1=="NO")
         // {
@@ -245,8 +249,6 @@ if (isset($_POST['guestdetailsubmit'])) {
         //     });
         //     </script>";
         // }
-        // else if($result = mysqli_query($conn, $sql))
-        // {
         if ($result || $ires) {
             echo '<script>swal({
                                 title: "Reservation successful",
@@ -280,9 +282,10 @@ if (isset($_POST['guestdetailsubmit'])) {
     <div class="roombooktable" class="table-responsive-xl">
         <?php
 
-$roombooktablesql = "SELECT * FROM roombook;--'";
-$roombookresult = mysqli_query($conn, $roombooktablesql);
-$nums = mysqli_num_rows($roombookresult);
+$roombooktablesql = $conn->prepare("SELECT * FROM roombook");
+$roombooktablesql->execute();
+$roombookresult = $roombooktablesql->fetchAll(PDO::FETCH_ASSOC);
+$nums = $roombookresult->columnCount();
 
 
 ?>
@@ -310,7 +313,7 @@ $nums = mysqli_num_rows($roombookresult);
 
             <tbody>
                 <?php
-        while ($res = mysqli_fetch_array($roombookresult)) {
+     foreach($roombookresult as $res) {
             $r2=$res['id'] + 6;
             ?>
                     <tr>

@@ -1,5 +1,5 @@
 <?php
-
+include('../config');
 session_start();
 ?>
 
@@ -48,23 +48,23 @@ session_start();
             $typeofroom = $_POST['troom'];
             $typeofbed = $_POST['bed'];
 
-            $sql = "INSERT INTO room(type,bedding) VALUES ('$typeofroom', '$typeofbed');--'";
-            $result = mysqli_query($conn, $sql);
-
-            if ($result) {
-                header("Location:room");
-            }
+            $sql = $conn->prepare("INSERT INTO room(type,bedding) VALUES ('$typeofroom', '$typeofbed')");
+            $sql->execute();
+            $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+            header("Location: room.php");
+            
         }
         ?>
     </div>
 
     <div class="room">
         <?php
-        $sql = "SELECT * FROM room;--'";
-        $re = mysqli_query($conn, $sql)
+        $sql = $conn->prepare("SELECT * FROM room");
+        $sql->execute();
+        $re = $sql->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <?php
-        while ($row = mysqli_fetch_array($re)) {
+        foreach ($re as $row) {
             $id = $row['type'];
             if ($id == "Superior Room") {
                 echo "<div class='roombox roomboxsuperior'>

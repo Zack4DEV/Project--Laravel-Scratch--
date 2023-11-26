@@ -1,19 +1,10 @@
 <?php
 
-/**
-$servername = "0.0.0.0";
-$username = "root";
-$password = "";
-$dbname = "database_hotel";
-*/
-global $conn;
 
+global $conn;
 try {
-    $conn = new PDO(sqlite:".__DIR__/database/DB.db");
-    /**
-    $conn = new PDO("mysql:host=$servername;port=;dbname=$dbname",
-        $username, $password);
-    */
+    $conn = new PDO('sqlite:database/DB.db');
+
     $conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // echo "Connected Successufully <br />";
 }

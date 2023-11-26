@@ -1,10 +1,12 @@
 <?php
+inlcude '../config';
 
-$sqlq = "SELECT * FROM roombook;--'";
-$result = mysqli_query($conn,$sqlq);
+$sqlq = $conn->prepare("SELECT * FROM roombook");
+$sqlq->execute();
+$result = $sqlq->fetchAll(PDO::FETCH_ASSOC);
 $roombook_record = array();
 
-while( $rows = mysqli_fetch_assoc($result)){
+foreach( $result as $rows){
     $roombook_record[] = $rows;
 }
 

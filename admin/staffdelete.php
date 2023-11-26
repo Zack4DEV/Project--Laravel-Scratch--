@@ -1,11 +1,12 @@
 <?php
-
+inlcude '../config';
 
 $id = $_GET['id'];
 
-$roomdeletesql = "DELETE FROM staff WHERE id = $id;--'";
+$roomdeletesql = $conn->prepare("DELETE FROM staff WHERE id = $id");
+$roomdeletesql->execute();
 
-$result = mysqli_query($conn, $roomdeletesql);
+$result = $roomdeletesql->fetchAll(PDO::FETCH_ASSOC);
 
 header("Location:staff");
 

@@ -1,5 +1,5 @@
 <?php
-
+include '../config';
 session_start();
 ?>
 
@@ -33,10 +33,11 @@ session_start();
 
     <div class="roombooktable" class="table-responsive-xl">
         <?php
-        $paymanttablesql = "SELECT * FROM payment;--'";
-$paymantresult = mysqli_query($conn, $paymanttablesql);
+        $paymanttablesql = $conn->prepare("SELECT * FROM payment");
+        $paymanttablesql->execute();
+        $paymantresult = $paymanttablesql->fetchAll(PDO::FETCH_ASSOC);
 
-$nums = mysqli_num_rows($paymantresult);
+$nums = $paymantresult->columnCount();
 ?>
         <table class="table table-bordered" id="table-data">
             <thead>
@@ -62,9 +63,8 @@ $nums = mysqli_num_rows($paymantresult);
 
             <tbody>
                 <?php
-        while ($res = mysqli_fetch_array($paymantresult)) {
-            $r2=$res['id'] + 6;
-
+            foreach ($paymantresult as res) {
+                        $r2=$res['id'] + 6;
             ?>
                     <tr>
                         <td>

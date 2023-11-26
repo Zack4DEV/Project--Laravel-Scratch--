@@ -1,4 +1,5 @@
 <?php
+inlcude('config');
 session_start();
 
 // page redirect
@@ -175,8 +176,10 @@ if ($usermail == true) {
                     </script>';
           } else {
             $sta = "NotConfirm";
-            $sql = "INSERT INTO roombook(Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays) VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))";
-            $result = mysqli_query($conn, $sql);
+            $sql = $conn->prepare("INSERT INTO roombook(Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays) VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
+            $sql->execute([
+              $Name,$Email,$Country,$Roomtype,$Bed,NoofRoom,$Meal,$cin,$cout,$sta,datediff('$cout','$cin')]);
+              $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
             if ($result) {

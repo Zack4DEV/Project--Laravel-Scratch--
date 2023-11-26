@@ -1,5 +1,5 @@
 <?php
-
+include '../config';
 session_start();
 ?>
 
@@ -49,12 +49,11 @@ session_start();
             $staffname = $_POST['staffname'];
             $staffwork = $_POST['staffwork'];
 
-            $sql = "INSERT INTO staff(name,work) VALUES ('$staffname', '$staffwork');--'";
-            $result = mysqli_query($conn, $sql);
+            $sql = $conn->prepare("INSERT INTO staff(name,work) VALUES ('$staffname', '$staffwork')");
+            $sql->execute([$staffname,$staffwork]);
+            $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-            if ($result) {
                 header("Location:staff");
-            }
         }
         ?>
     </div>
@@ -63,11 +62,12 @@ session_start();
     <!-- here room add because room and staff both css is similar -->
     <div class="room">
         <?php
-        $sql = "SELECT * FROM staff;--'";
-        $re = mysqli_query($conn, $sql)
+        $sql = $conn->prepare("SELECT * FROM staff");
+        $sql->execute()
+        $re = $sql->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <?php
-        while ($row = mysqli_fetch_array($re)) {
+        foreach ($re as $row) {
             echo "<div class='roombox'>
 						<div class='text-center no-boder'>
                             <i class='fa fa-users fa-5x'></i>

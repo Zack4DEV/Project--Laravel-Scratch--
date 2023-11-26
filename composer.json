@@ -32,7 +32,7 @@
         },
   "config": {
         "optimize-autoloader": true,
-	"prfer-dist": true,
+	    "prefer-dist": true,
         "prefer-lowest": false,
         "sort-packages": true
         }	    

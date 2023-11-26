@@ -1,5 +1,5 @@
 <?php
-//include_once('config.php');
+include('config');
 session_start();
 
 ?>
@@ -66,10 +66,11 @@ session_start();
                     $Email = $_POST['Email'];
                     $Password = $_POST['Password'];
 
-                    $sql = "SELECT * FROM signup WHERE Email = '$Email' AND Password = BINARY'$Password'";
-                    $result = mysqli_query($conn, $sql);
+                    $sql = $conn->prepare("SELECT * FROM signup WHERE Email = '$Email' AND Password = BINARY'$Password'");
+                    $sql->execute([$Email,$Password])
+                    $result = $sql->fetchAll(PDO::FETCH_ASSOC));
 
-                    if ($result->num_rows > 0) {
+                    if ($result) {
                         $_SESSION['usermail'] = $Email;
                         $Email = "";
                         $Password = "";
@@ -114,12 +115,13 @@ session_start();
                     $Email = $_POST['Emp_Email'];
                     $Password = $_POST['Emp_Password'];
 
-                    $sql = "SELECT * FROM emp_login WHERE Emp_Email = '$Email' AND Emp_Password = BINARY'$Password'";
-                    $result = mysqli_query($conn, $sql);
+                    $sql = $conn->prepare("SELECT * FROM emp_login WHERE Emp_Email = '$Email' AND Emp_Password = BINARY'$Password'");
+                    $sql->execute([$Email,$Password]);
+                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                    if ($result->num_rows > 0) {
+                    if ($result) {
                         $_SESSION['usermail'] = $Email;
-                        $Email = $POST[""];
+                        $Email = $_POST[""];
                         $Password = $_POST[""];
                         header("Location: admin/admin");
                     } else {
@@ -161,18 +163,20 @@ session_start();
                         </script>";
                 } else {
                     if ($Password == $CPassword) {
-                        $sql = "SELECT * FROM signup WHERE Email = '$Email'";
-                        $result = mysqli_query($conn, $sql);
+                        $sql = $conn->prepare("SELECT * FROM signup WHERE Email = '$Email'");
+                        $sql->execute([$Email]);
+                        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                        if ($result->num_rows > 0) {
+                        if ($result) {
                             echo "<script>swal({
                                     title: 'Email already exits',
                                     icon: 'error',
                                 });
                                 </script>";
                         } else {
-                            $sql = "INSERT INTO signup (Username,Email,Password) VALUES ('$Username', '$Email', '$Password')";
-                            $result = mysqli_query($conn, $sql);
+                            $sql = $conn->prepare("INSERT INTO signup (Username,Email,Password) VALUES ('$Username', '$Email', '$Password')");
+                            $sql->execute([$Username,$Email,$Password]);
+                            $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                             if ($result) {
                                 $_SESSION['usermail'] = $Email;

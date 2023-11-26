@@ -1,12 +1,13 @@
 <?php
-
+inlcude '../config';
 
 $id = $_GET['id'];
 $idRoom = $_GET['idroom'];
 
-$deletesql = "DELETE FROM roombook WHERE id = $id;--'";
+$deletesql = $conn->prepare("DELETE FROM roombook WHERE id = $id");
+$deletesql->execute();
 
-$result = mysqli_query($conn, $deletesql);
+$result = $deletesql->fetchAll();
 
 header("Location:roombook");
 

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Invoice</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/admin.css">
 	<link rel="license" href="https://www.opensource.org/licenses/mit-license/">
 	<script src="./javascript/script.js"></script>
 	<style>
@@ -380,14 +380,15 @@
 
 
 	<?php
-  
+  include '../config';
   ob_start();
 
 	$id = $_GET['id'];
 
-	$sql = "SELECT * FROM payment WHERE id = '$id';--'";
-	$re = mysqli_query($conn, $sql);
-	while ($row = mysqli_fetch_array($re)) {
+	$sql = $conn->prepare("SELECT * FROM payment WHERE id = '$id'");
+	$sql->execute();
+	$re = $sql->fetchAll(PDO::FETCH_ASSOC);
+	foreach ($re as $row) {
 	    $id = $row['id'];
 	    $idroom = $row['idroom'];
 	    $Name = $row['Name'];

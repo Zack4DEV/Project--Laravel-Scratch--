@@ -1,9 +1,10 @@
 <?php
+inlcude '../config';
 
-
-$sql = "SELECT * FROM roombook;--'";
-$re = mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_array($re)) {
+$sql = $conn->prepare("SELECT * FROM roombook");
+$sql->execute();
+$re = $sql->fetchAll(PDO::FETCH_ASSOC);
+foreach ($re as $row) {
     $id = $row['id'];
     $idRoom = $row['idroom'];
     $Name = $row['Name'];
@@ -30,9 +31,10 @@ while ($stat == "NotConfirm") {
     } else {
         $st = "Confirm";
     }
-    $sql = "UPDATE roombook SET stat = '$st'  WHERE id = '$id';--'";
+    $sql = $conn->prepare("UPDATE roombook SET stat = '$st'  WHERE id = '$id'");
+    $sql->execute();
 
-    $result = mysqli_query($conn, $sql);
+    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
     if ($result) {
 
@@ -75,9 +77,9 @@ while ($stat == "NotConfirm") {
 
         $fintot = $ttot + $mepr + $btot;
 
-        $psql = "INSERT INTO payment VALUES ('$id','$idRoom', '$Name', '$Email', '$Roomtype', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot');--'";
-
-        mysqli_query($conn, $psql);
+        $psql = $conn->("INSERT INTO payment VALUES ('$id','$idRoom', '$Name', '$Email', '$Roomtype', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot')");
+        $psql->execute();
+        //$psqlresult = $psql->fetchAll();
 
         header("Location:roombook");
     }
