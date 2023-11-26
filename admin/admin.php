@@ -8,7 +8,7 @@ $usermail=$_SESSION['usermail'];
 if($usermail == true){
 
 }else{
-  header("location: ../index");
+  header("location: ../index.php");
 }
 
 ?>

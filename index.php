@@ -60,55 +60,8 @@ session_start();
                     </div>
                 </span>
 
-                <?php
-                if (isset($_POST['user_login_submit'])) {
-                    $Email = $_POST['Email'];
-                    $Password = $_POST['Password'];
 
-                    $sql = $conn->prepare("SELECT * FROM signup");
-                    $sql->execute();
-                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-                    if ($result) {
-                        $_SESSION['usermail'] = $Email;
-                        $Email = "";
-                        $Password = "";
-                        header("Location: home");
-                    } else {
-                        echo "<script>swal({
-                            title: 'Something went wrong',
-                            icon: 'error',
-                        });
-                        </script>";
-                    }
-                }
-                ?>
-
-                <form class="user_login authsection active" id="userlogin" action="" method="POST">
-
-                    <div class="form-floating">
-                        <input type="text" class="form-control" name="Username" placeholder=" ">
-                        <label for="Username">Username</label>
-                    </div>
-                    <div class="form-floating">
-                        <input typuser_logine="email" class="form-control" name="Email" placeholder=" ">
-                        <label for="Email">Email</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" name="Password" placeholder=" ">
-                        <label for="Password">Password</label>
-                    </div>
-                    <button type="submit" name="user_login_submit" class="auth_btn">Log in</button>
-
-                    <div class="footer_line">
-                        <h6>Don't have an account? <span class="page_move_btn" onclick="signuppage()">sign
-                                up</span>
-                        </h6>
-                    </div>
-                </form>
-
-
-                <?php
+         <?php
                 if (isset($_POST['Emp_login_submit'])) {
                     $Email = $_POST['Emp_Email'];
                     $Password = $_POST['Emp_Password'];
@@ -117,11 +70,11 @@ session_start();
                     $sql->execute();
                     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                    if ($result) {
+                    if ($sql) {
                         $_SESSION['usermail'] = $Email;
                         $Email = $_POST[""];
                         $Password = $_POST[""];
-                        header("Location: admin/admin");
+                        header("Location: admin/admin.php");
                     } else {
                         echo "<script>swal({
                                 title: 'Something went wrong',
@@ -142,6 +95,7 @@ session_start();
                     </div>
                     <button type="submit" name="Emp_login_submit" class="auth_btn">Log in</button>
                 </form>
+
 
             </div>
 
@@ -165,7 +119,7 @@ session_start();
                         $sql->execute();
                         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                        if ($result) {
+                        if ($sql) {
                             echo "<script>swal({
                                     title: 'Email already exits',
                                     icon: 'error',
@@ -182,7 +136,7 @@ session_start();
                                 $Email = "";
                                 $Password = "";
                                 $CPassword = "";
-                                //header("Location: home");
+                                //header("Location: home.php");
                             } else {
                                 echo "<script>swal({
                                         title: 'Something went wrong',
@@ -229,6 +183,54 @@ session_start();
                         </h6>
                     </div>
                 </form>
+        <?php
+                if (isset($_POST['user_login_submit'])) {
+                    $Email = $_POST['Email'];
+                    $Password = $_POST['Password'];
+
+                    $sql = $conn->prepare("SELECT * FROM signup");
+                    $sql->execute();
+                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                    if ($sql) {
+                        $_SESSION['usermail'] = $Email;
+                        $Email = "";
+                        $Password = "";
+                        header("Location: home.php");
+                    } else {
+                        echo "<script>swal({
+                            title: 'Something went wrong',
+                            icon: 'error',
+                        });
+                        </script>";
+                    }
+                }
+                ?>
+
+                <form class="user_login authsection active" id="userlogin" action="" method="POST">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" name="Username" placeholder=" ">
+                        <label for="Username">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input typuser_logine="email" class="form-control" name="Email" placeholder=" ">
+                        <label for="Email">Email</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" name="Password" placeholder=" ">
+                        <label for="Password">Password</label>
+                    </div>
+                    <button type="submit" name="user_login_submit" class="auth_btn">Log in</button>
+
+                    <div class="footer_line">
+                        <h6>Don't have an account? <span class="page_move_btn" onclick="signuppage()">sign
+                                up</span>
+                        </h6>
+                    </div>
+                </form>
+
+
             </div>
  </section>
 </body>

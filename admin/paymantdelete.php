@@ -7,6 +7,6 @@ $deletesql = $conn->prepare("DELETE FROM payment WHERE id = $id");
 $deletesql->execute();
 $result = $deletesql->fetchAll(PDO::FETCH_ASSOC);
 
-header("Location:payment");
+header("Location:payment.php");
 
 ?>

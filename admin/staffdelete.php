@@ -8,6 +8,6 @@ $roomdeletesql->execute();
 
 $result = $roomdeletesql->fetchAll(PDO::FETCH_ASSOC);
 
-header("Location:staff");
+header("Location:staff.php");
 
 ?>

@@ -53,7 +53,7 @@ session_start();
             $sql->execute([$staffname,$staffwork]);
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                header("Location:staff");
+                header("Location:staff.php");
         }
         ?>
     </div>

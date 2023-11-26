@@ -79,9 +79,9 @@ while ($stat == "NotConfirm") {
 
         $psql = $conn->("INSERT INTO payment VALUES ('$id','$idRoom', '$Name', '$Email', '$Roomtype', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot')");
         $psql->execute();
-        //$psqlresult = $psql->fetchAll();
+        $psqlresult = $psql->fetchAll();
 
-        header("Location:roombook");
+        header("Location:roombook.php");
     }
 }
 
@@ -89,5 +89,5 @@ while ($stat == "NotConfirm") {
 // else
 // {
 //     echo "<script>alert('Guest Already Confirmed')</script>";
-//     header("Location:roombook");
+//     header("Location:roombook.php");
 // }

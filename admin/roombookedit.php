@@ -90,7 +90,7 @@ if (isset($_POST['guestdetailedit'])) {
     $psql = $conn->prepare("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
     $psql->execute([$EditName,$EditEmail,$Editroomtype,$editBed,$editNoofRoom,$EditMeal,$Editcin,$Editcout,$Editnoofday,$editttol,$editbtot,$editmepr,$editfintot]);
     $paymentresult = $psql->fetchAll(PDO::FETCH_ASSOC);
-        header("Location:roombook");
+        header("Location:roombook.php");
 }
 ?>
 
