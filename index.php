@@ -60,14 +60,13 @@ session_start();
                     </div>
                 </span>
 
-                <!-- // ==userlogin== -->
                 <?php
                 if (isset($_POST['user_login_submit'])) {
                     $Email = $_POST['Email'];
                     $Password = $_POST['Password'];
 
-                    $sql = $conn->prepare("SELECT * FROM signup WHERE Email = '$Email' AND Password = BINARY'$Password'");
-                    $sql->execute([$Email,$Password]);
+                    $sql = $conn->prepare("SELECT * FROM signup WHERE Email = '$Email' AND Password = '$Password'");
+                    $sql->execute();
                     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                     if ($result) {
@@ -109,13 +108,12 @@ session_start();
                 </form>
 
 
-                <!-- == Emp Login == -->
                 <?php
                 if (isset($_POST['Emp_login_submit'])) {
                     $Email = $_POST['Emp_Email'];
                     $Password = $_POST['Emp_Password'];
 
-                    $sql = $conn->prepare("SELECT * FROM emp_login WHERE Emp_Email = '$Email' AND Emp_Password = BINARY'$Password'");
+                    $sql = $conn->prepare("SELECT empid,Emp_Email FROM emp_login WHERE Emp_Email = '$Email' AND Emp_Password = BINARY'$Password'");
                     $sql->execute([$Email,$Password]);
                     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
