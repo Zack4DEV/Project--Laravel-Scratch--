@@ -193,7 +193,7 @@ if ($f5 <= 0) {
 
         <!-- ==== room book php ====-->
         <?php
-if (isset($_POST['guestdetailsubmit'])) {
+if ($_POST && isset($_POST['guestdetailsubmit'])) {
     $Name = $_POST['Name'];
     $Email = $_POST['Email'];
     $Country = $_POST['Country'];
@@ -214,7 +214,7 @@ if (isset($_POST['guestdetailsubmit'])) {
     } else {
         $sta = "NotConfirm";
         $sql = $conn->prepare("INSERT INTO roombook[(idroom,Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays)] VALUES ('$idroom','$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
-        $sql->execute();
+        $sql->execute([$_POST['guestdetailsubmit']]);
         $result = $sql->fetchAll();
 
         // if($f1=="NO")
@@ -283,7 +283,7 @@ if (isset($_POST['guestdetailsubmit'])) {
         <?php
 
 $roombooktablesql = $conn->prepare("SELECT * FROM roombook");
-$roombooktablesql->execute();
+$roombooktablesql->execute([$_POST['guestdetailsubmit']]);
 $roombookresult = $roombooktablesql->fetchAll(PDO::FETCH_ASSOC);
 $nums = $roombookresult->columnCount();
 

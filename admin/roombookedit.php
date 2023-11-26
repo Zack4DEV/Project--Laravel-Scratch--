@@ -18,7 +18,7 @@ foreach ($re as $row) {
     $stat = $row['stat'];
 }
 
-if (isset($_POST['guestdetailedit'])) {
+if ($_POST && isset($_POST['guestdetailedit'])) {
     $EditName = $_POST['Name'];
     $EditEmail = $_POST['Email'];
     $EditCountry = $_POST['Country'];
@@ -32,7 +32,7 @@ if (isset($_POST['guestdetailedit'])) {
 
     $sql = $conn->prepare("UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = datediff('$Editcout','$Editcin') WHERE id = '$id'");
 
-    $sql->execute();
+    $sql->execute([$_POST['guestdetailedit']]);
     $result = $sql->fetchAll();
 
     $type_of_room = 0;
@@ -88,7 +88,7 @@ if (isset($_POST['guestdetailedit'])) {
     $editfintot = $editttot + $editmepr + $editbtot;
 
     $psql = $conn->prepare("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
-    $psql->execute([$EditName,$EditEmail,$Editroomtype,$editBed,$editNoofRoom,$EditMeal,$Editcin,$Editcout,$Editnoofday,$editttol,$editbtot,$editmepr,$editfintot]);
+    $psql->execute([$_POST['guestdetailedit']]);
     $paymentresult = $psql->fetchAll(PDO::FETCH_ASSOC);
         header("Location:roombook.php");
 }

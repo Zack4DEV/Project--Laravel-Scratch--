@@ -45,12 +45,12 @@ session_start();
         </form>
 
         <?php
-        if (isset($_POST['addstaff'])) {
+        if ($_POST && isset($_POST['addstaff'])) {
             $staffname = $_POST['staffname'];
             $staffwork = $_POST['staffwork'];
 
             $sql = $conn->prepare("INSERT INTO staff[(name,work)] VALUES ('$staffname', '$staffwork')");
-            $sql->execute([$staffname,$staffwork]);
+            $sql->execute([$_POST['addstaff']]);
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                 header("Location:staff.php");

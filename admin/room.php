@@ -44,12 +44,12 @@ session_start();
         </form>
 
         <?php
-        if (isset($_POST['addroom'])) {
+        if (isset($_POST && $_POST['addroom'])) {
             $typeofroom = $_POST['troom'];
             $typeofbed = $_POST['bed'];
 
             $sql = $conn->prepare("INSERT INTO room[(type,bedding)] VALUES ('$typeofroom', '$typeofbed')");
-            $sql->execute();
+            $sql->execute([$_POST['addroom']]);
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
             header("Location: room.php");
             
@@ -60,7 +60,7 @@ session_start();
     <div class="room">
         <?php
         $sql = $conn->prepare("SELECT * FROM room");
-        $sql->execute();
+        $sql->execute([$_POST['addroom']]);
         $re = $sql->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <?php

@@ -48,42 +48,15 @@ session_start();
         </div>
 
         <div class="auth_container">
-            <!--============ login =============-->
-
-            <div id="Log_in">
+                <div id="Log_in">
                 <h2>Log In</h2>
-                <br />
+                <br/>
                 <span>
                     <div class="role_btn">
-                        <div class="btns active">User</div>
                         <div class="btns">Admin</div>
+                        <div class="btns active">User</div>
                     </div>
                 </span>
-
-
-         <?php
-                if (isset($_POST['Emp_login_submit'])) {
-                    $Email = $_POST['Emp_Email'];
-                    $Password = $_POST['Emp_Password'];
-
-                    $sql = $conn->prepare("SELECT * FROM emp_login");
-                    $sql->execute();
-                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-                    if ($sql) {
-                        $_SESSION['usermail'] = $Email;
-                        $Email = $_POST[""];
-                        $Password = $_POST[""];
-                        header("Location: admin/admin.php");
-                    } else {
-                        echo "<script>swal({
-                                title: 'Something went wrong',
-                                icon: 'error',selec
-                            });
-                            </script>";
-                    }
-                }
-                ?>
                 <form class="employee_login authsection" id="employeelogin" action="" method="POST">
                     <div class="form-floating">
                         <input type="email" class="form-control" name="Emp_Email" placeholder=" ">
@@ -95,81 +68,92 @@ session_start();
                     </div>
                     <button type="submit" name="Emp_login_submit" class="auth_btn">Log in</button>
                 </form>
+                <?php
+                if ($_POST && isset($_POST['Emp_login_submit'])) {
+                    $Email = $_POST['Emp_Email'];
+                    $Password = $_POST['Emp_Password'];
 
+                    $sql = $conn->prepare("SELECT * FROM emp_login");
+                    $sql->execute([$_POST['Emp_login_submit'])]);
+                    $resultEmployee = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-            </div>
+                    if ($resultEmployee) {
+                        $_SESSION['usermail'] = $Email;
+                        $Email = $_POST[""];
+                        $Password = $_POST[""];
+                        header("Location: ./admin/admin.php");
 
-            <!--============ signup =============-->
-            <?php
-            if (isset($_POST['user_signup_submit'])) {
-                $Username = $_POST['Username'];
-                $Email = $_POST['Email'];
-                $Password = $_POST['Password'];
-                $CPassword = $_POST['CPassword'];
-
-                if ($Username == "" || $Email == "" || $Password == "") {
-                    echo "<script>swal({
-                            title: 'Fill the proper details',
-                            icon: 'error',
-                        });
-                        </script>";
-                } else {
-                    if ($Password == $CPassword) {
-                        $sql = $conn->prepare("SELECT * FROM signup");
-                        $sql->execute();
-                        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-                        if ($sql) {
-                            echo "<script>swal({
-                                    title: 'Email already exits',
-                                    icon: 'error',
-                                });
-                                </script>";
-                        } else {
-                            $sql = $conn->prepare("INSERT INTO signup[(Username,Email,Password)] VALUES ('$Username', '$Email', '$Password')");
-                            $sql->execute();
-                            $result = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-                            if ($result) {
-                                $_SESSION['usermail'] = $Email;
-                                $Username = "";
-                                $Email = "";
-                                $Password = "";
-                                $CPassword = "";
-                                //header("Location: home.php");
-                            } else {
-                                echo "<script>swal({
-                                        title: 'Something went wrong',
-                                        icon: 'error',
-                                    });
-                                    </script>";
-                            }
-                        }
                     } else {
                         echo "<script>swal({
-                                title: 'Password does not matched',
-                                icon: 'error',
+                                title: 'Something went wrong',
+                                icon: 'error',selec
                             });
                             </script>";
                     }
                 }
-            }
-            ?>
-            <div id="sign_up">
+                ?>                
+                <form class="user_login authsection active" id="userlogin" action="" method="POST">
+                <div class="form-floating">
+                    <input type="text" class="form-control" name="Username" placeholder=" ">
+                    <label for="Username">Username</label>
+                </div>
+                <div class="form-floating">
+                    <input typuser_logine="email" class="form-control" name="Email" placeholder=" ">
+                    <label for="Email">Email</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" name="Password" placeholder=" ">
+                    <label for="Password">Password</label>
+                </div>
+                <button type="submit" name="user_login_submit" class="auth_btn">Log in</button>
+                <div class="footer_line">
+                <h6>Don't have an account? <span class="page_move_btn" onclick="signuppage()">sign
+                            up</span>
+                    </h6>
+                </div>
+                </form>
+
+                    <?php
+                    if ($_POST && isset($_POST['user_login_submit'])) {
+                        $Email = $_POST['Email'];
+                        $Password = $_POST['Password'];
+
+                        $sql = $conn->prepare("SELECT * FROM signup");
+                        $sql->execute([$_POST['user_login_submit']]);
+                        $resultUser = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                        if ($resultUser) {
+                            $_SESSION['usermail'] = $Email;
+                            $Email = "";
+                            $Password = "";
+                            header("Location: ./home.php");
+
+                        } else {
+                            echo "<script>swal({
+                                title: 'Something went wrong',
+                                icon: 'error',
+                            });
+                            </script>";
+                        }
+                    }
+                    ?>
+                </div>
+
+                <div id="sign_up">
                 <h2>Sign Up</h2>
 
                 <form class="user_signup" id="usersignup" action="" method="POST">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" name="Username" placeholder=" ">
-                        <label for="Username">Username</label>
+                   <div class="form-floating">
+                     <input type="text" class="form-control" name="Username" placeholder=" ">
+                     <label for="Username">Username</label>
                     </div>
                     <div class="form-floating">
-                        <input type="email" class="form-control" name="Email" placeholder=" ">
-                        <label for="Email">Email</label>
+                      <input type="email" class="form-control" name="Email" placeholder=" ">
+                      <label for="Email">Email</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" name="Password" placeholder=" ">
-                        <label for="Password">Password</label>
+                      <input type="password" class="form-control" name="Password" placeholder=" ">
+                      <label for="Password">Password</label>
                     </div>
                     <div class="form-floating">
                         <input type="password" class="form-control" name="CPassword" placeholder=" ">
@@ -182,57 +166,65 @@ session_start();
                         <h6>Already have an account? <span class="page_move_btn" onclick="loginpage()">Log in</span>
                         </h6>
                     </div>
-                </form>
-        <?php
-                if (isset($_POST['user_login_submit'])) {
-                    $Email = $_POST['Email'];
-                    $Password = $_POST['Password'];
+                    </form>
 
-                    $sql = $conn->prepare("SELECT * FROM signup");
-                    $sql->execute();
-                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+                        <?php
+                        if ($_POST &&isset($_POST['user_signup_submit'])) {
+                            $Username = $_POST['Username'];
+                            $Email = $_POST['Email'];
+                            $Password = $_POST['Password'];
+                            $CPassword = $_POST['CPassword'];
 
-                    if ($sql) {
-                        $_SESSION['usermail'] = $Email;
-                        $Email = "";
-                        $Password = "";
-                        header("Location: home.php");
-                    } else {
-                        echo "<script>swal({
-                            title: 'Something went wrong',
-                            icon: 'error',
-                        });
-                        </script>";
-                    }
-                }
-                ?>
+                            if ($Username == "" || $Email == "" || $Password == "") {
+                                echo "<script>swal({
+                                        title: 'Fill the proper details',
+                                        icon: 'error',
+                                    });
+                                    </script>";
+                            } else {
+                                if ($Password == $CPassword) {
+                                    $sql = $conn->prepare("SELECT * FROM signup");
+                                    $sql->execute([$_POST['user_signup_submit']]);
+                                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                <form class="user_login authsection active" id="userlogin" action="" method="POST">
+                                    if ($sql) {
+                                        echo "<script>swal({
+                                                title: 'Email already exist',
+                                                icon: 'error',
+                                            });
+                                            </script>";
+                                    } else {
+                                        $sql = $conn->prepare("INSERT INTO signup[(Username,Email,Password)] VALUES ('$Username', '$Email', '$Password')");
+                                        $sql->execute([$_POST['user_signup_submit']]);
+                                        $resultUserSignup = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                    <div class="form-floating">
-                        <input type="text" class="form-control" name="Username" placeholder=" ">
-                        <label for="Username">Username</label>
-                    </div>
-                    <div class="form-floating">
-                        <input typuser_logine="email" class="form-control" name="Email" placeholder=" ">
-                        <label for="Email">Email</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" name="Password" placeholder=" ">
-                        <label for="Password">Password</label>
-                    </div>
-                    <button type="submit" name="user_login_submit" class="auth_btn">Log in</button>
-
-                    <div class="footer_line">
-                        <h6>Don't have an account? <span class="page_move_btn" onclick="signuppage()">sign
-                                up</span>
-                        </h6>
-                    </div>
-                </form>
-
-
-            </div>
- </section>
+                                        if ($resultUserSignup) {
+                                            $_SESSION['usermail'] = $Email;
+                                            $Username = "";
+                                            $Email = "";
+                                            $Password = "";
+                                            $CPassword = "";
+                                            //header("Location: home.php");
+                                        } else {
+                                            echo "<script>swal({
+                                                    title: 'Something went wrong',
+                                                    icon: 'error',
+                                                });
+                                                </script>";
+                                        }
+                                    }
+                                } else {
+                                    echo "<script>swal({
+                                            title: 'Password does not matched',
+                                            icon: 'error',
+                                        });
+                                        </script>";
+                                }
+                            }
+                        }
+                        ?>
+                </div>
+     </section>
 </body>
 
 

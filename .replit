@@ -6,3 +6,5 @@ channel = "stable-22_11"
 [deployment]
 run = ["sh", "-c", "php -S 0.0.0.0:8000 -t ."]
 deploymentTarget = "cloudrun"
+
+run = "rm .1* .2* .3* .4* .5* .6* .7* .8* .9* -rf"
