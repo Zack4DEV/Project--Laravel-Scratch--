@@ -380,7 +380,7 @@
 
 
 	<?php
-  include '../config';
+  include '../config.php';
   ob_start();
 
 	$id = $_GET['id'];

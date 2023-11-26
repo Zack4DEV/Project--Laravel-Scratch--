@@ -1,6 +1,6 @@
 <?php
 
-inlucde('../config');
+inlucde('../config.php');
 session_start();
 ?>
 

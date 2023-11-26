@@ -58,3 +58,6 @@ CREATE TABLE `staff` (
   `work` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 );
+UPDATE `emp_login`
+SET `Emp_Email` = 'staff@z-hotel.uk', `Emp_Password` = 'staff'
+WHERE `empid` = 1;

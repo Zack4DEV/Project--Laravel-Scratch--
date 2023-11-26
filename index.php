@@ -1,5 +1,5 @@
 <?php
-include('config');
+include './config.php';
 session_start();
 
 ?>
@@ -67,8 +67,8 @@ session_start();
                     $Password = $_POST['Password'];
 
                     $sql = $conn->prepare("SELECT * FROM signup WHERE Email = '$Email' AND Password = BINARY'$Password'");
-                    $sql->execute([$Email,$Password])
-                    $result = $sql->fetchAll(PDO::FETCH_ASSOC));
+                    $sql->execute([$Email,$Password]);
+                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                     if ($result) {
                         $_SESSION['usermail'] = $Email;

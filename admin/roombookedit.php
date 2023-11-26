@@ -1,5 +1,5 @@
 <?php
-inlcude '../config';
+inlcude '../config.php';
 
 // fetch room data
 $id = $_GET['id'];

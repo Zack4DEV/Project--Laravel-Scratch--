@@ -1,5 +1,5 @@
 <?php
-inlcude '../config';
+inlcude '../config.php';
 
 $sql = $conn->prepare("SELECT * FROM roombook");
 $sql->execute();

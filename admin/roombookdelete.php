@@ -1,5 +1,5 @@
 <?php
-inlcude '../config';
+inlcude '../config.php';
 
 $id = $_GET['id'];
 $idRoom = $_GET['idroom'];

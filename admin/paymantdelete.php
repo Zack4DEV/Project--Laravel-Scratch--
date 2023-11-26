@@ -1,5 +1,5 @@
 <?php
-include '../config';
+include '../config.php';
 
 $id = $_GET['id'];
 

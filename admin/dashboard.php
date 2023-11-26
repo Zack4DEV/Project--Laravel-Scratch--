@@ -1,5 +1,5 @@
 <?php
-inlcude('../config');
+inlcude('../config.php');
 session_start();
 
 // roombook
