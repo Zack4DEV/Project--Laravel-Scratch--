@@ -65,7 +65,7 @@ session_start();
                     $Email = $_POST['Email'];
                     $Password = $_POST['Password'];
 
-                    $sql = $conn->prepare("SELECT * FROM signup WHERE Email = '$Email' AND Password = '$Password'");
+                    $sql = $conn->prepare("SELECT * FROM signup");
                     $sql->execute();
                     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -113,8 +113,8 @@ session_start();
                     $Email = $_POST['Emp_Email'];
                     $Password = $_POST['Emp_Password'];
 
-                    $sql = $conn->prepare("SELECT empid,Emp_Email FROM emp_login WHERE Emp_Email = '$Email' AND Emp_Password = BINARY'$Password'");
-                    $sql->execute([$Email,$Password]);
+                    $sql = $conn->prepare("SELECT * FROM emp_login");
+                    $sql->execute();
                     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                     if ($result) {
@@ -125,7 +125,7 @@ session_start();
                     } else {
                         echo "<script>swal({
                                 title: 'Something went wrong',
-                                icon: 'error',
+                                icon: 'error',selec
                             });
                             </script>";
                     }
@@ -161,8 +161,8 @@ session_start();
                         </script>";
                 } else {
                     if ($Password == $CPassword) {
-                        $sql = $conn->prepare("SELECT * FROM signup WHERE Email = '$Email'");
-                        $sql->execute([$Email]);
+                        $sql = $conn->prepare("SELECT * FROM signup");
+                        $sql->execute();
                         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                         if ($result) {
@@ -172,8 +172,8 @@ session_start();
                                 });
                                 </script>";
                         } else {
-                            $sql = $conn->prepare("INSERT INTO signup (Username,Email,Password) VALUES ('$Username', '$Email', '$Password')");
-                            $sql->execute([$Username,$Email,$Password]);
+                            $sql = $conn->prepare("INSERT INTO signup[(Username,Email,Password)] VALUES ('$Username', '$Email', '$Password')");
+                            $sql->execute();
                             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                             if ($result) {

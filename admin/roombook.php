@@ -213,8 +213,8 @@ if (isset($_POST['guestdetailsubmit'])) {
                     </script>';
     } else {
         $sta = "NotConfirm";
-        $sql = $conn->prepare("INSERT INTO roombook(idroom,Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays) VALUES ('$idroom','$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
-        $sql->execute([$idroom,$Name,$Email,$Country,$Phone,$Roomtype,$Bed,$NofRoom,$Meal,$cin,$cout,$sta,datediff('$cout','$cin')]);
+        $sql = $conn->prepare("INSERT INTO roombook[(idroom,Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays)] VALUES ('$idroom','$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
+        $sql->execute();
         $result = $sql->fetchAll();
 
         // if($f1=="NO")

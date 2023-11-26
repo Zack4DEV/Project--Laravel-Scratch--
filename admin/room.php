@@ -48,7 +48,7 @@ session_start();
             $typeofroom = $_POST['troom'];
             $typeofbed = $_POST['bed'];
 
-            $sql = $conn->prepare("INSERT INTO room(type,bedding) VALUES ('$typeofroom', '$typeofbed')");
+            $sql = $conn->prepare("INSERT INTO room[(type,bedding)] VALUES ('$typeofroom', '$typeofbed')");
             $sql->execute();
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
             header("Location: room.php");

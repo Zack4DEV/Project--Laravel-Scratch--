@@ -176,9 +176,8 @@ if ($usermail == true) {
                     </script>';
           } else {
             $sta = "NotConfirm";
-            $sql = $conn->prepare("INSERT INTO roombook(Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays) VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
-            $sql->execute([
-              $Name,$Email,$Country,$Roomtype,$Bed,NoofRoom,$Meal,$cin,$cout,$sta,datediff('$cout','$cin')]);
+            $sql = $conn->prepare("INSERT INTO roombook[(Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays)] VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
+            $sql->execute();
               $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 

@@ -32,7 +32,7 @@ if (isset($_POST['guestdetailedit'])) {
 
     $sql = $conn->prepare("UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = datediff('$Editcout','$Editcin') WHERE id = '$id'");
 
-    $sql->execute([$EditName,$EditEmail,$EditCountry,$EditPhone,$Editroomtype,$EditBed,$EditNoofRoom,$EditMeal,$Editcin,$Editcout,dattediff('$Editcout','$Editcin')]);
+    $sql->execute();
     $result = $sql->fetchAll();
 
     $type_of_room = 0;

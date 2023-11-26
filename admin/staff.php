@@ -49,7 +49,7 @@ session_start();
             $staffname = $_POST['staffname'];
             $staffwork = $_POST['staffwork'];
 
-            $sql = $conn->prepare("INSERT INTO staff(name,work) VALUES ('$staffname', '$staffwork')");
+            $sql = $conn->prepare("INSERT INTO staff[(name,work)] VALUES ('$staffname', '$staffwork')");
             $sql->execute([$staffname,$staffwork]);
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 

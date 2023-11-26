@@ -21,22 +21,22 @@ $roomre = $roomsql->fetchAll(PDO::FETCH_ASSOC);
 $roomrow = $roomre->columnCount();
 
 //roombook roomtype
-$chartroom1 = $conn->prepare("SELECT * FROM roombook WHERE roomtype='Superior Room'");
+$chartroom1 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Superior Room'");
 $chartroom1->execute();
 $chartroom1re = $chartroom1->fetchAll(PDO::FETCH_ASSOC);
 $chartroom1row = $chartroom1re->columnCount();
 
-$chartroom2 = $conn->prepare("SELECT * FROM roombook WHERE roomtype='Deluxe Room'");
+$chartroom2 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Deluxe Room'");
 $chartroom2->execute();
 $chartroom2re = $chartroom2->fetchAll(PDO::FETCH_ASOOC);
 $chartroom2row = $chartroom2re->columnCount();
 
-$chartroom3 = $conn->prepare("SELECT * FROM roombook WHERE roomtype='Guest House'");
+$chartroom3 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Guest House'");
 $chartroom3->execute();
 $chartroom3re = $chartroom3->fetchAll(PDO::FETCH_ASOOC);
 $chartroom3row = $chartroom3re->columnCount();
 
-$chartroom4 = $conn->prepare("SELECT * FROM roombook WHERE roomtype='Single Room'");
+$chartroom4 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Single Room'");
 $chartroom4->execute();
 $chartroom4re = $chartroom4->fetchAll(PDO::FETCH_ASOOC);
 $chartroom4row = $chartroom4re->columnCount();
