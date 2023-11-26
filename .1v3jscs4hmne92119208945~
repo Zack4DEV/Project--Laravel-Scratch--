@@ -1,7 +1,0 @@
-# Configure path
-$media_path = "C:\SSMS-Setup-ENU.exe"
-$install_path = "C:\Program Files (x86)\Microsoft SQL Server\SQL Server Management Studio 18.6.1"
-$params = " /Install /Passive SSMSInstallRoot=$install_path"
-        
-# Run the install
-Start-Process -FilePath $media_path  -ArgumentList $params -Wait
