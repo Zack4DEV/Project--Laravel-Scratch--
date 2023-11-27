@@ -73,17 +73,18 @@ session_start();
                     $Email = $_POST['Emp_Email'];
                     $Password = $_POST['Emp_Password'];
 
-                    $sql = $conn->prepare("SELECT * FROM emp_login");
-                    $sql->execute([$_POST['Emp_login_submit'])]);
+                    $sql = $conn->prepare("SELECT empid,Emp_Email,Emp_Password FROM emp_login");
+                    $sql->execute();
                     $resultEmployee = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                    if ($resultEmployee) {
+                    if(!empty($_POST['Emp_login_submit'])) {
                         $_SESSION['usermail'] = $Email;
                         $Email = $_POST[""];
                         $Password = $_POST[""];
                         header("Location: ./admin/admin.php");
-
-                    } else {
+                        exit;
+                    } 
+                    else {
                         echo "<script>swal({
                                 title: 'Something went wrong',
                                 icon: 'error',selec
@@ -115,18 +116,19 @@ session_start();
 
                     <?php
                     if ($_POST && isset($_POST['user_login_submit'])) {
-                        $Email = $_POST['Email'];
+                       $Email = $_POST['Email'];
                         $Password = $_POST['Password'];
 
                         $sql = $conn->prepare("SELECT * FROM signup");
-                        $sql->execute([$_POST['user_login_submit']]);
+                        $sql->execute();
                         $resultUser = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                        if ($resultUser) {
+                        if (!empty($_POST['user_login_submit'])) {
                             $_SESSION['usermail'] = $Email;
                             $Email = "";
                             $Password = "";
                             header("Location: ./home.php");
+                            exit;
 
                         } else {
                             echo "<script>swal({
@@ -169,7 +171,7 @@ session_start();
                     </form>
 
                         <?php
-                        if ($_POST &&isset($_POST['user_signup_submit'])) {
+                        if ($_POST && isset($_POST['user_signup_submit'])) {
                             $Username = $_POST['Username'];
                             $Email = $_POST['Email'];
                             $Password = $_POST['Password'];
@@ -184,7 +186,7 @@ session_start();
                             } else {
                                 if ($Password == $CPassword) {
                                     $sql = $conn->prepare("SELECT * FROM signup");
-                                    $sql->execute([$_POST['user_signup_submit']]);
+                                    $sql->execute();
                                     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                                     if ($sql) {
@@ -198,13 +200,14 @@ session_start();
                                         $sql->execute([$_POST['user_signup_submit']]);
                                         $resultUserSignup = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-                                        if ($resultUserSignup) {
+                                        if (!empty($_POST['user_signup_submit'])) {
                                             $_SESSION['usermail'] = $Email;
                                             $Username = "";
                                             $Email = "";
                                             $Password = "";
                                             $CPassword = "";
                                             //header("Location: home.php");
+                                            //exit
                                         } else {
                                             echo "<script>swal({
                                                     title: 'Something went wrong',
