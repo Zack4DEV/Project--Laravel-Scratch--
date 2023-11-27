@@ -22,7 +22,7 @@ export default defineConfig({
                     'admin/roomconfirm.php',
                     'admin/roomdelete.php',
                     'admin/staff.php',
-                    'admin/staffdelete.php',
+                    'admin/staffdelete.php'
                   ],
            cleanup: {},
         })
