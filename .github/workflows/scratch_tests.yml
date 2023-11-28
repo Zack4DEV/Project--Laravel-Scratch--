@@ -14,8 +14,8 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0.2]
         phpunit: [9.6.x-dev]
-    #    include:
-    #       - testbench: 6.x-dev
+        include:
+           - testbench: 6.x-dev
         dependencies:
           - "locked"
           - "lowest"
