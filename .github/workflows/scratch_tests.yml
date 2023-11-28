@@ -43,12 +43,12 @@ jobs:
 
       - name: Install PHPUnit ${{ matrix.phpunit }}
         run: |
-          composer require "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
+          composer require "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update --prefer-lowest
 
       - name: Install dependencies
         run: |
-          composer require   --no-interaction --with-all-dependencies
-          composer update  --no-interaction --with-all-dependencies --prefer-dist 
+          composer require  --no-interaction --with-all-dependencies --prefer-lowest
+          composer update  --no-interaction --with-all-dependencies --prefer-dist --prefer-lowest
 
       - name: PHPUnit Test
         uses: chindit/actions-phpunit@1.0.0
