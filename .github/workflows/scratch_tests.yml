@@ -14,8 +14,8 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0.2]
         phpunit: [9.6.x-dev]
-        include:
-           - testbench: 6.x-dev
+    #    include:
+    #       - testbench: 6.x-dev
         dependencies:
           - "locked"
           - "lowest"
@@ -47,8 +47,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require  "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --prefer-dist --no-interaction
+          composer require   --no-interaction --with-all-dependencies
+          composer update  --no-interaction --with-all-dependencies --prefer-dist 
 
       - name: PHPUnit Test
         uses: chindit/actions-phpunit@1.0.0
