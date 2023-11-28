@@ -1,4 +1,4 @@
-name: PHPUnit Laravel Test
+name: PHPUnit Laravel Test 
 on:
   push:
     branches: ["core","develop","framework","scratch","laravel"]
