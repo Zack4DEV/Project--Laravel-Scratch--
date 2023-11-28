@@ -17,7 +17,7 @@ jobs:
         laravel: [8.x-dev]
         include:
           - laravel: 8.x-dev
-  #          testbench: 6.x-dev
+            testbench: 6.x-dev
         dependencies:
           - "locked"
           - "lowest"
