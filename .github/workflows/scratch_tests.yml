@@ -15,7 +15,7 @@ jobs:
         php: [8.0.2]
         phpunit: [9.6.x-dev]
     #    include:
-    #       - testbench: 7.x-dev
+    #       - testbench: 6.x-dev
         dependencies:
           - "locked"
           - "lowest"
