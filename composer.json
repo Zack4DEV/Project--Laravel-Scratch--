@@ -12,7 +12,8 @@
        }, 
   "require-dev": {
 		"mikey179/vfsstream": "2.0.x-dev",
-		"phpunit/phpunit": "9.6.x-dev"
+		"phpunit/phpunit": "9.6.x-dev",
+	  	"orchestra/testbench": "6.x-dev"
         },
   "scripts": {
     "post-create-project": [
