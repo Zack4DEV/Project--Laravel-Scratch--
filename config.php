@@ -1,14 +1,14 @@
 <?php
 
-$hostName = "localhost";
-$db = "database_hotel";
-$user = "root";
-$passwd = "";
+//$hostName = "localhost";
+//$db = "database_hotel";
+//$user = "root";
+//$passwd = "";
 
 global $conn;
 try {
-    $conn = new PDO('mysqli:host=$hostName;dbname=$db, $user, $passwd');
-//  $conn = new PDO('sqlite:database/DB.db');
+   // $conn = new PDO('mysql:host=$hostName;dbname=$db, $user, $passwd');
+    $conn = new PDO('sqlite:database/DB.db');
     $conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // echo "Connected Successufully <br />";
 }
