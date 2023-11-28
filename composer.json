@@ -37,7 +37,6 @@
   "config": {
         "optimize-autoloader": true,
         "prefer-dist": true,
-        "prefer-lowest": false,
 	"minimum-stability": "dev",
         "sort-packages": true
         }	    
