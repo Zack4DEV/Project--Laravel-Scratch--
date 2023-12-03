@@ -18,7 +18,7 @@
             <p>Hotel</p>
         </div>
         <div class="logout">
-        <a href="{{ URL::to('/logout') }}"><button class="btn btn-primary">Logout</button></a>
+        <a href="{{ URL::to('/admin/logout') }}"><button class="btn btn-primary">Logout</button></a>
     </div>
     </nav>
 
@@ -34,11 +34,11 @@
 
 
     <div class="mainscreen">
-        <iframe class="frames frame1 active" src="{{ URL::to('/dashboard') }}" frameborder="0"></iframe>
-        <iframe class="frames frame2" src="{{ URL::to('/roombook') }}" frameborder="0"></iframe>
-        <iframe class="frames frame3" src="{{ URL::to('/payment') }}" frameborder="0"></iframe>
-        <iframe class="frames frame4" src="{{ URL::to('/room') }}" frameborder="0"></iframe>
-        <iframe class="frames frame4" src="{{ URL::to('/staff') }}" frameborder="0"></iframe>
+        <iframe class="frames frame1 active" src="{{ URL::to('/admin/dashboard') }}" frameborder="0"></iframe>
+        <iframe class="frames frame2" src="{{ URL::to('/admin/roombook') }}" frameborder="0"></iframe>
+        <iframe class="frames frame3" src="{{ URL::to('/admin/payment') }}" frameborder="0"></iframe>
+        <iframe class="frames frame4" src="{{ URL::to('/admin/room') }}" frameborder="0"></iframe>
+        <iframe class="frames frame4" src="{{ URL::to('/admin/staff') }}" frameborder="0"></iframe>
     </div>
 
     <div id="mobileview">

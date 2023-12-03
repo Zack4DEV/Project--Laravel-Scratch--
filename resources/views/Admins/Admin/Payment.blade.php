@@ -90,7 +90,7 @@
                     {{ $res->finaltotal }}
                 </td>
                 <td class="action">
-                    <a href="{{ URL::to( '/invoice' ) }}"><button class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button></a>
+                    <a href="{{ URL::to( '/admin/invoice' ) }}"><button class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button></a>
                 </td>
             </tr>
         </tbody>

@@ -31,7 +31,7 @@ class User extends Controller{
         ->where('UserId', "=", "{{ $id }}")
         ->get();
 
-        return view('Layouts.App')->with('user_result_up', $user_result_up);
+        return redirect()->route('in_signup_user')->with('user_result_up', $user_result_up);
     }
 
     public function user_Signup_In(Request $request)
@@ -52,7 +52,7 @@ class User extends Controller{
                 //'CPassword' => $CPassword
             ));
 
-        return redirect()->route('up_signup_user')->with('result_in', $result_in);
+        return redirect()->route('login_from_welcome')->with('result_in', $result_in);
     }
 
 
@@ -60,7 +60,7 @@ class User extends Controller{
     public function user_Logout()
     {
         Auth::logout();
-        return redirect(route('login_to_welcome'));
+        return redirect(route('login_form_welcome'));
 
     }
 

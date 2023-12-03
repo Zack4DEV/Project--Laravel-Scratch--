@@ -23,14 +23,14 @@ class Employee extends Controller
                 ))
           ->get();
 
-        return redirectTo('/dashboard')->with('employee_result_up', $employee_result_up);
+        return redirect()->route('admin.to_employee_dashboard')->with('employee_result_up', $employee_result_up);
 
     }
 
     public function logout_Employee()
     {
         Auth::guard('admin')->logout();
-        return redirect()->route('login_to_welcome');
+        return redirect()->route('login_form_welcome');
     }
 
 

@@ -36,7 +36,7 @@ class Room extends Controller
             $addroom--;
         }
 
-        return redirect()->route('to_Room');
+        return redirect()->route('admin.to_Room');
     }
 
     public function Room_Delete_To()
@@ -45,6 +45,6 @@ class Room extends Controller
         $redeletesql = DB::table('Room')
             ->delete('*');
 
-        return redirect()->route('to_Room');
+        return redirect()->route('admin.to_Room');
     }
 }

@@ -23,7 +23,7 @@
 
 @section('staff_section')
 <div class="addstaffsection">
-    <form action="route('to_create_staff')" method="POST">
+    <form action="route('admin.to_create_staff')" method="POST">
         <label for="nstaff">Name :</label>
         <input type="text" name="staffname" class="form-control">
 
@@ -48,7 +48,7 @@
         <i class="fa fa-users fa-5x"></i>
         <h3>{{ $row['name'] }}</h3>
         <div class="mb-1">{{ $row['work'] }}</div>
-        <a href="{{ URL::to('/staff/delete') }}""><button class="btn btn-danger">Delete</button></a>
+        <a href="{{ URL::to('/admin/staff/delete') }}""><button class="btn btn-danger">Delete</button></a>
     </div>
 </div>
 @endwhile

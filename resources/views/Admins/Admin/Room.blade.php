@@ -8,7 +8,7 @@
     <body>
         @section('room_section')
 <div class="addroomsection">
-    <form action="route('to_create_room')" method="POST">
+    <form action="route('admin.to_create_room')" method="POST">
         <label for="troom">Type of Room :</label>
         <select name="troom" class="form-control">
             <option value selected></option>
@@ -38,7 +38,7 @@
         <i class="fa fa-users fa-5x"></i>
         <h3>{{ $row['type'] }}</h3>
         <div class="mb-1">{{ $row['bedding'] }}</div>
-        <a href="{{ URL::to('/room/delete') }}"><button class="btn btn-danger">Delete</button></a>
+        <a href="{{ URL::to('/admin/room/delete') }}"><button class="btn btn-danger">Delete</button></a>
     </div>
 </div>
 @endwhile

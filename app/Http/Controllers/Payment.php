@@ -27,7 +27,7 @@ class Payment extends Controller {
                 ->where('id', '=', $id)
                 ->delete('*');
 
-        return redirect()->route('to_payment');
+        return redirect()->route('admin.to_payment');
     }
 
     public function payment_To_Check_Room(Request $request)
@@ -45,7 +45,7 @@ class Payment extends Controller {
         $sr = 0;
         $dr = 0;
 
-        return view('Admins.Admin.Roombook', compact('rre', 'r', 'sc', 'gh', 'sr', 'dr'));
+        return redirect()->route('admin.to_roombook')->compact('rre', 'r', 'sc', 'gh', 'sr', 'dr');
     }
 
 }
