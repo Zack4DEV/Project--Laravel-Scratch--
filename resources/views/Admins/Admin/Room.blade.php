@@ -1,4 +1,12 @@
-@section('room_section')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('Room')</title>
+    </head>
+    <body>
+        @section('room_section')
 <div class="addroomsection">
     <form action="route('to_create_room')" method="POST">
         <label for="troom">Type of Room :</label>
@@ -23,18 +31,6 @@
     </form>
 </div>
 
-<div class="room">
-    @foreach($re as $row)
-    echo "<div class='roombox'>
-        <div class='text-center no-border'>
-            <i class='fa fa-users fa-5x'></i>
-            <h3>" . {{ $row['type'] }} . "</h3>
-            <div class='mb-1'>" . {{ $row['bedding'] }} . "</div>
-            <a href="asset('URL::to('/room/delete')')"><button class='btn btn-danger'>Delete</button></a>
-        </div>
-    </div>";
-    @endforeach
-</div>
 
 @while($redeletesql)
 <div class="roombox">
@@ -42,8 +38,10 @@
         <i class="fa fa-users fa-5x"></i>
         <h3>{{ $row['type'] }}</h3>
         <div class="mb-1">{{ $row['bedding'] }}</div>
-        <a href="asset('URL::to('/room/delete')')"><button class="btn btn-danger">Delete</button></a>
+        <a href="{{ URL::to('/room/delete') }}"><button class="btn btn-danger">Delete</button></a>
     </div>
 </div>
 @endwhile
 @endsection
+    </body>
+</html>

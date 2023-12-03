@@ -1,7 +1,10 @@
-@extends('Admins.Admin.Payment');
-
-@push('css')
-<link rel="stylesheet" href="{{ asset('/public/admin/css/style.css') }}">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@yield('Invoice')</title>
+<link rel="stylesheet" href="{{ URL::asset('/admin/css/style.css') }}">
 <style>
     /* reset */
 
@@ -371,7 +374,8 @@
         margin: 0;
     }
 </style>
-@endpush
+    </head>
+    <body>
 
 @section('invoice_section')
 <header>
@@ -380,7 +384,7 @@
         <p>HOTEL,</p>
         <p>(+212)5-37809882</p>
     </address>
-    <span><img alt="" src="asset( '/public/admin/image/logo.jpg' )"></span>
+    <span><img alt="" src="{{ URL::asset( '/admin/image/logo.jpg' ) }}"></span>
 </header>
 
 <aside>
@@ -458,6 +462,6 @@
         </tr>
     </table>
 </article>
-
-
 @endsection
+</body>
+</html>

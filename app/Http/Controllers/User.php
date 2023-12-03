@@ -31,7 +31,7 @@ class User extends Controller{
         ->where('UserId', "=", "{{ $id }}")
         ->get();
 
-        return view('Layouts.Login')->with('user_result_up', $user_result_up);
+        return view('Layouts.App')->with('user_result_up', $user_result_up);
     }
 
     public function user_Signup_In(Request $request)
@@ -60,7 +60,7 @@ class User extends Controller{
     public function user_Logout()
     {
         Auth::logout();
-        return redirectTo('/login');
+        return redirect(route('login_to_welcome'));
 
     }
 

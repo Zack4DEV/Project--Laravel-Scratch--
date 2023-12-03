@@ -1,15 +1,16 @@
-@include('Admins.Admin.Dashboard')
-
-@push('css')
-<link rel="stylesheet" href="{{ asset('/public/admin/css/admin.css') }}">
-<link rel="stylesheet" href="asset('/public/css/flash.css')">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@yield('Admin')</title>
+<link rel="stylesheet" href="{{ URL::asset('/admin/css/admin.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('/css/flash.css') }}">
 <!-- fontowesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-@endpush
-
-@push('js')
-<script src="asset('/public/admin/javascript/script.js')"></script>
-@endpush
+<script src="{{ URL::asset('/admin/javascript/script.js') }}"></script>
+    </head>
+    <body>
 
 @section('admin_section')
 <nav class="uppernav">
@@ -23,11 +24,11 @@
 
     <nav class="sidenav">
         <ul>
-            <li class="pagebtn active"><img src="asset(/public/admin/image/icon/dashboard.png)">&nbsp&nbsp&nbsp Dashboard</li>
-            <li class="pagebtn"><img src="asset(/public/admin/image/icon/bed.png)">&nbsp&nbsp&nbsp Room Booking</li>
-            <li class="pagebtn"><img src="asset(/public/admin/image/icon/wallet.png)">&nbsp&nbsp&nbsp Payment</li>
-            <li class="pagebtn"><img src="asset(/public/admin/image/icon//bedroom.png)">&nbsp&nbsp&nbsp Rooms</li>
-            <li class="pagebtn"><img src="asset(/public/admin/image/icon/staff.png">&nbsp&nbsp&nbsp Staff</li>
+            <li class="pagebtn active"><img src="{{ URL::asset(/admin/image/icon/dashboard.png) }}">&nbsp&nbsp&nbsp Dashboard</li>
+            <li class="pagebtn"><img src="{{ URL::asset(/admin/image/icon/bed.png) }}">&nbsp&nbsp&nbsp Room Booking</li>
+            <li class="pagebtn"><img src="{{ URL::asset(/admin/image/icon/wallet.png) }}">&nbsp&nbsp&nbsp Payment</li>
+            <li class="pagebtn"><img src="{{ URL::asset(/admin/image/icon//bedroom.png) }}">&nbsp&nbsp&nbsp Rooms</li>
+            <li class="pagebtn"><img src="{{ URL::asset(/admin/image/icon/staff.png) }}">&nbsp&nbsp&nbsp Staff</li>
         </ul>
     </nav>
 
@@ -45,3 +46,6 @@
     </div>
 
 @endsection
+
+    </body>
+</html>

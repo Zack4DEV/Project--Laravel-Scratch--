@@ -1,9 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('RoombookEdit')</title>
+    </head>
+<body>
 @section('roombookedit_section')
 <div id="editpanel">
-    <form action="route('to_edit_roombook')" method="POST" class="guestdetailpanelform">
+    <form action="{{ route('edit_to_roombook') }}" method="POST" class="guestdetailpanelform">
         <div class="head">
             <h3>EDIT RESERVATION</h3>
-            <a href="{{ asset('/resources/views/Admins/Roombook') }}"><i class="fa-solid fa-circle-xmark"></i></a>
+            <a href="{{ URL::to('/roombook/edit') }}"><i class="fa-solid fa-circle-xmark"></i></a>
         </div>
         <div class="middle">
             <div class="guestinfo">
@@ -72,3 +80,5 @@
     </form>
 </div>
 @endsection
+</body>
+</html>

@@ -1,14 +1,18 @@
-@push('css')
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<link rel="stylesheet" href="{{ asset('/public/Admin/css/dashboard.css') }}">
-@endpush
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@yield('Dashboard')</title>
+<link rel="stylesheet" href="https//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<link rel="stylesheet" href="{{ URL::asset('/admin/css/dashboard.css') }}">
 
-@push('js')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-
+    </head>
+    <body>
 <script>
     const labels = [
         'Superior Room',
@@ -62,7 +66,7 @@
         ]
     });
 </script>
-@endpush
+
 
 @section('dashboard_section')
 <div class="databox">
@@ -106,3 +110,5 @@ $chart_data = substr($chart_data, 0, -2);
 @endforeach
 
 @endsection
+    </body>
+</html>
