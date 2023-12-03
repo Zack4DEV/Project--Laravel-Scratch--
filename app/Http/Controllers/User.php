@@ -60,7 +60,7 @@ class User extends Controller{
     public function user_Logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirectTo('/login');
 
     }
 
