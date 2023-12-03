@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', 'App\Http\Controllers\Welcome@welcome_Form_Login')->name('login_form_welcome');
+Route::get('/login', 'App\Http\Controllers\Welcome@welcome_Form_Login')->name('login_form_welcome');
 Route::post('/login', 'App\Http\Controllers\Welcome@welcome_Login_To')->name('login_to_welcome');
 
-Route::post('/signup', 'App\Http\Controllers\User@user_Signup_Up')->name('up_signup_user');
+Route::get('/signup', 'App\Http\Controllers\User@user_Signup_Up')->name('up_signup_user');
 Route::post('/signup', 'App\Http\Controllers\User@user_Signup_In')->name('in_signup_user');
 
-Route::post('/home', 'App\Http\Controllers\Home@home_Create_Roombook_To')->name('to_roombook_create_home');
+Route::get('/home', 'App\Http\Controllers\Home@home_Create_Roombook_To')->name('to_roombook_create_home');
 Route::post('/home', 'App\Http\Controllers\Home@home_Create_Roombook')->name('roombook_create_home');
 
-Route::get('/logout', 'App\Http\Controllers\User@user_Logout')->name('logout_user');
+Route::post('/logout', 'App\Http\Controllers\User@user_Logout')->name('logout_user');
 
 
 Route::group(
@@ -35,10 +35,9 @@ Route::group(
     function () {
         Route::middleware(['auth:admin'])->group(
             function () {
+                Route::post('/logout', 'Employee@logout_Employee')->name('employee_logout');
 
-                Route::post('/login', 'Employee@up_Login_Employee')->name('employee_login_Up');
-                Route::get('/logout', 'Employee@logout_Employee')->name('employee_logout');
-
+                Route::get('/dashboard', 'Employee@up_Login_Employee')->name('employee_login_Up');
                 Route::post('/dashboard', 'Employee@dashboard_Employee_To')->name('to_employee_dashboard');
                 Route::post('/dashboard', 'Employee@dashboard_Employee_Edit')->name('edit_employee_dashboard');
 

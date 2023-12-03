@@ -1,7 +1,6 @@
 @section('room_section')
 <div class="addroomsection">
-    <form action="" method="POST">
-        @method('POST')
+    <form action="route('to_create_room')" method="POST">
         <label for="troom">Type of Room :</label>
         <select name="troom" class="form-control">
             <option value selected></option>

@@ -14,8 +14,7 @@
 
             <div id="User_Log_In">
 
-                <form class="user_login authsection active" id="userlogin" action="" method="POST">
-                    @method('POST')
+                <form class="user_login authsection active" id="userlogin" action="route('to_roombook_create_home')" method="POST">
 
                     <div class="form-floating">
                         <input type="text" class="form-control" name="Username" placeholder=" ">
@@ -42,8 +41,7 @@
 
             <div id="Employee_Log_In">
 
-                <form class="employee_login authsection" id="employeelogin" action="" method="POST">
-                    @method('POST')
+                <form class="employee_login authsection" id="employeelogin" action="route('to_employee_dashboard')" method="POST">
                     <div class="form-floating">
                         <input type="email" class="form-control" name="Emp_Email" placeholder=" ">
                         <label for="floatingInput">Email</label>
@@ -59,8 +57,7 @@
         <div id="sign_up">
             <h2>Sign Up</h2>
 
-            <form class="user_signup" id="usersignup" action="" method="POST">
-                @method('POST')
+            <form class="user_signup" id="usersignup" action="route('login_to_welcome')" method="POST">
                 <div class="form-floating">
                     <input type="text" class="form-control" name="Username" placeholder=" ">
                     <label for="Username">Username</label>

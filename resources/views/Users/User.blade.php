@@ -62,8 +62,7 @@
 
         <!-- bookbox -->
         <div id="guestdetailpanel">
-            <form action="" method="POST" class="guestdetailpanelform">
-                @method('POST')
+            <form action="route('roombook_create_home')" method="POST" class="guestdetailpanelform">
                 <div class="head">
                     <h3>RESERVATION</h3>
                     <i class="fa-solid fa-circle-xmark" onclick="closebox()"></i>

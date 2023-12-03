@@ -16,8 +16,7 @@
 
 @section('staff_section')
 <div class="addstaffsection">
-    <form action="" method="POST">
-        @method('POST')
+    <form action="route('to_create_staff')" method="POST">
         <label for="nstaff">Name :</label>
         <input type="text" name="staffname" class="form-control">
 
