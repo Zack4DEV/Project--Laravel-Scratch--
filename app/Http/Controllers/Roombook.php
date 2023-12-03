@@ -17,7 +17,7 @@ class Roombook extends Controller
         return view('Admins.Admin.Roombook')->with('roombookresult', $roombookresult);
     }
 
-    public function roombook_To_Add(Request $request,$id)
+    public function roombook_To_Add(Request $request)
     {
 
         $id = session('id');

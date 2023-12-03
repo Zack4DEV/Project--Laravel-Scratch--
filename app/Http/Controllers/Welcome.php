@@ -12,7 +12,7 @@ class Welcome extends Controller
         return view('Layouts.App');
     }
 
-    public function welcome_Login_To(Request $request,$id)
+    public function welcome_Login_To(Request $request)
     {
         $credentials = [
             'Email' => $request->input('Email'),

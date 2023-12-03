@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\Welcome@welcome_Form_Login')->name('login_form_welcome');
+Route::post('/login', 'App\Http\Controllers\Welcome@welcome_Form_Login')->name('login_form_welcome');
 Route::post('/login', 'App\Http\Controllers\Welcome@welcome_Login_To')->name('login_to_welcome');
 
-Route::get('/signup', 'App\Http\Controllers\User@user_Signup_Up')->name('up_signup_user');
+Route::post('/signup', 'App\Http\Controllers\User@user_Signup_Up')->name('up_signup_user');
 Route::post('/signup', 'App\Http\Controllers\User@user_Signup_In')->name('in_signup_user');
 
 Route::get('/home', 'App\Http\Controllers\Home@home_Create_Roombook_To')->name('to_roombook_create_home');
@@ -36,7 +36,7 @@ Route::group(
         Route::middleware(['auth:admin'])->group(
             function () {
 
-                Route::get('/login', 'Employee@up_Login_Employee')->name('employee_login_Up');
+                Route::post('/login', 'Employee@up_Login_Employee')->name('employee_login_Up');
                 Route::post('/logout', 'Employee@logout_Employee')->name('employee_logout');
 
                 Route::get('/dashboard', 'Employee@dashboard_Employee_To')->name('to_employee_dashboard');

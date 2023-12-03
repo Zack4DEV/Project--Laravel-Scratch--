@@ -13,7 +13,7 @@ class Home extends Controller
     {
         return view('Users.User');
     }
-    public function home_Create_Roombook(Request $request,$id)
+    public function home_Create_Roombook(Request $request)
     {
 
 

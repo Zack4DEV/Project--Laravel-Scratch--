@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Invoice extends Controller {
 
-    public function Invoice_To(Request $request, $id)
+    public function Invoice_To(Request $request)
     {
 
         $request->session()->put('id', $id);

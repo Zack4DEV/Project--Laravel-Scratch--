@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Employee extends Controller
 {
 
-    public function up_Login_Employee(Request $request,$id)
+    public function up_Login_Employee(Request $request)
     {
         $id = $request->session()->get('empid');
         $Email = $request->input('Emp_Email');

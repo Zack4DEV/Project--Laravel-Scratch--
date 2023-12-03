@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Payment extends Controller {
 
-    public function payment_To(Request $request,$id)
+    public function payment_To(Request $request)
     {
         $id = session('id');
 
@@ -19,7 +19,7 @@ class Payment extends Controller {
         return view('Admins.Admin.Payment')->with('paymantresult', $paymantresult);
     }
 
-    public function payment_Delete_To(Request $request,$id)
+    public function payment_Delete_To(Request $request)
     {
         $id = session('id');
 

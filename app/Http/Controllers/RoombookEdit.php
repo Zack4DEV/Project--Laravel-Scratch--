@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class RoombookEdit extends Controller
 {
 
-    public function roombook_Edit_To(Request $request,$id)
+    public function roombook_Edit_To(Request $request)
     {
         $id = session('id');
         $prow = session('nodays');

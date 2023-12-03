@@ -1,9 +1,9 @@
-run = "npm run dev && php artisan serve --host 0.0.0.0 --port 8888"
+run = "php artisan serve --host=0.0.0.0 --port=8000 -vvv"
 modules = ["nodejs-20:v8-20230920-bd784b9"]
 
 [nix]
 channel = "stable-22_11"
 
 [deployment]
-run = ["sh", "-c", "npm run dev && php artisan serve --host 0.0.0.0 --port 8888"]
+run = ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=8000 -vvv"]
 deploymentTarget = "cloudrun"

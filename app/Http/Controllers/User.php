@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class User extends Controller{
 
-    public function user_Signup_Up(Request $request,$id)
+    public function user_Signup_Up(Request $request)
     {
 
         $request->session()->put('UserId', $id);
@@ -34,7 +34,7 @@ class User extends Controller{
         return view('Layouts.Login')->with('user_result_up', $user_result_up);
     }
 
-    public function user_Signup_In(Request $request,$id)
+    public function user_Signup_In(Request $request)
     {
 
         $request->session()->put('UserId', $id);
