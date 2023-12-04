@@ -52,7 +52,7 @@
 
                 <div id="User_Log_In">
 
-                    <form class="user_login authsection active" id="userlogin" action="route('login_to_welcome')" method="POST">
+                    <form class="user_login authsection active" id="userlogin" action="{{ URL::to('/') }}" method="POST">
 
                         <div class="form-floating">
                             <input type="text" class="form-control" name="Username" placeholder=" ">
@@ -79,7 +79,7 @@
 
                 <div id="Employee_Log_In">
 
-                    <form class="employee_login authsection" id="employeelogin" action="route('login_to_welcome')" method="POST">
+                    <form class="employee_login authsection" id="employeelogin" action="{{ URL::to('/') }}" method="POST">
                         <div class="form-floating">
                             <input type="email" class="form-control" name="Emp_Email" placeholder=" ">
                             <label for="floatingInput">Email</label>

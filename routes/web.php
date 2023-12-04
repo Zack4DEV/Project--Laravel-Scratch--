@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/', 'App\Http\Controllers\Welcome@welcome_Form_Login')->name('login_form_welcome');
+Route::get('/', 'App\Http\Controllers\Welcome@welcome_Form_Login')->name('login_form_welcome');
 Route::post('/', 'App\Http\Controllers\Welcome@welcome_Login_To')->name('login_to_welcome');
 
 Route::get('/signup', 'App\Http\Controllers\User@user_Signup_Up')->name('up_signup_user');
@@ -71,6 +71,3 @@ Route::group(
     }
 );
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
