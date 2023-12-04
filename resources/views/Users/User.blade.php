@@ -44,7 +44,6 @@
         <a href="{{ URL::to('/logout') }}"><button class="btn btn-danger">Logout</button></a>
     </ul>
 </nav>
-
 @section('firstsection')
 <div id="first_div" class="carousel slide carousel_section" data-bs-ride="carousel">
     <div class="carousel-inner">

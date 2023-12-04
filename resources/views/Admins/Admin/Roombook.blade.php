@@ -1,4 +1,4 @@
-@extends('Admins.Admin.RoombookEdit');
+@s@extends('Admins.Admin.RoombookEdit');
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

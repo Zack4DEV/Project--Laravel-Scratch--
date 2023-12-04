@@ -7,6 +7,7 @@
 /vendor/**/**
 /.local
 .upm
+["*".]cache
 .env
 .env.backup
 .env.production
