@@ -377,7 +377,6 @@ r<!DOCTYPE html>
     </head>
     <body>
 
-@section('invoice_section')
 <header>
     <h1>Invoice</h1>
     <address>
@@ -462,6 +461,5 @@ r<!DOCTYPE html>
         </tr>
     </table>
 </article>
-@endsection
 </body>
 </html>

@@ -19,7 +19,6 @@
 </script>
     </head>
 <body>
-@section('appsection')
 <div id="carouselExampleControls" class="carousel slide carousel_section" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
@@ -122,6 +121,5 @@
                 </form>
             </div>
         </div>
-    @endsection
 </body>
 </html>

@@ -21,7 +21,6 @@
 
 
 
-@section('staff_section')
 <div class="addstaffsection">
     <form action="route('to_create_staff')" method="POST">
         <label for="nstaff">Name :</label>
@@ -52,6 +51,5 @@
     </div>
 </div>
 @endwhile
-@endsection
     </body>
 </html>

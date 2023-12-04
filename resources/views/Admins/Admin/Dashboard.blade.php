@@ -68,7 +68,6 @@
 </script>
 
 
-@section('dashboard_section')
 <div class="databox">
     <div class="box roombookbox">
         <h2>Total Booked Room</h1>
@@ -109,6 +108,5 @@ $tot = $tot + $row["finaltotal"] * 10 / 100;
 $chart_data = substr($chart_data, 0, -2);
 @endforeach
 
-@endsection
     </body>
 </html>

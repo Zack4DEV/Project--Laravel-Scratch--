@@ -12,7 +12,6 @@
     </head>
     <body>
 
-@section('admin_section')
 <nav class="uppernav">
         <div class="logo">
             <p>Hotel</p>
@@ -45,7 +44,6 @@
         <h5>Admin panel doesn't show in mobile view</h4>
     </div>
 
-@endsection
 
     </body>
 </html>

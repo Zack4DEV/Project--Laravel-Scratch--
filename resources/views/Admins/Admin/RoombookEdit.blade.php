@@ -6,7 +6,6 @@
     <title>@yield('RoombookEdit')</title>
     </head>
 <body>
-@section('roombookedit_section')
 <div id="editpanel">
     <form action="{{ route('edit_to_roombook') }}" method="POST" class="guestdetailpanelform">
         <div class="head">
@@ -79,6 +78,5 @@
         </div>
     </form>
 </div>
-@endsection
 </body>
 </html>

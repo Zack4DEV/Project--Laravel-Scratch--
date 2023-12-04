@@ -6,7 +6,6 @@
     <title>@yield('Room')</title>
     </head>
     <body>
-        @section('room_section')
 <div class="addroomsection">
     <form action="route('to_create_room')" method="POST">
         <label for="troom">Type of Room :</label>
@@ -42,6 +41,5 @@
     </div>
 </div>
 @endwhile
-@endsection
     </body>
 </html>

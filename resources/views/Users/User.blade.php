@@ -44,7 +44,6 @@
         <a href="{{ route('logout_user') }}"><button class="btn btn-danger">Logout</button></a>
     </ul>
 </nav>
-@section('firstsection')
 <div id="first_div" class="carousel slide carousel_section" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
@@ -140,8 +139,6 @@
 
     </div>
 </div>
-@endsection
-@section('secondsection')
 <div id="second_div">
     <img src="{{ URL::asset('/image/homeanimatebg.svg') }}">
     <div class="ourroom">
@@ -200,9 +197,6 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('thirdsection')
 <div id="third_div">
     <h1 class="head">≼ Facilities ≽</h1>
     <div class="facility">
@@ -223,9 +217,6 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('contactus')
 <div id="contactus_div">
     <div class="social">
         <i class="fa-brands fa-instagram"></i>
@@ -236,6 +227,5 @@
         <h5>Hotel</h5>
     </div>
 </div>
-@endsection
 </body>
 </html>

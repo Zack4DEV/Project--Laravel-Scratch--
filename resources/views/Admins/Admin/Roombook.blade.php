@@ -1,4 +1,4 @@
-@s@extends('Admins.Admin.RoombookEdit');
+@extends('Admins.Admin.RoombookEdit');
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -18,7 +18,6 @@
 
 <!-- show_roombook -->
 
-@section('roombook_section')
 <div class="roombooktable" class="table-responsive-xl">
     <div class="roombooktable" class="table-responsive-xl">
         <table class="table table-bordered" id="table-data">
@@ -253,7 +252,5 @@
     @endphp
 
     @endforeach
-
-    @endsection
     </body>
 </html>

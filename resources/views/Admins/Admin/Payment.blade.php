@@ -14,7 +14,6 @@
     <body>
 
 
-@section('payment_section')
 <div class="searchsection">
     <input type="text" name="search_bar" id="search_bar" placeholder="search..." onkeyup="searchFun()">
 </div>
@@ -97,6 +96,5 @@
         @endforeach
     </table>
 </div>
-@endsection
     </body>
 </html>
