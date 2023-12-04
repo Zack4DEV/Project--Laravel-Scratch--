@@ -8,7 +8,7 @@
     <body>
         @section('room_section')
 <div class="addroomsection">
-    <form action="route('admin.to_create_room')" method="POST">
+    <form action="route('to_create_room')" method="POST">
         <label for="troom">Type of Room :</label>
         <select name="troom" class="form-control">
             <option value selected></option>

@@ -22,7 +22,7 @@ class Welcome extends Controller
         $credentialUsername = $request->input('Username');
 
         if (Auth::attempt($credentials) && Auth::user()->role == 'admin') {
-            return redirect()->route('admin.employee_login_up');
+            return redirect()->route('to_employee_dashboard');
         }elseif(Auth::attempt($credentials) && Auth::attempt($credentialUsername )) {
             return redirect()->route('to_roombook_create_home');
         }else {

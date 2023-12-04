@@ -85,13 +85,13 @@
                     </td>
                     <td class="action">
 
-                        <a href="{{ route('admin.add_to_roombook') }}" class="btn btn-danger">Add</a>
+                        <a href="{{ route('add_to_roombook') }}" class="btn btn-danger">Add</a>
                         @if($roombookresult['stat'] == "Confirm")
                         echo " ";
                         @else
-                        <a href="{{ route('admin.confirm_to_roombook') }}" class="btn btn-danger">Confirm</a>
+                        <a href="{{ route('confirm_to_roombook') }}" class="btn btn-danger">Confirm</a>
                         @endif
-                        <a href="{{ route('admin.delete_to_roombook') }}" class="btn btn-danger">Delete</a>
+                        <a href="{{ route('delete_to_roombook') }}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </tbody>
@@ -104,7 +104,7 @@
     <div class="searchsection">
         <input type="text" name="search_bar" id="search_bar" placeholder="search..." onkeyup="searchFun()">
         <button class="adduser" id="adduser" onclick="adduseropen()"><i class="fa-solid fa-bookmark"></i>Add</button>
-        <form action="route('admin.in_data_export')" method="post">
+        <form action="route('in_data_export')" method="post">
             <button class="exportexcel" id="exportexcel" name="exportexcel" type="submit"><i class="fa-solid fa-file-arrow-down"></i></button>
         </form>
     </div>
@@ -114,7 +114,7 @@
     <!-- add roombook-->
 
     <div id="guestdetailpanel">
-        <form action="route('admin.add_to_roombook')" method="POST" class="guestdetailpanelform">
+        <form action="route('add_to_roombook')" method="POST" class="guestdetailpanelform">
             <div class="head">
                 <h3>RESERVATION</h3>
                 <i class="fa-solid fa-circle-xmark" onclick="adduserclose()"></i>

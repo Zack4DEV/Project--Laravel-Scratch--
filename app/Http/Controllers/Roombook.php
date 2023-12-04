@@ -49,7 +49,7 @@ class Roombook extends Controller
             'stat' => $sta
         ));
 
-        return redirect()->route('admin.to_roombook')->with('success', 'Room Booked Successfully');
+        return redirect()->route('to_roombook')->with('success', 'Room Booked Successfully');
 
     }
 
@@ -61,12 +61,12 @@ class Roombook extends Controller
         ->where('id', $id)
         ->update(['stat' => 'Confirm']);
 
-        return redirect()->route('admin.to_roombook');
+        return redirect()->route('to_roombook');
 
     }
 
 
-    public function roombook_To_Delete(Request $request, $id)
+    public function roombook_To_Delete(Request $request)
     {
         $id = session('id');
 
@@ -74,7 +74,7 @@ class Roombook extends Controller
                    ->where('id', '=', $id)
                    ->delete('*');
 
-        return redirect()->route('admin.to_roombook');
+        return redirect()->route('to_roombook');
     }
 
 }

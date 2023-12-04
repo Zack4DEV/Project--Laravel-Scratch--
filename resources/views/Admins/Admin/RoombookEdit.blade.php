@@ -8,7 +8,7 @@
 <body>
 @section('roombookedit_section')
 <div id="editpanel">
-    <form action="{{ route('admin.edit_to_roombook') }}" method="POST" class="guestdetailpanelform">
+    <form action="{{ route('edit_to_roombook') }}" method="POST" class="guestdetailpanelform">
         <div class="head">
             <h3>EDIT RESERVATION</h3>
             <a href="{{ URL::to('/admin/roombook/edit') }}"><i class="fa-solid fa-circle-xmark"></i></a>

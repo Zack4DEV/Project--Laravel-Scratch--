@@ -10,14 +10,12 @@ class Authenticate extends Middleware
      * Get the path the user should be redirected to when they are not authenticated.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return string|null
+     * 
      */
-    protected function redirectTo($request): ?string
+    protected function redirectTo($request)
     {
-        if ($request->is(config('admin.prefix') . '*')) {
-            return route('to_employee_dashboard');
-        } else {
-            return $request->expectsJson() ? null : route('login_form_welcome');
+        if (!$request->is(config('admin.prefix') . '*')) {
+            return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
         }
     }
 }

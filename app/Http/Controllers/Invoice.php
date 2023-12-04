@@ -9,8 +9,7 @@ class Invoice extends Controller {
 
     public function Invoice_To(Request $request)
     {
-
-        $request->session()->put('id', $id);
+        $id = session('id');
 
         $Name = $request->input('Name');
         $troom = $request->input('roomtype');
@@ -30,7 +29,7 @@ class Invoice extends Controller {
             $type_of_room = 320;
         } elseif ($troom == "Deluxe Room") {
             $type_of_room = 220;
-        } elseif ($troom == "Guest House") {
+        } elseif ($troom == "Guest House") {i
             $type_of_room = 180;
         } elseif ($troom == "Single Room") {
             $type_of_room = 150;

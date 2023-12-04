@@ -36,7 +36,7 @@ class Staff extends Controller
             $addstaff--;
         }
 
-        return redirect()->route('admin.to_staff');
+        return redirect()->route('to_staff');
     }
 
     public function staff_Delete_To()
@@ -45,6 +45,6 @@ class Staff extends Controller
         $redeletesql = DB::table('staff')
             ->delete('*');
 
-        return redirect()->route('admin.to_staff');
+        return redirect()->route('to_staff');
     }
 }
