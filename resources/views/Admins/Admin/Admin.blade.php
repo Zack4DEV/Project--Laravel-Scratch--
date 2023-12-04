@@ -18,7 +18,7 @@
             <p>Hotel</p>
         </div>
         <div class="logout">
-        <a href="{{ URL::to('/admin/logout') }}"><button class="btn btn-primary">Logout</button></a>
+        <a href="{{ route('admin.employee_logout') }}"><button class="btn btn-primary">Logout</button></a>
     </div>
     </nav>
 

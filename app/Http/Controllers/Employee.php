@@ -30,7 +30,7 @@ class Employee extends Controller
     public function logout_Employee()
     {
         Auth::guard('admin')->logout();
-        return redirect()->route('login_form_welcome');
+        return redirectTo('/');
     }
 
 

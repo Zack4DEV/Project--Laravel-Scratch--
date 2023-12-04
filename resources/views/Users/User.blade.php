@@ -41,7 +41,7 @@
         <li><a href="#secondsection">Rooms</a></li>
         <li><a href="#thirdsection">Facilites</a></li>
         <li><a href="#contactus">contact us</a></li>
-        <a href="{{ URL::to('/logout') }}"><button class="btn btn-danger">Logout</button></a>
+        <a href="{{ route('logout_user') }}"><button class="btn btn-danger">Logout</button></a>
     </ul>
 </nav>
 @section('firstsection')
