@@ -37,7 +37,7 @@
         <i class="fa fa-users fa-5x"></i>
         <h3>{{ $row['type'] }}</h3>
         <div class="mb-1">{{ $row['bedding'] }}</div>
-        <a href="{{ URL::to('/admin/room/delete') }}"><button class="btn btn-danger">Delete</button></a>
+        <a src="{{ URL::to('/admin/room/delete') }}"><button class="btn btn-danger">Delete</button></a>
     </div>
 </div>
 @endwhile

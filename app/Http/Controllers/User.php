@@ -19,8 +19,7 @@ class User extends Controller{
         $CPassword = session('Cpassword');
 
         $user_result_up = DB::table("signup")
-        ->select(array(        ))
-        ->where('UserId', "=", "{{ $id }}")
+        ->select()
         ->get();
 
         return redirect()->route('in_signup_user')->with('user_result_up', $user_result_up);

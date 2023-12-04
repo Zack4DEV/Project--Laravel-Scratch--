@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>@yield('Admin')</title>
-<link rel="stylesheet" href="{{ URL::asset('/admin/css/admin.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('/css/flash.css') }}">
+<link rel="stylesheet" src="{{ URL::asset('/admin/css/admin.css') }}">
+<link rel="stylesheet" src="{{ URL::asset('/css/flash.css') }}">
 <!-- fontowesome -->
 <link rel="stylesheet" href="https://cdrnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="{{ URL::asset('/admin/javascript/script.js') }}"></script>
@@ -17,7 +17,7 @@
             <p>Hotel</p>
         </div>
         <div class="logout">
-        <a href="{{ route('employee_logout') }}"><button class="btn btn-primary">Logout</button></a>
+        <a src="{{ route('employee_logout') }}"><button class="btn btn-primary">Logout</button></a>
     </div>
     </nav>
 

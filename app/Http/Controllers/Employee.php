@@ -15,7 +15,7 @@ class Employee extends Controller
         $Email = session('Emp_Email');
         $Password = session('Emp_Password');
         $employee_result_up = DB::table("emp_login")
-                ->select(array(                ))
+          ->select()
           ->get();
 
         return redirect()->route('to_employee_dashboard')->with('employee_result_up', $employee_result_up);

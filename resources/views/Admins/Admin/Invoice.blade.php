@@ -4,7 +4,7 @@ r<!DOCTYPE html>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('Invoice')</title>
-<link rel="stylesheet" href="{{ URL::asset('/admin/css/style.css') }}">
+<link rel="stylesheet" src="{{ URL::asset('/admin/css/style.css') }}">
 <style>
     /* reset */
 
