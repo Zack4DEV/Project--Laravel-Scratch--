@@ -7,6 +7,7 @@
 /vendor/**/**
 /.local
 .upm
+.lesson
 ["*".]cache
 .env
 .env.backup
