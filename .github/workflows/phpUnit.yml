@@ -1,0 +1,56 @@
+name: PHPUnit
+on:
+  push:
+    branches: ["origin,"upstream","scratch","laravel"]
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+       matrix:
+        os: [ubuntu-latest]
+        php: [8.0.2]
+        phpunit: [9.6.x-dev]
+    #    include:
+    #       - testbench: 6.x-dev
+        dependencies:
+          - "locked"
+          - "lowest"
+          - "highest"
+        experimental:
+          - false
+
+    name: P${{ matrix.php }} - ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, sqlite3, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Install PHPUnit ${{ matrix.phpunit }}
+        run: |
+          composer require "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
+
+      - name: Install dependencies
+        run: |
+          composer require   --no-interaction --with-all-dependencies
+          composer update  --no-interaction --with-all-dependencies --prefer-dist 
+
+      - name: PHPUnit Test
+        uses: chindit/actions-phpunit@1.0.0
+   #   - name: PHPUnit Test
+   #     run: composer post-test-project
