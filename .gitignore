@@ -1,5 +1,10 @@
 ra.*
 .vscode
+.lesson
+.upm
+[*.]cache
+.local
+.config
 vendor/
-result
+[*.]result
 !*.php
