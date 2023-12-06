@@ -8,4 +8,4 @@ ra.*
 vendor/
 [*.]result
 !*.php
-.github/workflows/*
+.github
