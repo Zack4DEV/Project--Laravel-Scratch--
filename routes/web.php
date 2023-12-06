@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\Welcome@welcome_Form_Login')->name('login_form_welcome');
 Route::post('/', 'App\Http\Controllers\Welcome@welcome_Login_To')->name('login_to_welcome');
 
-Route::get('/signup', 'App\Http\Controllers\User@user_Signup_Up')->name('up_signup_user');
-Route::post('/signup', 'App\Http\Controllers\User@user_Signup_In')->name('in_signup_user');
+Route::get('/', 'App\Http\Controllers\User@user_Signup_Up')->name('up_signup_user');
+Route::post('/', 'App\Http\Controllers\User@user_Signup_In')->name('in_signup_user');
 
 Route::get('/home', 'App\Http\Controllers\Home@home_Create_Roombook_To')->name('to_roombook_create_home');
 Route::post('/home', 'App\Http\Controllers\Home@home_Create_Roombook')->name('roombook_create_home');
