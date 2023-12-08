@@ -1,7 +1,7 @@
 name: PHPUnit Laravel Test 
 on:
   push:
-    branches: ["core","develop","framework","scratch","laravel"]
+    branches: ['origin','upstream','scratch','laravel']
   pull_request:
   schedule:
     - cron: '0 0 * * *'
