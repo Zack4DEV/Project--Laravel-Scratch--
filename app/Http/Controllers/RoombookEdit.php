@@ -15,8 +15,8 @@ class RoombookEdit extends Controller
         $ndays = session('roomtotal');
 
 
-        $Name = $request->input('Name');
-        $Email = $request->input('Email');
+        $Name = $request->input('name');
+        $Email = $request->input('email');
         $Country = $request->input('Country');
         $Phone = $request->input('Phone');
         $Roomtype = $request->input('roomtype');
@@ -35,8 +35,8 @@ class RoombookEdit extends Controller
 
         $paymantresult = DB::table("roombook")
             ->update(array(
-            'Name' => $Name,
-            'Email' => $Email,
+            'name' => $Name,
+            'email' => $Email,
             'Country' => $Country,
             'Phone' => $Phone,
             'roomtype' => $Roomtype,

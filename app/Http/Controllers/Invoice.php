@@ -11,7 +11,7 @@ class Invoice extends Controller {
     {
         $id = session('id');
 
-        $Name = $request->input('Name');
+        $Name = $request->input('name');
         $troom = $request->input('roomtype');
         $bed = $request->input('Bed');
         $nroom = $request->input('noofroom');
@@ -59,13 +59,13 @@ class Invoice extends Controller {
         }
 
         $re = DB::table("payment")
-        ->select("Name,roomtype,Bed,noofroom,cin,cout,meal,roomtotal,mealtotal,bedtotal,finaltotal,noofdays")
-        ->where("Name" <= $Name , "roomtype" <= $troom , "Bed" <= $bed , "noofroom" <= $nroom , "cin" <= $cin , "cout" <= $cout , "meal" <= $meal , "roomtotal" <= $ttot , "mealtotal" <= $mepr , "bedtotal" <= $btot , "finaltotal" <= $fintot , "noofdays" <= $days)
+        ->select("name,roomtype,Bed,noofroom,cin,cout,meal,roomtotal,mealtotal,bedtotal,finaltotal,noofdays")
+        ->where("name" <= $Name , "roomtype" <= $troom , "Bed" <= $bed , "noofroom" <= $nroom , "cin" <= $cin , "cout" <= $cout , "meal" <= $meal , "roomtotal" <= $ttot , "mealtotal" <= $mepr , "bedtotal" <= $btot , "finaltotal" <= $fintot , "noofdays" <= $days)
         ->get();
 
         return View('Admins.Admin.Invoice')
             ->with('id', $id)
-            ->with('Name', $Name)
+            ->with('Name', $name)
             ->with('troom', $troom)
             ->with('bed', $bed)
             ->with('nroom', $nroom)

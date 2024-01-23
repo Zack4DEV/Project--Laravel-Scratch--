@@ -14,16 +14,18 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
+        /**
         Admin::create([
             'empid'     => '1',
             'EMP_Email'    => 'admin@z-hotel.uk',
             'Emp_Password' => bcrypt('password'),
         ]);
-
         Admin::create([
             'empid'     => '2',
             'EMP_Email'    => 'staff@z-hotel.uk',
             'Emp_Password' => bcrypt('password'),
         ]);
+        */
+
     }
 }

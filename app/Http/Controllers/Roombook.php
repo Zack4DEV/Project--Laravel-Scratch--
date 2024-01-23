@@ -23,8 +23,8 @@ class Roombook extends Controller
         $id = session('id');
         $sta = session('stat');
 
-        $Name = $request->input('Name');
-        $Email = $request->input('Email');
+        $Name = $request->input('name');
+        $Email = $request->input('email');
         $Country = $request->input('Country');
         $Phone = $request->input('Phone');
         $Roomtype = $request->input('roomtype');
@@ -36,8 +36,8 @@ class Roombook extends Controller
 
         $result = DB::table("roombook")
         ->insert(array(
-            'Name' => $Name,
-            'Email' => $Email,
+            'name' => $Name,
+            'email' => $Email,
             'Country' => $Country,
             'Phone' => $Phone,
             'roomtype' => $Roomtype,

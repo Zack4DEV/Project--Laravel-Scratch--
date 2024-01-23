@@ -11,9 +11,9 @@ class Employee extends Controller
 
     public function up_Login_Employee(Request $request)
     {
-        $id = session('empid');
-        $Email = session('Emp_Email');
-        $Password = session('Emp_Password');
+        $id = session('id');
+        $Email = session('email');
+        $Password = session('password');
         $employee_result_up = DB::table("emp_login")
           ->select()
           ->get();

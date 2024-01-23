@@ -12,41 +12,44 @@ class User extends Controller{
 
     public function user_Signup_Up(Request $request)
     {
-        $id = session('UserId');
-        $Username = session('Username');
-        $Email = session('Email');
-        $Password = session('Password');
-        $CPassword = session('Cpassword');
+        $id = session('id');
+        $Username = session('username');
+        $Email = session('email');
+        $Password = session('password');
+        $CPassword = session('password');
 
-        $user_result_up = DB::table("signup")
+        /**
+        $user_result_up = DB::table('signup')
         ->select()
         ->get();
-
+        
         return redirect()->route('in_signup_user')->with('user_result_up', $user_result_up);
+        */
+
     }
 
     public function user_Signup_In(Request $request)
     {
 
 
-        $Username = $request->input('Username');
-        $Email = $request->input('Email');
-        $Password = $request->input('Password');
+        $Username = $request->input('username');
+        $Email = $request->input('email');
+        $Password = $request->input('password');
         //$CPassword = $request->input('CPassword');
         
         $result_in = DB::table("signup")
             ->insert(array(
-                'Username' => $Username,
-                'Email' => $Email,
-                'Password' => $Password,
+                'username' => $Username,
+                'email' => $Email,
+                'password' => $Password,
                  //'CPassword' => $CPassword
             ));
 
-        $request->session()->put('UserId', $id);
+        $request->session()->put('id', $id);
         
-        $request->session()->put('Username', $Username);
-        $request->session()->put('Email', $Email);
-        $request->session()->put('Password', $Password);
+        $request->session()->put('username', $Username);
+        $request->session()->put('email', $Email);
+        $request->session()->put('password', $Password);
         //$request->session()->put('Cpassword', $CPassword);
         
         return redirect()->route('login_from_welcome')->with('result_in', $result_in);

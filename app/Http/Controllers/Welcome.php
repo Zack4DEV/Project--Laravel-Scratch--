@@ -15,11 +15,11 @@ class Welcome extends Controller
     public function welcome_Login_To(Request $request)
     {
         $credentials = [
-            'Email' => $request->input('Email'),
-            'Password' => $request->input('Password'),
+            'Email' => $request->input('email'),
+            'Password' => $request->input('password'),
         ];
 
-        $credentialUsername = $request->input('Username');
+        $credentialUsername = $request->input('username');
 
         if (Auth::attempt($credentials) && Auth::user()->role == 'admin') {
             return redirect()->route('to_employee_dashboard');

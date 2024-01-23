@@ -15,7 +15,7 @@
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "3.x-dev",
         "laravel/ui": "^3.4.6",
-        "orchestra/testbench": "^6.38.0"
+        "orchestra/testbench": "^6.40.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
