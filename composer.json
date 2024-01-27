@@ -38,10 +38,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Tests\\Unit\\": "tests/unit/",
+            "Tests\\Feature\\": "tests/features"
         },
         "classmap": [
-            "tests/TestCase.php",
+            "tests/TestCase.php"
         ]
     },
     "scripts": {
