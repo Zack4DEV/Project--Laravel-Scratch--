@@ -3,19 +3,15 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Http\Request;
 
 class Authenticate extends Middleware
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * 
+     * @params \Illuminate\Http\Request $request 
      */
-    protected function redirectTo($request)
+    protected function redirect(Request $request): routed
     {
-        if (!$request->is(config('admin.prefix') . '*')) {
-            return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
-        }
+        return $request->expectsJson() ? null : redirect()->route('login_to_welcome');
     }
 }

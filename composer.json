@@ -34,14 +34,14 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+    }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         },
         "classmap": [
-            "tests/TestCase.php"
+            "tests/TestCase.php",
         ]
     },
     "scripts": {
