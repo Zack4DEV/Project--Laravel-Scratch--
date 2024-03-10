@@ -104,7 +104,9 @@ r<!DOCTYPE html>
 
     html {
         background: #999;
-        cursor: default;
+        cursor:  @endphp 
+ @default 
+ @php 
     }
 
     body {
