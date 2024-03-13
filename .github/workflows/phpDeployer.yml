@@ -1,0 +1,39 @@
+name: PHPDeploy Docker deployer actions
+on:
+  push:
+    branches: ['upstream','origin''scratch','laravel']
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
+
+concurrency: production_environment
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+       matrix:
+        os: [ubuntu-latest]
+        php: [8.3]
+        experimental:
+          - false
+    name: P${{ matrix.php }} - ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: P${{ matrix.php }}
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Docker deployer action
+        uses: drixs6o9/docker-deployer@v7.1.4
+        with:
+          private-key: ${{ secrets.CLOUDFLARE_SSH_KEY }}
+          dep: deploy
