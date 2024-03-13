@@ -18,7 +18,7 @@ jobs:
         php: [8.3]
         experimental:
           - false
-    name: P${{ matrix.php }} - ${{ matrix.os }}
+    name: ${{ matrix.php }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -27,7 +27,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: ${{ matrix.php }}
 
       - name: Install dependencies
         run: composer install
@@ -36,4 +36,4 @@ jobs:
         uses: drixs6o9/docker-deployer@v7.1.4
         with:
           private-key: ${{ secrets.CLOUDFLARE_CSR_KEY }}
-          dep: deploy
+          dep: -e GITHUB_API_URL ${{ secrets.CLOUDFLARE_API_URL }}
