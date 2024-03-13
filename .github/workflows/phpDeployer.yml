@@ -36,4 +36,3 @@ jobs:
         uses: drixs6o9/docker-deployer@v7.1.4
         with:
           SSH_PRIVATE_KEY: ${{ secrets.CLOUDFLARE_PUB_KEY }}
-   #       args: -e GITHUB_API_URL ${{ secrets.CLOUDFLARE_API_URL }}
