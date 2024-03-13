@@ -27,7 +27,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: P${{ matrix.php }}
+          php-version: '8.3'
 
       - name: Install dependencies
         run: composer install
@@ -35,5 +35,5 @@ jobs:
       - name: Docker deployer action
         uses: drixs6o9/docker-deployer@v7.1.4
         with:
-          private-key: ${{ secrets.CLOUDFLARE_SSH_KEY }}
+          private-key: ${{ secrets.CLOUDFLARE_CSR_KEY }}
           dep: deploy
