@@ -9,7 +9,7 @@ on:
 concurrency: production_environment
 
 jobs:
-  test:
+  deploy:
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     strategy:
@@ -32,7 +32,11 @@ jobs:
       - name: Install dependencies
         run: composer install
 
-      - name: Docker deployer action
-        uses: drixs6o9/docker-deployer@v7.1.4
+      - uses: astappiev/docker-compose-remote-action@master
+        name: Docker-Compose Remote Deployment
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.CLOUDFLARE_PUB_KEY }}
+          ssh_host: z-hotel.uk
+          ssh_user: ${{ secrets.DEPLOY_USERNAME }}
+          ssh_private_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+          ssh_host_public_key: ${{ secrets.DEPLOY_PUBLIC_KEY }}
+          docker_compose_prefix: Project--Laravel-Scratch--
