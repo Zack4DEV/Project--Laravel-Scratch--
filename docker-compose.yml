@@ -1,6 +1,6 @@
 name: docker_build
 on: [push, pull_request]
-  branches: ['scratch','laravel']
+  branches: ['upstream','origin']
 default:
   image: project-hotel:3.0
   with:
@@ -24,8 +24,8 @@ services:
     image: project-hotel
     container_name: Scratch
     build:
-      context: /
-      file: /docker/php-fpm/Dockerfile
+      context: .
+      file: docker/php-fpm/Dockerfile
     restart: unless-stopped
     tty: true
     working_dir: /srv/app
@@ -36,8 +36,8 @@ services:
     image: project-hotel
     container_name: Scratch
     build:
-      context: /
-      file: /docker/nginx/Dockerfile
+      context: .
+      file: docker/nginx/Dockerfile
       args:
         php_fpm_dns: php-fpm
     ports:
@@ -81,10 +81,10 @@ services:
       - redis
 
   - name: web
-    build: /
+    build: .
     restart: always
     ports:
-      - 127.0.0.1:8000:8000
+      - 127.0.0.1:8080:8080
     volumes:
       - Scratch:/var/www/html:z,ro
     depends_on:
