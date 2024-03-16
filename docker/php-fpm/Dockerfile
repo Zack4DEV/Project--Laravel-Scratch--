@@ -132,8 +132,8 @@ rm -rf /var/lib/apt/lists/*
 # composer
 #RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-ENV LISTEN_PORT=8000
-EXPOSE 8000
+ENV LISTEN_PORT=8080
+EXPOSE 8080
 
 VOLUME /var/www/html
 
@@ -141,4 +141,4 @@ COPY ./public/ /srv/app
 WORKDIR /srv/app
 ADD ./public/ /srv/app
 
-CMD [ "php","-S","0.0.0.0:8000","-t","./src/" ] || exit 1
+CMD [ "php","-S","0.0.0.0:8080","-t","." ] || exit 1
