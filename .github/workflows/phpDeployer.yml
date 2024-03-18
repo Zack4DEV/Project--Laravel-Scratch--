@@ -36,8 +36,8 @@ jobs:
         name: Docker-Compose Remote Deployment
         with:
           ssh_host: ${{ vars.CLOUDFLARE_HOST }}
+          ssh_port: ${{ vars.CLOUDFLARE_PORT }}
           ssh_user: ${{ secrets.CLOUDFLARE_USERNAME }}
           ssh_private_key: ${{ secrets.CLOUDFLARE_AUD_KEY }}
           ssh_host_public_key: ${{ secrets.CLOUDFLARE_PUB_KEY }}
           docker_compose_prefix: Project
-          commands: "cd . ; /usr/local/bin/git pull ; /usr/local/bin/docker compose up --build -W 0.0.0.0:8080 -d "           
