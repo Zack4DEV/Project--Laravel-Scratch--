@@ -16,4 +16,6 @@ catch (PDOException $e)
 {
     echo "Connection Error: " . $e->getMessage();
 }
-  ?>
+
+session_start();
+?>

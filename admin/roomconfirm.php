@@ -81,7 +81,7 @@ while ($stat == "NotConfirm") {
         $psql->execute();
         $psqlresult = $psql->fetchAll();
 
-        header("Location:roombook.php");
+        header("Location: roombook.php");
     }
 }
 
@@ -89,5 +89,5 @@ while ($stat == "NotConfirm") {
 // else
 // {
 //     echo "<script>alert('Guest Already Confirmed')</script>";
-//     header("Location:roombook.php");
+//     header("Location: roombook.php");
 // }

@@ -90,13 +90,13 @@ if ($_POST && isset($_POST['guestdetailedit'])) {
     $psql = $conn->prepare("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
     $psql->execute([$_POST['guestdetailedit']]);
     $paymentresult = $psql->fetchAll(PDO::FETCH_ASSOC);
-        header("Location:roombook.php");
+        header("Location: roombook.php");
 }
 ?>
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -114,7 +114,7 @@ if ($_POST && isset($_POST['guestdetailedit'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- sweet alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="./css/roombook.css">
+    <link rel="stylesheet" href="css/roombook.css">
     <style>
         #editpanel {
             position: fixed;

@@ -1,11 +1,10 @@
 <?php
 
 inlucde('../config.php');
-session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -23,7 +22,7 @@ session_start();
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- sweet alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="./css/roombook.css">
+    <link rel="stylesheet" href="css/roombook.css">
     <title>Admin</title>
 </head>
 

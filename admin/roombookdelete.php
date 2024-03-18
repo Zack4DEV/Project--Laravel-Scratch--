@@ -9,6 +9,6 @@ $deletesql->execute();
 
 $result = $deletesql->fetchAll();
 
-header("Location:roombook.php");
+header("Location: roombook.php");
 
 ?>
