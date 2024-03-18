@@ -1,6 +1,6 @@
 <?php
 include './config.php';
-global boolean $IsAdmin ,$IsUser;
+global  $IsAdmin ,$IsUser;
 session_start();
 if($IsAdmin == true){
     header("Location: ./admin/admin.php");
