@@ -1,6 +1,6 @@
 <?php
 include './config.php';
-#session_start();
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -69,13 +69,13 @@ include './config.php';
                     <button type="submit" name="Emp_login_submit" class="auth_btn">Log in</button>
                 </form>
                 <?php
-                if ($_POST && isset($_POST['Emp_login_submit'])) {
+                if (isset($_POST['Emp_login_submit'])) {
                     $Email = $_POST['Emp_Email'];
                     $Password = $_POST['Emp_Password'];
 
-                    $sql = $conn->prepare("SELECT empid,Emp_Email,Emp_Password FROM emp_login");
-                    $sql->execute();
-                    $resultEmployee = $sql->fetchAll(PDO::FETCH_ASSOC);
+                    $sqlResultEmployee = $conn->prepare("SELECT empid,Emp_Email,Emp_Password FROM emp_login");
+                    $sqlResultEmployee ->execute();
+                    $resultEmployee = $sqlResultEmployee ->fetchAll(PDO::FETCH_ASSOC);
 
                     if(!empty($_POST['Emp_login_submit'])) {
                         $_SESSION['usermail'] = $Email;
@@ -87,7 +87,7 @@ include './config.php';
                     else {
                         echo "<script>swal({
                                 title: 'Something went wrong',
-                                icon: 'error',selec
+                                icon: 'error',
                             });
                             </script>";
                     }
@@ -119,9 +119,9 @@ include './config.php';
                        $Email = $_POST['Email'];
                         $Password = $_POST['Password'];
 
-                        $sql = $conn->prepare("SELECT * FROM signup");
-                        $sql->execute();
-                        $resultUser = $sql->fetchAll(PDO::FETCH_ASSOC);
+                        $sqlResultUser = $conn->prepare("SELECT * FROM signup");
+                        $sqlResultUser->execute();
+                        $resultUser = $sqlResultUser->fetchAll(PDO::FETCH_ASSOC);
 
                         if (!empty($_POST['user_login_submit'])) {
                             $_SESSION['usermail'] = $Email;
@@ -185,20 +185,20 @@ include './config.php';
                                     </script>";
                             } else {
                                 if ($Password == $CPassword) {
-                                    $sql = $conn->prepare("SELECT * FROM signup");
-                                    $sql->execute();
-                                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+                                    $sqlResultUser = $conn->prepare("SELECT * FROM signup");
+                                    $sqlResultUser->execute();
+                                    $result = $sqlResultUser->fetchAll(PDO::FETCH_ASSOC);
 
-                                    if ($sql) {
+                                    if ($sqlResultUser) {
                                         echo "<script>swal({
                                                 title: 'Email already exist',
                                                 icon: 'error',
                                             });
                                             </script>";
                                     } else {
-                                        $sql = $conn->prepare("INSERT INTO signup[(Username,Email,Password)] VALUES ('$Username', '$Email', '$Password')");
-                                        $sql->execute([$_POST['user_signup_submit']]);
-                                        $resultUserSignup = $sql->fetchAll(PDO::FETCH_ASSOC);
+                                        $sqlResultUser = $conn->prepare("INSERT INTO signup[(Username,Email,Password)] VALUES ('$Username', '$Email', '$Password')");
+                                        $sqlResultUser->execute([$_POST['user_signup_submit']]);
+                                        $resultUserSignup = $sqlResultUser->fetchAll(PDO::FETCH_ASSOC);
 
                                         if (!empty($_POST['user_signup_submit'])) {
                                             $_SESSION['usermail'] = $Email;

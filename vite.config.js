@@ -4,10 +4,8 @@ import usePHP from 'vite-plugin-php';
 export default defineConfig({
     plugins: [
         usePHP({
-           entry: [ 'config.php', 
-                    'index.php', 
+           entry: [ 'index.php', 
                     'home.php',
-                    'logout.php',
                     'admin/admin.php',
                     'admin/dashboard.php',
                     'admin/exportdata.php',
@@ -22,7 +20,9 @@ export default defineConfig({
                     'admin/roomconfirm.php',
                     'admin/roomdelete.php',
                     'admin/staff.php',
-                    'admin/staffdelete.php'
+                    'admin/staffdelete.php',
+                   'logout.php',
+                   'config.php'
                   ],
            cleanup: {},
         })
