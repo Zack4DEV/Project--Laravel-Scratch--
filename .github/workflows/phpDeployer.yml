@@ -1,4 +1,4 @@
-name: PHPDeploy Docker deployer actions
+name: PHPDeploy Docker deployer actions 
 on:
   push:
     branches: ['upstream','origin']
