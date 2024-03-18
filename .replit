@@ -1,12 +1,24 @@
 run = "npm run dev"
-#run = "php -S 0.0.0.0:8000 -t ."
+modules = ["nodejs-20:v8-20230920-bd784b9"]
+#run = "php -S 0.0.0.0:8080 -t ."
 
 [nix]
 channel = "stable-22_11"
 
 [deployment]
-run = ["sh", "-c", "php -S 0.0.0.0:8000 -t ."]
+run = ["sh", "-c", "npm run dev"]
 deploymentTarget = "cloudrun"
 
-run = "rm .php-tmp -rf"
-#run = "rm .1* .2* .3* .4* .5* .6* .7* .8* .9* -rf"
+[[ports]]
+localPort = 5173
+externalPort = 5173
+exposeLocalhost = true
+
+[[ports]]
+localPort = 8080
+externalPort = 80
+
+[[ports]]
+localPort = 65535
+externalPort = 3000
+exposeLocalhost = true
