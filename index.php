@@ -1,7 +1,12 @@
 <?php
 include './config.php';
+global boolean $IsAdmin ,$IsUser;
 session_start();
-
+if($IsAdmin == true){
+    header("Location: ./admin/admin.php");
+}else if($IsUser == true){
+    header("Location: ./home.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +86,7 @@ session_start();
                         $_SESSION['usermail'] = $Email;
                         $Email = $_POST[""];
                         $Password = $_POST[""];
-                        header("Location: ./admin/admin.php");
+                        $IsAdmin = true;
                         exit;
                     } 
                     else {
@@ -127,7 +132,7 @@ session_start();
                             $_SESSION['usermail'] = $Email;
                             $Email = "";
                             $Password = "";
-                            header("Location: ./home.php");
+                            $IsUser = true;
                             exit;
 
                         } else {
@@ -206,7 +211,7 @@ session_start();
                                             $Email = "";
                                             $Password = "";
                                             $CPassword = "";
-                                            //header("Location: home.php");
+                                            //$IsUser = true;
                                             //exit
                                         } else {
                                             echo "<script>swal({
