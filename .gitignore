@@ -9,3 +9,5 @@ vendor/
 [*.]result
 !*.php
 .github
+database/DB.sql
+database/DB.sqlite
