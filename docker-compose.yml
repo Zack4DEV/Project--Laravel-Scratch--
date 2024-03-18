@@ -84,7 +84,7 @@ services:
     build: .
     restart: always
     ports:
-      - 127.0.0.1:8080:8080
+      - 127.0.0.1:8080:80
     volumes:
       - Scratch:/var/www/html:z,ro
     depends_on:

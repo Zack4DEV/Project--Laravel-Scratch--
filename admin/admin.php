@@ -63,6 +63,6 @@ if($usermail == true){
     </div>
 </body>
 
-<script  src="./javascript/script.js"></script>
+<script  type="module" src="javascript/script.js"></script>
 
 </html>

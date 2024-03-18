@@ -5,7 +5,7 @@
 	<title>Invoice</title>
 	<link rel="stylesheet" href="css/admin.css">
 	<link rel="license" href="https://www.opensource.org/licenses/mit-license/">
-	<script src="./javascript/script.js"></script>
+	<script type="module" src="javascript/script.js"></script>
 	<style>
 		/* reset */
 

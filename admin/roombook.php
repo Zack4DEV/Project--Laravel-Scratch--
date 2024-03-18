@@ -380,7 +380,7 @@ $nums = $roombookresult->columnCount();
         </table>
     </div>
 </body>
-<script src="./javascript/roombook.js"></script>
+<script type="module" src="javascript/roombook.js"></script>
 
 
 
