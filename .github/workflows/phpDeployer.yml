@@ -35,7 +35,7 @@ jobs:
       - uses: astappiev/docker-compose-remote-action@master
         name: Docker-Compose Remote Deployment
         with:
-          ssh_host: ${{ vars.CLOUDFLARE_HOST}}
+          ssh_host: ${{ variables.CLOUDFLARE_HOST}}
           ssh_user: ${{ secrets.CLOUDFLARE_USERNAME }}
           ssh_private_key: ${{ secrets.CLOUDFLARE_AUD_KEY }}
           ssh_host_public_key: ${{ secrets.CLOUDFLARE_PUB_KEY }}
