@@ -80,23 +80,15 @@ if($IsAdminEntry == true){
                     $sqlResultEmployee = $conn->prepare("SELECT * FROM emp_login");
                     $sqlResultEmployee ->execute();
                     $resultEmployee = $sqlResultEmployee->fetchColumn(PDO::FETCH_ASSOC);
-
+                    while($resultEmployee > 0){
                     $IsAdminEntry = true;
-                    if (!empty($_POST['Emp_login_submit'])) {
-                        echo "<script>swal({
-                            title: 'Something went wrong',
-                            icon: 'error',
-                        });
-                        </script>";
-
-
-                    } else {
+                    if (empty($_POST['Emp_login_submit'])) {
                         $_SESSION['usermail'] = $Email;
                         $Email = "";
                         $Password = "";
                         exit;
-                    }
-                    
+                  }
+                }
                 }
                 ?>                
                 <form class="user_login authsection active" id="userlogin" action="" method="POST">
@@ -114,43 +106,14 @@ if($IsAdminEntry == true){
                 </div>
                 <button type="submit" name="user_login_submit" class="auth_btn">Log in</button>
                 <div class="footer_line">
-                <h6>Don't have an account? <span class="page_move_btn" onclick="signuppage()">sign up</span>
-                    </h6>
+                <h6>Don't have an account?<span class="page_move_btn" onclick="signuppage()">sign up</span></h6>
                 </div>
                 </form>
 
-                    <?php
-                    if (isset($_POST['user_login_submit'])) {
-                        $Email = $_POST['Email'];
-                        $Password = $_POST['Password'];
-
-                        $sqlResultUser = $conn->prepare("SELECT * FROM signup");
-                        $sqlResultUser->execute();
-                        $resultUser = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
-                        
-                        $IsUserEntry = true;
-
-                        if (!empty($_POST['user_login_submit'])) {
-                            echo "<script>swal({
-                                title: 'Something went wrong',
-                                icon: 'error',
-                            });
-                            </script>";
-                            
-
-                        } else {
-                            $_SESSION['usermail'] = $Email;
-                            $Email = "";
-                            $Password = "";
-                            exit;
-                        }
-                    }
-                    ?>
                 </div>
 
                 <div id="sign_up">
                 <h2>SignUp</h2>
-
                 <form class="user_signup" id="usersignup" action="" method="POST">
                    <div class="form-floating">
                      <input type="text" class="form-control" name="Username" placeholder=" ">
@@ -168,18 +131,41 @@ if($IsAdminEntry == true){
                         <input type="password" class="form-control" name="CPassword" placeholder=" ">
                         <label for="CPassword">Confirm Password</label>
                     </div>
-
-                    <button type="submit" name="user_signup_submit" class="auth_btn">SignUp</button>
+                    <button type="submit" name="user_signup_submit" class="auth_btn">Sign Up</button>
 
                     <div class="footer_line">
                         <h6>Already have an account? <span class="page_move_btn" onclick="loginpage()">Log in</span>
                         </h6>
                     </div>
-                    </form>
+        </form>
 
-                        <?php
-                        $_POST['user_signup_submit'] = Array($_POST['Username'],$_POST['Email'],$_POST['Password'],$_POST['CPassword']);
-                        if (isset($_POST['user_signup_submit'])) {
+                    <?php
+                    if (isset($_POST['user_login_submit'])) {
+                        $Email = $_POST['Email'];
+                        $Password = $_POST['Password'];
+
+                        $sqlResultUser = $conn->prepare("SELECT * FROM signup");
+                        $sqlResultUser->execute();
+                        $resultUser = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
+
+                        $IsUserEntry = true;
+
+                        if (!empty($_POST['user_login_submit'])) {
+                            echo "<script>swal({
+                                title: 'Something went wrong',
+                                icon: 'error',
+                            });
+                            </script>";
+
+
+                        } else {
+                            $_SESSION['usermail'] = $Email;
+                            $Email = "";
+                            $Password = "";
+                            exit;
+                        }
+                    }
+                    if (null !== isset($_POST['user_signup_submit'])) {
                             $Username = $_POST['Username'];
                             $Email = $_POST['Email'];
                             $Password = $_POST['Password'];
@@ -189,9 +175,9 @@ if($IsAdminEntry == true){
                                 if ($Password == $CPassword) {
                                     $sqlResultUser = $conn->prepare("SELECT * FROM signup");
                                     $sqlResultUser->execute();
-                                    $result = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
+                                    $resultUserSignup = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
 
-                                    if ($sqlResultUser) {
+                                    if ($resultUserSignup > 0) {
                                         echo "<script>swal({
                                                 title: 'Email already exist',
                                                 icon: 'error',
@@ -199,8 +185,8 @@ if($IsAdminEntry == true){
                                             </script>";
                                     } else {
                                         $sqlResultUser = $conn->prepare("INSERT INTO signup[(Username,Email,Password)] VALUES ('$Username', '$Email', '$Password')");
-                                        $sqlResultUser->execute([$_POST['user_signup_submit']]);
-                                        $resultUserSignup = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
+                                        $sqlResultUser->execute();
+                                        $resultUserLogin = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
 
                                         //$IsUserEntry =true;
 

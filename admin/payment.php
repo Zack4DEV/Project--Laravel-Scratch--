@@ -32,12 +32,11 @@ include '../config.php';
 
     <div class="roombooktable" class="table-responsive-xl">
         <?php
-        $paymanttablesql = $conn->prepare("SELECT * FROM payment");
-        $paymanttablesql->execute();
-        $paymantresult = $paymanttablesql->fetchColumn(PDO::FETCH_ASSOC);
-
-$nums = $paymantresult->columnCount();
-?>
+        $paymenttablesql = $conn->prepare("SELECT * FROM payment");
+        $paymenttablesql->execute();
+        $paymentResult = $paymenttablesql->fetchArray(PDO::FETCH_ASSOC);
+        $nums = $paymentResult->columnCount();
+        ?>
         <table class="table table-bordered" id="table-data">
             <thead>
                 <tr>
@@ -62,7 +61,7 @@ $nums = $paymantresult->columnCount();
 
             <tbody>
                 <?php
-            foreach ($paymantresult as res) {
+            foreach ($paymentresult as res) {
                         $r2=$res['id'] + 6;
             ?>
                     <tr>

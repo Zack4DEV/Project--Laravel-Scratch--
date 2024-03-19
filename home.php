@@ -177,10 +177,10 @@ if ($usermail == true) {
             $sta = "NotConfirm";
             $sql = $conn->prepare("INSERT INTO roombook[(Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays)] VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
             $sql->execute([$_POST['guestdetailsubmit']]);
-            $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
+            $resultUserBooking = $sql->fetchColumn(PDO::FETCH_ASSOC);
 
 
-            if ($result) {
+            if ($resultUserBooking > 0) {
               echo '<script>swal({
                                 title: "Reservation successful",
                                 icon: "success",

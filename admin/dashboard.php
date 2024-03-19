@@ -47,7 +47,7 @@ $query->execute();
 $result = $query->fetchColumn(PDO::FETCH_ASSOC);
 $chart_data = '';
 $tot = 0;
-foreach ($result as $row) {
+foreach (array($query->fetchArray(PDO::FETCH_ASSOC)) as $row) {
     $chart_data .= "{ date:'" . $row["cout"] . "', profit:" . $row["finaltotal"] * 10 / 100 . "}, ";
     $tot = $tot + $row["finaltotal"] * 10 / 100;
 }

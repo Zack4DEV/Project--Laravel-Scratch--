@@ -50,9 +50,10 @@ include '../config.php';
 
             $sql = $conn->prepare("INSERT INTO staff[(name,work)] VALUES ('$staffname', '$staffwork')");
             $sql->execute([$_POST['addstaff']]);
-            $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
-
+            $resultStaffAdd = $sql->fetchColumn(PDO::FETCH_ASSOC);
+            if ($resultStaffAdd > 0)
                 header("Location:staff.php");
+           }
         }
         ?>
     </div>
@@ -66,7 +67,7 @@ include '../config.php';
         $re = $sql->fetchColumn(PDO::FETCH_ASSOC);
         ?>
         <?php
-        foreach ($re as $row) {
+        foreach (array($sql->fetchArray()) as $row) {
             echo "<div class='roombox'>
 						<div class='text-center no-boder'>
                             <i class='fa fa-users fa-5x'></i>

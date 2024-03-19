@@ -5,8 +5,8 @@ $id = $_GET['id'];
 
 $roomdeletesql = $conn->prepare("DELETE FROM room WHERE id = $id");
 $roomdeletesql->execute();
-$result = $roomdeletesql->fetchColumn(PDO::FETCH_ASSOC);
-
+$resultRoomDelete = $roomdeletesql->fetchColumn(PDO::FETCH_ASSOC);
+if($resultRoomDelete > 0){
 header("Location: room.php");
-
+}
 ?>

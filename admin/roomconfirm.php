@@ -4,7 +4,7 @@ inlcude '../config.php';
 $sql = $conn->prepare("SELECT * FROM roombook");
 $sql->execute();
 $re = $sql->fetchColumn(PDO::FETCH_ASSOC);
-foreach ($re as $row) {
+foreach (array($sql->fetchArray()) as $row) {
     $id = $row['id'];
     $idRoom = $row['idroom'];
     $Name = $row['Name'];
@@ -34,9 +34,9 @@ while ($stat == "NotConfirm") {
     $sql = $conn->prepare("UPDATE roombook SET stat = '$st'  WHERE id = '$id'");
     $sql->execute();
 
-    $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
+    $resultConfirmBooking = $sql->fetchColumn(PDO::FETCH_ASSOC);
 
-    if ($result) {
+    if (array($sql->fetchArray())) {
 
         $type_of_room = 0;
         if ($Roomtype == "Superior Room") {
@@ -80,8 +80,9 @@ while ($stat == "NotConfirm") {
         $psql = $conn->("INSERT INTO payment VALUES ('$id','$idRoom', '$Name', '$Email', '$Roomtype', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot')");
         $psql->execute();
         $psqlresult = $psql->fetchColumn();
-
+        if ($psqlresult > 0){
         header("Location: roombook.php");
+    }
     }
 }
 
