@@ -1,9 +1,9 @@
 <?php
 include './config.php';
-global  $IsAdmin ,$IsUser;
-if($IsAdmin == true){
+global  $IsAdminEntry ,$IsUserEntry;
+if($IsAdminEntry == true){
     header("Location: admin/admin.php");
-}else if($IsUser == true){
+}else if($IsUserEntry == true){
     header("Location: home.php");
 }
 ?>
@@ -73,7 +73,8 @@ if($IsAdmin == true){
                     <button type="submit" name="Emp_login_submit" class="auth_btn">Log in</button>
                 </form>
                 <?php
-                if (isset($_POST['Emp_login_submit'])) {
+                $_POST['Emp_login_submit'] = Array('Emp_Email','Emp_Password');
+                if (array_key_exists('Emp_Email',$_POST['Emp_login_submit'])) {
                     $Email = $_POST['Emp_Email'];
                     $Password = $_POST['Emp_Password'];
 
@@ -81,19 +82,20 @@ if($IsAdmin == true){
                     $sqlResultEmployee ->execute();
                     $resultEmployee = $sqlResultEmployee ->fetchAll(PDO::FETCH_ASSOC);
 
-                    if(!empty($_POST['Emp_login_submit'])) {
+                    if(is_array($_POST['user_login_submit']) and !empty($_POST['Emp_login_submit'])) {
+                        
+                        echo "<script>swal({
+                            title: 'Something went wrong',
+                            icon: 'error',
+                        });
+                        </script>";
+                    } 
+                    else {
                         $_SESSION['usermail'] = $Email;
                         $Email = $_POST[""];
                         $Password = $_POST[""];
-                        $IsAdmin = true;
+                        $IsAdminEntry = true;
                         exit;
-                    } 
-                    else {
-                        echo "<script>swal({
-                                title: 'Something went wrong',
-                                icon: 'error',
-                            });
-                            </script>";
                     }
                 }
                 ?>                
@@ -112,14 +114,14 @@ if($IsAdmin == true){
                 </div>
                 <button type="submit" name="user_login_submit" class="auth_btn">Log in</button>
                 <div class="footer_line">
-                <h6>Don't have an account? <span class="page_move_btn" onclick="signuppage()">sign
-                            up</span>
+                <h6>Don't have an account? <span class="page_move_btn" onclick="signuppage()">sign up</span>
                     </h6>
                 </div>
                 </form>
 
                     <?php
-                    if ($_POST && isset($_POST['user_login_submit'])) {
+                    $_POST['user_login_submit'] = Array('Username','Email','Password');
+                    if (array_key_exists('Email',$_POST['user_login_submit'])) {
                        $Email = $_POST['Email'];
                         $Password = $_POST['Password'];
 
@@ -127,26 +129,26 @@ if($IsAdmin == true){
                         $sqlResultUser->execute();
                         $resultUser = $sqlResultUser->fetchAll(PDO::FETCH_ASSOC);
 
-                        if (!empty($_POST['user_login_submit'])) {
-                            $_SESSION['usermail'] = $Email;
-                            $Email = "";
-                            $Password = "";
-                            $IsUser = true;
-                            exit;
-
-                        } else {
+                        if (is_array($_POST['user_login_submit']) and !empty($_POST['user_login_submit'])) {
                             echo "<script>swal({
                                 title: 'Something went wrong',
                                 icon: 'error',
                             });
                             </script>";
+
+                        } else {
+                            $_SESSION['usermail'] = $Email;
+                            $Email = "";
+                            $Password = "";
+                            $IsUserEntry = true;
+                            exit;
                         }
                     }
                     ?>
                 </div>
 
                 <div id="sign_up">
-                <h2>Sign Up</h2>
+                <h2>SignUp</h2>
 
                 <form class="user_signup" id="usersignup" action="" method="POST">
                    <div class="form-floating">
@@ -166,7 +168,7 @@ if($IsAdmin == true){
                         <label for="CPassword">Confirm Password</label>
                     </div>
 
-                    <button type="submit" name="user_signup_submit" class="auth_btn">Sign up</button>
+                    <button type="submit" name="user_signup_submit" class="auth_btn">SignUp</button>
 
                     <div class="footer_line">
                         <h6>Already have an account? <span class="page_move_btn" onclick="loginpage()">Log in</span>
@@ -175,7 +177,8 @@ if($IsAdmin == true){
                     </form>
 
                         <?php
-                        if ($_POST && isset($_POST['user_signup_submit'])) {
+                        $_POST['user_signup_submit'] = Array('Username','Email','Password','CPassword');
+                        if (array_key_exists('Username',$_POST['user_signup_submit'])) {
                             $Username = $_POST['Username'];
                             $Email = $_POST['Email'];
                             $Password = $_POST['Password'];
@@ -204,20 +207,20 @@ if($IsAdmin == true){
                                         $sqlResultUser->execute([$_POST['user_signup_submit']]);
                                         $resultUserSignup = $sqlResultUser->fetchAll(PDO::FETCH_ASSOC);
 
-                                        if (!empty($_POST['user_signup_submit'])) {
+                                        if(is_array($_POST['user_login_submit']) and !empty($_POST['user_signup_submit'])) {
+                                            echo "<script>swal({
+                                                title: 'Something went wrong',
+                                                icon: 'error',
+                                            });
+                                            </script>";
+                                        } else {
                                             $_SESSION['usermail'] = $Email;
                                             $Username = "";
                                             $Email = "";
                                             $Password = "";
                                             $CPassword = "";
-                                            //$IsUser = true;
+                                            //$IsUserEntry = true;
                                             //exit
-                                        } else {
-                                            echo "<script>swal({
-                                                    title: 'Something went wrong',
-                                                    icon: 'error',
-                                                });
-                                                </script>";
                                         }
                                     }
                                 } else {

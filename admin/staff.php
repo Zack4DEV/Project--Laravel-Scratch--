@@ -44,7 +44,8 @@ include '../config.php';
         </form>
 
         <?php
-        if ($_POST && isset($_POST['addstaff'])) {
+        $_POST['addstaff'] = Array('staffname','staffwork');
+        if (array_key_exists('staffname',$_POST['addstaff'])) {
             $staffname = $_POST['staffname'];
             $staffwork = $_POST['staffwork'];
 

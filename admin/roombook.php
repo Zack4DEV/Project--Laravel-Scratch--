@@ -192,7 +192,8 @@ if ($f5 <= 0) {
 
         <!-- ==== room book php ====-->
         <?php
-if ($_POST && isset($_POST['guestdetailsubmit'])) {
+$_POST['guestdetailsubmit'] = Array('Name', 'Email', 'Country', 'Phone', 'roomtype', 'Bed', 'NoofRoom','Meal','cin','cout');
+if (array_key_exists('Name',$_POST['guestdetailsubmit'])) {
     $Name = $_POST['Name'];
     $Email = $_POST['Email'];
     $Country = $_POST['Country'];

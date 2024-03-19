@@ -43,7 +43,8 @@ include('../config.php');
         </form>
 
         <?php
-        if (isset($_POST && $_POST['addroom'])) {
+        $_POST['addroom'] = Array('troom','bed');
+        if (array_key_exists('troom',$_POST['addroom'])) {
             $typeofroom = $_POST['troom'];
             $typeofbed = $_POST['bed'];
 

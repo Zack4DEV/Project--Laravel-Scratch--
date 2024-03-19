@@ -17,8 +17,8 @@ foreach ($re as $row) {
     $noofday = $row['nodays'];
     $stat = $row['stat'];
 }
-
-if ($_POST && isset($_POST['guestdetailedit'])) {
+$_POST['guestdetailedit'] = Array('Name','Email','Country','Phone','cin','cout','noofday','stat');
+if (array_key_exists('Name',$_POST['guestdetailedit'])) {
     $EditName = $_POST['Name'];
     $EditEmail = $_POST['Email'];
     $EditCountry = $_POST['Country'];
