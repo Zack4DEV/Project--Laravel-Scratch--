@@ -7,7 +7,7 @@ $idRoom = $_GET['idroom'];
 $deletesql = $conn->prepare("DELETE FROM roombook WHERE id = $id");
 $deletesql->execute();
 
-$result = $deletesql->fetchAll();
+$result = $deletesql->fetchColumn();
 
 header("Location: roombook.php");
 

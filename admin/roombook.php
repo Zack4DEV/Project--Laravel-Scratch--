@@ -111,7 +111,7 @@ inlucde('../config.php');
 
 $rsql = $conn->prepare("SELECT type FROM room");
 $rsql->execute();
-$rre = $rsql->fetchAll(PDO::FETCH_ASSOC);
+$rre = $rsql->fetchColumn(PDO::FETCH_ASSOC);
 $r = 0;
 $sc = 0;
 $gh = 0;
@@ -137,7 +137,7 @@ foreach ($rre as $rrow )) {
 
 $csql = $conn->prepare("SELECT roomtype FROM payment");
 $csql->execute();
-$cre = $csql->fetchAll();
+$cre = $csql->fetchColumn();
 $cr = 0;
 $csc = 0;
 $cgh = 0;
@@ -192,8 +192,7 @@ if ($f5 <= 0) {
 
         <!-- ==== room book php ====-->
         <?php
-$_POST['guestdetailsubmit'] = Array('Name', 'Email', 'Country', 'Phone', 'roomtype', 'Bed', 'NoofRoom','Meal','cin','cout');
-if (array_key_exists('Name',$_POST['guestdetailsubmit'])) {
+if (isset($_POST['guestdetailsubmit'])) {
     $Name = $_POST['Name'];
     $Email = $_POST['Email'];
     $Country = $_POST['Country'];
@@ -215,7 +214,7 @@ if (array_key_exists('Name',$_POST['guestdetailsubmit'])) {
         $sta = "NotConfirm";
         $sql = $conn->prepare("INSERT INTO roombook[(idroom,Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays)] VALUES ('$idroom','$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
         $sql->execute([$_POST['guestdetailsubmit']]);
-        $result = $sql->fetchAll();
+        $result = $sql->fetchColumn();
 
         // if($f1=="NO")
         // {
@@ -284,7 +283,7 @@ if (array_key_exists('Name',$_POST['guestdetailsubmit'])) {
 
 $roombooktablesql = $conn->prepare("SELECT * FROM roombook");
 $roombooktablesql->execute([$_POST['guestdetailsubmit']]);
-$roombookresult = $roombooktablesql->fetchAll(PDO::FETCH_ASSOC);
+$roombookresult = $roombooktablesql->fetchColumn(PDO::FETCH_ASSOC);
 $nums = $roombookresult->columnCount();
 
 

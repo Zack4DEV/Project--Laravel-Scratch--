@@ -4,47 +4,47 @@ inlcude('../config.php');
 // roombook
 $roombooksql = $conn->prepare("SELECT * FROM roombook");
 $roombooksql->execute();
-$roombookre = $roombook->fetchAll(PDO::FETCH_ASSOC);
+$roombookre =  $roombook->fetchColumn(PDO::FETCH_ASSOC);
 $roombookrow = $roombookre-columnCount();
 
 // staff
 $staffsql = $conn->prepare("SELECT * FROM staff");
 $staffsql->execute();
-$staffre = $staff->fetchAll(PDO::FETCH_ASSOC);
+$staffre = $staff->fetchColumn(PDO::FETCH_ASSOC);
 $staffrow = $staffre->columnCount();
 
 // room
 $roomsql = $conn->prepare("SELECT * FROM room");
 $roomsql->execute();
-$roomre = $roomsql->fetchAll(PDO::FETCH_ASSOC);
+$roomre = $roomsql->fetchColumn(PDO::FETCH_ASSOC);
 $roomrow = $roomre->columnCount();
 
 //roombook roomtype
 $chartroom1 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Superior Room'");
 $chartroom1->execute();
-$chartroom1re = $chartroom1->fetchAll(PDO::FETCH_ASSOC);
+$chartroom1re = $chartroom1->fetchColumn(PDO::FETCH_ASSOC);
 $chartroom1row = $chartroom1re->columnCount();
 
 $chartroom2 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Deluxe Room'");
 $chartroom2->execute();
-$chartroom2re = $chartroom2->fetchAll(PDO::FETCH_ASSOC);
+$chartroom2re = $chartroom2->fetchColumn(PDO::FETCH_ASSOC);
 $chartroom2row = $chartroom2re->columnCount();
 
 $chartroom3 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Guest House'");
 $chartroom3->execute();
-$chartroom3re = $chartroom3->fetchAll(PDO::FETCH_ASSOC);
+$chartroom3re = $chartroom3->fetchColumn(PDO::FETCH_ASSOC);
 $chartroom3row = $chartroom3re->columnCount();
 
 $chartroom4 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Single Room'");
 $chartroom4->execute();
-$chartroom4re = $chartroom4->fetchAll(PDO::FETCH_ASSOC);
+$chartroom4re = $chartroom4->fetchColumn(PDO::FETCH_ASSOC);
 $chartroom4row = $chartroom4re->columnCount();
 ?>
 <!--moriss profit -->
 <?php
 $query = $conn->prepare("SELECT cout,finaltotal FROM payment");
 $query->execute();
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
+$result = $query->fetchColumn(PDO::FETCH_ASSOC);
 $chart_data = '';
 $tot = 0;
 foreach ($result as $row) {

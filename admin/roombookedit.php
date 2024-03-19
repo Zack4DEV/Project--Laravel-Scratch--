@@ -6,7 +6,7 @@ $id = $_GET['id'];
 
 $sql = $conn->prepare("SELECT * FROM roombook WHERE id = '$id'");
 $sql->execute();
-$re = $sql->fetchAll();
+$re = $sql->fetchColumn();
 foreach ($re as $row) {
     $Name = $row['Name'];
     $Email = $row['Email'];
@@ -17,8 +17,7 @@ foreach ($re as $row) {
     $noofday = $row['nodays'];
     $stat = $row['stat'];
 }
-$_POST['guestdetailedit'] = Array('Name','Email','Country','Phone','cin','cout','noofday','stat');
-if (array_key_exists('Name',$_POST['guestdetailedit'])) {
+if (isset($_POST['guestdetailedit'])) {
     $EditName = $_POST['Name'];
     $EditEmail = $_POST['Email'];
     $EditCountry = $_POST['Country'];
@@ -33,7 +32,7 @@ if (array_key_exists('Name',$_POST['guestdetailedit'])) {
     $sql = $conn->prepare("UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = datediff('$Editcout','$Editcin') WHERE id = '$id'");
 
     $sql->execute([$_POST['guestdetailedit']]);
-    $result = $sql->fetchAll();
+    $result = $sql->fetchColumn();
 
     $type_of_room = 0;
     if ($Editroomtype == "Superior Room") {
@@ -70,15 +69,15 @@ if (array_key_exists('Name',$_POST['guestdetailedit'])) {
     // noofday update
     $psql = $conn->prepare("SELECT * FROM roombook WHERE id = '$id'");
     $psql->execute();
-    $presult = $psql->fetchAll();
+    $presult = $psql->fetchColumn();
     $prow = $presult;
     $ndays = $conn->prepare("SELECT nodays FROM roombook");
     $ndays->execute();
-    $ndaysedited = $ndays->fetchAll(PDO::FETCH_ASSOC);
+    $ndaysedited = $ndays->fetchColumn(PDO::FETCH_ASSOC);
     $Editnoofday = $prow[$ndaysedited];
     $nroom = $conn->prepare("SELECT roomtotal FROM roombook");
     $nroom->execute();
-    $nroomedited = $nroom->fetchAll(PDO::FETCH_ASSOC);
+    $nroomedited = $nroom->fetchColumn(PDO::FETCH_ASSOC);
     $EditNoofRoom = $prow[$nroomedited];
 
     $editttot = $type_of_room * $Editnoofday * $EditNoofRoom;
@@ -89,7 +88,7 @@ if (array_key_exists('Name',$_POST['guestdetailedit'])) {
 
     $psql = $conn->prepare("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
     $psql->execute([$_POST['guestdetailedit']]);
-    $paymentresult = $psql->fetchAll(PDO::FETCH_ASSOC);
+    $paymentresult = $psql->fetchColumn(PDO::FETCH_ASSOC);
         header("Location: roombook.php");
 }
 ?>

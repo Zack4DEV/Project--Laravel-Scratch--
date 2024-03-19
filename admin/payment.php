@@ -34,7 +34,7 @@ include '../config.php';
         <?php
         $paymanttablesql = $conn->prepare("SELECT * FROM payment");
         $paymanttablesql->execute();
-        $paymantresult = $paymanttablesql->fetchAll(PDO::FETCH_ASSOC);
+        $paymantresult = $paymanttablesql->fetchColumn(PDO::FETCH_ASSOC);
 
 $nums = $paymantresult->columnCount();
 ?>

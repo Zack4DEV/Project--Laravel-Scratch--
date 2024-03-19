@@ -44,14 +44,13 @@ include '../config.php';
         </form>
 
         <?php
-        $_POST['addstaff'] = Array('staffname','staffwork');
-        if (array_key_exists('staffname',$_POST['addstaff'])) {
+        if (isset($_POST['addstaff'])) {
             $staffname = $_POST['staffname'];
             $staffwork = $_POST['staffwork'];
 
             $sql = $conn->prepare("INSERT INTO staff[(name,work)] VALUES ('$staffname', '$staffwork')");
             $sql->execute([$_POST['addstaff']]);
-            $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+            $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
 
                 header("Location:staff.php");
         }
@@ -64,7 +63,7 @@ include '../config.php';
         <?php
         $sql = $conn->prepare("SELECT * FROM staff");
         $sql->execute()
-        $re = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $re = $sql->fetchColumn(PDO::FETCH_ASSOC);
         ?>
         <?php
         foreach ($re as $row) {

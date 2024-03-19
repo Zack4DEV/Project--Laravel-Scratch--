@@ -3,7 +3,7 @@ inlcude '../config.php';
 
 $sqlq = $conn->prepare("SELECT * FROM roombook");
 $sqlq->execute([$_POST["exportexcel"]]);
-$result = $sqlq->fetchAll(PDO::FETCH_ASSOC);
+$result = $sqlq->fetchColumn(PDO::FETCH_ASSOC);
 $roombook_record = array();
 
 foreach( $result as $rows){
