@@ -42,7 +42,7 @@ $chartroom4row = $chartroom4re->columnCount();
 ?>
 <!--moriss profit -->
 <?php
-$query = $conn->prepare("SELECT cout,finaltotal FROM payment");
+$query = $conn->prepare("SELECT * FROM payment");
 $query->execute();
 $result = $query->fetchColumn(PDO::FETCH_ASSOC);
 $chart_data = '';

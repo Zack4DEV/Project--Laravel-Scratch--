@@ -1,11 +1,13 @@
 <?php
 include './config.php';
 global  $IsAdminEntry ,$IsUserEntry;
+/**
 if($IsAdminEntry == true){
     header("Location: admin/admin.php");
 }else if($IsUserEntry == true){
     header("Location: home.php");
 }
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,8 +79,8 @@ if($IsAdminEntry == true){
                     $Email = $_POST['Emp_Email'];
                     $Password = $_POST['Emp_Password'];
 
-                    $sqlResultEmployee = $conn->prepare("SELECT * FROM emp_login");
-                    $sqlResultEmployee ->execute();
+                    $sqlResultEmployee = $conn->prepare("SELECT * FROM emp_login WHERE Emp_Email = '$Email' AND Emp_Password = BINARY'$Password'");
+                    $sqlResultEmployee->execute();
                     $resultEmployee = $sqlResultEmployee->fetchColumn(PDO::FETCH_ASSOC);
                     while($resultEmployee > 0){
                     $IsAdminEntry = true;
@@ -86,7 +88,6 @@ if($IsAdminEntry == true){
                         $_SESSION['usermail'] = $Email;
                         $Email = "";
                         $Password = "";
-                        exit;
                   }
                 }
                 }
@@ -144,7 +145,7 @@ if($IsAdminEntry == true){
                         $Email = $_POST['Email'];
                         $Password = $_POST['Password'];
 
-                        $sqlResultUser = $conn->prepare("SELECT * FROM signup");
+                        $sqlResultUser = $conn->prepare("SELECT * FROM signup  WHERE Email = '$Email'");
                         $sqlResultUser->execute();
                         $resultUser = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
 
@@ -162,7 +163,6 @@ if($IsAdminEntry == true){
                             $_SESSION['usermail'] = $Email;
                             $Email = "";
                             $Password = "";
-                            exit;
                         }
                     }
                     if (null !== isset($_POST['user_signup_submit'])) {
@@ -173,7 +173,7 @@ if($IsAdminEntry == true){
 
                             if ($Username != "" && $Email != "" && $Password != "") {
                                 if ($Password == $CPassword) {
-                                    $sqlResultUser = $conn->prepare("SELECT * FROM signup");
+                                    $sqlResultUser = $conn->prepare("SELECT * FROM signup WHERE Email = '$Email'");
                                     $sqlResultUser->execute();
                                     $resultUserSignup = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
 

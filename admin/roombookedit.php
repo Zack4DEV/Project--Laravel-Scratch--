@@ -71,7 +71,7 @@ if (isset($_POST['guestdetailedit'])) {
     $psql->execute();
     $presult = $psql->fetchColumn();
     $prow = $presult;
-    $ndays = $conn->prepare("SELECT nodays FROM roombook");
+    $ndays = $conn->prepare("SELECT * FROM roombook where id = '$id'");
     $ndays->execute();
     $ndaysedited = $ndays->fetchColumn(PDO::FETCH_ASSOC);
     $Editnoofday = $prow[$ndaysedited];

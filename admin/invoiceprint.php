@@ -385,7 +385,7 @@
 
 	$id = $_GET['id'];
 
-	$sql = $conn->prepare("SELECT * FROM payment");
+	$sql = $conn->prepare("SELECT * FROM payment  where id = '$id' ");
 	$sql->execute();
 	$re = $sql->fetchColumn(PDO::FETCH_ASSOC);
 	foreach (array($sql->fetchArray()) as $row) {

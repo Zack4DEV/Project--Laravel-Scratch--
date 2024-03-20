@@ -1,7 +1,7 @@
 <?php
 inlcude '../config.php';
 
-$sql = $conn->prepare("SELECT * FROM roombook");
+$sql = $conn->prepare("SELECT * FROM roombook where id = '$id'");
 $sql->execute();
 $re = $sql->fetchColumn(PDO::FETCH_ASSOC);
 foreach (array($sql->fetchArray()) as $row) {
