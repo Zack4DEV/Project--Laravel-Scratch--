@@ -87,7 +87,7 @@ if (isset($_POST['guestdetailedit'])) {
     $editfintot = $editttot + $editmepr + $editbtot;
 
     $psql = $conn->prepare("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
-    $psql->execute([$_POST['guestdetailedit']]);
+    $psql->execute();
     $paymentResult = $psql->fetchColumn(PDO::FETCH_ASSOC);
      if($paymentResult > 0){
         header("Location: roombook.php");
@@ -147,7 +147,7 @@ if (isset($_POST['guestdetailedit'])) {
         <form method="POST" class="guestdetailpanelform">
             <div class="head">
                 <h3>EDIT RESERVATION</h3>
-                <a href="./roombook"><i class="fa-solid fa-circle-xmark"></i></a>
+                <a href="./roombook.php"><i class="fa-solid fa-circle-xmark"></i></a>
             </div>
             <div class="middle">
                 <div class="guestinfo">

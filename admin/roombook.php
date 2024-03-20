@@ -272,7 +272,7 @@ if (isset($_POST['guestdetailsubmit'])) {
     <div class="searchsection">
         <input  type="text" name="search_bar" id="search_bar" placeholder="search..." onkeyup="searchFun()">
         <button class="adduser" id="adduser" onclick="adduseropen()"><i class="fa-solid fa-bookmark"></i>Add</button>
-        <form action="./exportdata" method="post">
+        <form action="./exportdata.php" method="post">
             <button class="exportexcel" id="exportexcel" name="exportexcel" type="submit"><i
                     class="fa-solid fa-file-arrow-down"></i></button>
         </form>
@@ -363,12 +363,12 @@ $nums = $roombookresult->columnCount();
                     if ($res['stat'] == "Confirm") {
                         echo " ";
                     } else {
-                        echo "<a href='roomconfirm?id=" . $res['id'] . "'><button class='btn btn-success'>Confirm</button></a>";
+                        echo "<a href='roomconfirm.php?id=" . $res['id'] . "'><button class='btn btn-success'>Confirm</button></a>";
                     }
             ?>
-                            <a href="roombookedit?id=<?php echo $res['id'] ?>"><button
+                            <a href="roombookedit.php?id=<?php echo $res['id'] ?>"><button
                                     class="btn btn-primary">Edit</button></a>
-                            <a href="roombookdelete?id=<?php echo $res['id'] ?>"><button
+                            <a href="roombookdelete.php?id=<?php echo $res['id'] ?>"><button
                                     class='btn btn-danger'>Delete</button></a>
                         </td>
                     </tr>

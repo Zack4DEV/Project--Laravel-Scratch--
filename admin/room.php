@@ -72,7 +72,7 @@ include('../config.php');
                             <i class='fa-solid fa-bed fa-4x mb-2'></i>
 							<h3>" . $row['type'] . "</h3>
                             <div class='mb-1'>" . $row['bedding'] . "</div>
-                            <a href='roomdelete?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                            <a href='roomdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
 						</div>
                     </div>";
             } else if ($id == "Deluxe Room") {
@@ -81,7 +81,7 @@ include('../config.php');
                         <i class='fa-solid fa-bed fa-4x mb-2'></i>
                         <h3>" . $row['type'] . "</h3>
                         <div class='mb-1'>" . $row['bedding'] . "</div>
-                        <a href='roomdelete?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                        <a href='roomdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
                     </div>
                     </div>";
             } else if ($id == "Guest House") {
@@ -90,7 +90,7 @@ include('../config.php');
                 <i class='fa-solid fa-bed fa-4x mb-2'></i>
 							<h3>" . $row['type'] . "</h3>
                             <div class='mb-1'>" . $row['bedding'] . "</div>
-                            <a href='roomdelete?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                            <a href='roomdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
 					</div>
             </div>";
             } else if ($id == "Single Room") {
@@ -99,7 +99,7 @@ include('../config.php');
                         <i class='fa-solid fa-bed fa-4x mb-2'></i>
                         <h3>" . $row['type'] . "</h3>
                         <div class='mb-1'>" . $row['bedding'] . "</div>
-                        <a href='roomdelete?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                        <a href='roomdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
                     </div>
                     </div>";
             }

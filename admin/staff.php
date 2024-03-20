@@ -49,7 +49,7 @@ include '../config.php';
             $staffwork = $_POST['staffwork'];
 
             $sql = $conn->prepare("INSERT INTO staff[(name,work)] VALUES ('$staffname', '$staffwork')");
-            $sql->execute([$_POST['addstaff']]);
+            $sql->execute();
             $resultStaffAdd = $sql->fetchColumn(PDO::FETCH_ASSOC);
             if ($resultStaffAdd > 0)
                 header("Location:staff.php");
@@ -73,7 +73,7 @@ include '../config.php';
                             <i class='fa fa-users fa-5x'></i>
 							<h3>" . $row['name'] . "</h3>
                             <div class='mb-1'>" . $row['work'] . "</div>
-                            <a href='staffdelete?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                            <a href='staffdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
 						</div>
                     </div>";
         }

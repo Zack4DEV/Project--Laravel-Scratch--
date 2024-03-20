@@ -442,7 +442,7 @@
 		<h1>Invoice</h1>
 		<address>
 			<p>HOTEL,</p>
-			<p>(+212)5-37809882</p>
+			<p>(+33)5-00000000</p>
 		</address>
 		<span><img alt="" src="../image/logo.jpg"></span>
 	</header>
@@ -515,7 +515,7 @@
 	<aside>
 		<h1><span>Contact us</span></h1>
 		<div>
-			<p align="center">Email :- hotel@gmail.com || Web :- www.hotel.com || Phone :- (+212)5-37809882 </p>
+			<p align="center">Email :- booking@z-hotel.uk || Web :- www.z-hotel.uk || Phone :- (+33)5-00000000 </p>
 		</div>
 	</aside>
 

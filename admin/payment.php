@@ -108,9 +108,9 @@ include '../config.php';
                             <?php echo $res['finaltotal'] ?>
                         </td>
                         <td class="action">
-                            <a href="invoiceprint?id= <?php echo $res['id'] ?>"><button class="btn btn-primary"><i
+                            <a href="invoiceprint.php?id= <?php echo $res['id'] ?>"><button class="btn btn-primary"><i
                                         class="fa-solid fa-print"></i>Print</button></a>
-                            <!-- <a href="paymantdelete?id=<?php echo $res['id'] ?>"><button class="btn btn-danger">Delete</button></a> -->
+                            <!-- <a href="paymantdelete.php?id=<?php echo $res['id'] ?>"><button class="btn btn-danger">Delete</button></a> -->
                         </td>
                     </tr>
                     <?php
