@@ -1,6 +1,7 @@
 <?php
-inlcude('./config.php');
-
+include 'config.php';
+session_start();
+$id = $_SESSION['id'];
 // page redirect
 $usermail = "";
 $usermail = $_SESSION['usermail'];
@@ -48,15 +49,15 @@ if ($usermail == true) {
 <body>
   <nav>
     <div class="logo">
-      <img class="hotellogo" src="./image/hotellogo.png" alt="">
+     <!-- <img class="hotellogo" src="image/hotellogo.png" alt=""> -->
       <p>Hotel</p>
     </div>
     <ul>
-      <li><a href="#firstsection">Home</a></li>
-      <li><a href="#secondsection">Rooms</a></li>
-      <li><a href="#thirdsection">Facilites</a></li>
-      <li><a href="#contactus">contact us</a></li>
-      <a href="./logout"><button class="btn btn-danger">Logout</button></a>
+      <li><a href="#Showroom">Home</a></li>
+      <li><a href="#Booking">Rooms</a></li>
+      <li><a href="#Facilities">Facilites</a></li>
+      <li><a href="#Contact">contact us</a></li>
+      <a href="logout.php"><button class="btn btn-danger">Logout</button></a>
     </ul>
   </nav>
 
@@ -156,7 +157,7 @@ if ($usermail == true) {
         <!-- ==== room book php ====-->
         <?php
         if (isset($_POST['guestdetailsubmit'])) {
-          $Name = $_POST['Name'];
+	  $Name = $_POST['Name'];
           $Email = $_POST['Email'];
           $Country = $_POST['Country'];
           $Phone = $_POST['Phone'];
@@ -175,12 +176,10 @@ if ($usermail == true) {
                     </script>';
           } else {
             $sta = "NotConfirm";
-            $sql = $conn->prepare("INSERT INTO roombook[(Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays)] VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
-            $sql->execute();
-            $resultUserBooking = $sql->fetchColumn(PDO::FETCH_ASSOC);
-
-
-            if ($resultUserBooking > 0) {
+                  $sql = $conn->query("INSERT INTO roombook  VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',date_diff('$cout','$cin'))");
+		 $sql->execute();
+	   $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
+            if ($result > 0) {
               echo '<script>swal({
                                 title: "Reservation successful",
                                 icon: "success",

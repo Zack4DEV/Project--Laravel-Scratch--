@@ -1,13 +1,14 @@
 <?php
+
 inlcude '../config.php';
 
 // fetch room data
 $id = $_GET['id'];
 
-$sql = $conn->prepare("SELECT * FROM roombook WHERE id = '$id'");
+$sql = $conn->query("SELECT * FROM roombook WHERE id = '$id'");
 $sql->execute();
 $re = $sql->fetchColumn();
-foreach (array($sql->fetchArray()) as $row) {
+foreach ($re as $row) {
     $Name = $row['Name'];
     $Email = $row['Email'];
     $Country = $row['Country'];
@@ -18,6 +19,7 @@ foreach (array($sql->fetchArray()) as $row) {
     $stat = $row['stat'];
 }
 if (isset($_POST['guestdetailedit'])) {
+    $EditId = $_SESSION['id'];
     $EditName = $_POST['Name'];
     $EditEmail = $_POST['Email'];
     $EditCountry = $_POST['Country'];
@@ -29,10 +31,10 @@ if (isset($_POST['guestdetailedit'])) {
     $Editcin = $_POST['cin'];
     $Editcout = $_POST['cout'];
 
-    $sql = $conn->prepare("UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = datediff('$Editcout','$Editcin') WHERE id = '$id'");
+    $sql = $conn->query("UPDATE roombook SET id = '$EditId' Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = datediff('$Editcout','$Editcin') WHERE id = '$id'");
 
-    $sql->execute([$_POST['guestdetailedit']]);
-    $resultEditBooking = $sql->fetchColumn();
+    $sql->execute();
+    $result = $sql->fetchColumn();
 
     $type_of_room = 0;
     if ($Editroomtype == "Superior Room") {
@@ -67,15 +69,15 @@ if (isset($_POST['guestdetailedit'])) {
     }
 
     // noofday update
-    $psql = $conn->prepare("SELECT * FROM roombook WHERE id = '$id'");
+    $psql = $conn->query("SELECT * FROM roombook WHERE id = '$id'");
     $psql->execute();
     $presult = $psql->fetchColumn();
     $prow = $presult;
-    $ndays = $conn->prepare("SELECT * FROM roombook where id = '$id'");
+    $ndays = $conn->query("SELECT * FROM roombook where id = '$id'");
     $ndays->execute();
     $ndaysedited = $ndays->fetchColumn(PDO::FETCH_ASSOC);
     $Editnoofday = $prow[$ndaysedited];
-    $nroom = $conn->prepare("SELECT roomtotal FROM roombook");
+    $nroom = $conn->query("SELECT roomtotal FROM roombook");
     $nroom->execute();
     $nroomedited = $nroom->fetchColumn(PDO::FETCH_ASSOC);
     $EditNoofRoom = $prow[$nroomedited];
@@ -86,7 +88,7 @@ if (isset($_POST['guestdetailedit'])) {
 
     $editfintot = $editttot + $editmepr + $editbtot;
 
-    $psql = $conn->prepare("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
+    $psql = $conn->query("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
     $psql->execute();
     $paymentResult = $psql->fetchColumn(PDO::FETCH_ASSOC);
      if($paymentResult > 0){

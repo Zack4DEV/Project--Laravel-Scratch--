@@ -5,7 +5,7 @@
 	<title>Invoice</title>
 	<link rel="stylesheet" href="css/admin.css">
 	<link rel="license" href="https://www.opensource.org/licenses/mit-license/">
-	<script type="module" src="javascript/script.js"></script>
+	<script src="javascript/script.js"></script>
 	<style>
 		/* reset */
 
@@ -380,15 +380,15 @@
 
 
 	<?php
-  include '../config.php';
-  ob_start();
+  	include '../config.php';
+  	ob_start();
 
 	$id = $_GET['id'];
 
-	$sql = $conn->prepare("SELECT * FROM payment  where id = '$id' ");
+	$sql = $conn->query("SELECT * FROM payment  where id = '$id' ");
 	$sql->execute();
 	$re = $sql->fetchColumn(PDO::FETCH_ASSOC);
-	foreach (array($sql->fetchArray()) as $row) {
+	foreach ($re as $row) {
 	    $id = $row['id'];
 	    $idroom = $row['idroom'];
 	    $Name = $row['Name'];

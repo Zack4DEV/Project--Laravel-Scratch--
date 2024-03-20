@@ -3,10 +3,10 @@ inlcude '../config.php';
 
 $id = $_GET['id'];
 
-$roomdeletesql = $conn->prepare("DELETE FROM room WHERE id = $id");
+$roomdeletesql = $conn->query("DELETE FROM room WHERE id = $id");
 $roomdeletesql->execute();
-$resultRoomDelete = $roomdeletesql->fetchColumn(PDO::FETCH_ASSOC);
-if($resultRoomDelete > 0){
+$result = $roomdeletesql->fetchColumn(PDO::FETCH_ASSOC);
+if($result > 0){
 header("Location: room.php");
 }
 ?>

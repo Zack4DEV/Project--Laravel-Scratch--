@@ -1,12 +1,12 @@
 <?php
-inlcude '../config.php';
+include '../config.php';
 
-$sqlq = $conn->prepare("SELECT * FROM roombook");
+$sqlq = $conn->query("SELECT * FROM roombook");
 $sqlq->execute();
-$resulExportData = $sqlq->fetchArray(PDO::FETCH_ASSOC);
+$result = $sqlq->fetchColumn(PDO::FETCH_ASSOC);
 $roombook_record = array();
 
-foreach( $resulExportData as $rows){
+foreach( $result as $rows){
     $roombook_record[] = $rows;
 }
 

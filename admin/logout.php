@@ -1,6 +1,4 @@
 <?php
-    
-    session_write_close();
-
-    header("Location ../index.php");
+    session_start();
+    include '../config.php';
 ?>

@@ -1,53 +1,54 @@
 <?php
-inlcude('../config.php');
+session_start();
+require_once '../config.php';
 
 // roombook
-$roombooksql = $conn->prepare("SELECT * FROM roombook");
+$roombooksql = $conn->query("SELECT * FROM roombook");
 $roombooksql->execute();
-$roombookre =  $roombook->fetchColumn(PDO::FETCH_ASSOC);
-$roombookrow = $roombookre-columnCount();
+$roombookre =  $roombooksql->fetchColumn(PDO::FETCH_ASSOC);
+$roombookrow = $roombookre->count();
 
 // staff
-$staffsql = $conn->prepare("SELECT * FROM staff");
+$staffsql = $conn->query("SELECT * FROM staff");
 $staffsql->execute();
-$staffre = $staff->fetchColumn(PDO::FETCH_ASSOC);
-$staffrow = $staffre->columnCount();
+$staffre = $staffsql->fetchColumn(PDO::FETCH_ASSOC);
+$staffrow = $staffre->count();
 
 // room
-$roomsql = $conn->prepare("SELECT * FROM room");
+$roomsql = $conn->query("SELECT * FROM room");
 $roomsql->execute();
-$roomre = $roomsql->fetchColumn(PDO::FETCH_ASSOC);
-$roomrow = $roomre->columnCount();
+$roomre = $roomsqlsql->fetchColumn(PDO::FETCH_ASSOC);
+$roomrow = $roomre->count();
 
 //roombook roomtype
-$chartroom1 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Superior Room'");
+$chartroom1 = $conn->query("SELECT * FROM roombook WHERE roomtype = 'Superior Room'");
 $chartroom1->execute();
 $chartroom1re = $chartroom1->fetchColumn(PDO::FETCH_ASSOC);
-$chartroom1row = $chartroom1re->columnCount();
+$chartroom1row = $chartroom1re->count();
 
-$chartroom2 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Deluxe Room'");
+$chartroom2 = $conn->query("SELECT * FROM roombook WHERE roomtype = 'Deluxe Room'");
 $chartroom2->execute();
 $chartroom2re = $chartroom2->fetchColumn(PDO::FETCH_ASSOC);
-$chartroom2row = $chartroom2re->columnCount();
+$chartroom2row = $chartroom2re->count();
 
-$chartroom3 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Guest House'");
+$chartroom3 = $conn->query("SELECT * FROM roombook WHERE roomtype = 'Guest House'");
 $chartroom3->execute();
 $chartroom3re = $chartroom3->fetchColumn(PDO::FETCH_ASSOC);
-$chartroom3row = $chartroom3re->columnCount();
+$chartroom3row = $chartroom3re->count();
 
-$chartroom4 = $conn->prepare("SELECT * FROM roombook WHERE roomtype = 'Single Room'");
+$chartroom4 = $conn->query("SELECT * FROM roombook WHERE roomtype = 'Single Room'");
 $chartroom4->execute();
 $chartroom4re = $chartroom4->fetchColumn(PDO::FETCH_ASSOC);
-$chartroom4row = $chartroom4re->columnCount();
+$chartroom4row = $chartroom4re->count();
 ?>
 <!--moriss profit -->
 <?php
-$query = $conn->prepare("SELECT * FROM payment");
+$query = $conn->query("SELECT * FROM payment");
 $query->execute();
 $result = $query->fetchColumn(PDO::FETCH_ASSOC);
 $chart_data = '';
 $tot = 0;
-foreach (array($query->fetchArray(PDO::FETCH_ASSOC)) as $row) {
+foreach ($result as $row) {
     $chart_data .= "{ date:'" . $row["cout"] . "', profit:" . $row["finaltotal"] * 10 / 100 . "}, ";
     $tot = $tot + $row["finaltotal"] * 10 / 100;
 }

@@ -1,6 +1,6 @@
 <?php
-
-inlucde('../config.php');
+session_start();
+require_once '../config.php';
 ?>
 
 <!DOCTYPE html>
@@ -107,18 +107,18 @@ inlucde('../config.php');
 
 
         <?php
-// <!-- room availablity start-->
 
-$rsql = $conn->prepare("SELECT type FROM room");
+$rsql = $conn->query("SELECT type FROM room");
 $rsql->execute();
-$rre = $rsql->fetchArray(PDO::FETCH_ASSOC);
+$rre = $rsql->fetchColumn(PDO::FETCH_ASSOC);
 $r = 0;
 $sc = 0;
 $gh = 0;
 $sr = 0;
 $dr = 0;
-
-foreach ($rre as $rrow )) {
+?>
+<?
+foreach ($rre as $rrow ) {
     $r = $r + 1;
     $s = $rrow['type'];
     if ($s == "Superior Room") {
@@ -135,9 +135,9 @@ foreach ($rre as $rrow )) {
     }
 }
 
-$csql = $conn->prepare("SELECT roomtype FROM payment");
+$csql = $conn->query("SELECT roomtype FROM payment");
 $csql->execute();
-$cre = $csql->fetchArray(PDO::FETCH_ASSOC);
+$cre = $csql->fetchColumn(PDO::FETCH_ASSOC);
 $cr = 0;
 $csc = 0;
 $cgh = 0;
@@ -212,9 +212,9 @@ if (isset($_POST['guestdetailsubmit'])) {
                     </script>';
     } else {
         $sta = "NotConfirm";
-        $sql = $conn->prepare("INSERT INTO roombook[(idroom,Name,Email,Country,Phone,roomtype,Bed,NoofRoom,Meal,cin,cout,stat,nodays)] VALUES ('$idroom','$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',datediff('$cout','$cin'))");
+        $sql = $conn->query("INSERT INTO roombook  VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',date_diff('$cout','$cin'))");
         $sql->execute();
-        $resultConfirmBooking = $sql->fetchArray(PDO::FETCH_ASSOC);
+        $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
 
         // if($f1=="NO")
         // {
@@ -281,10 +281,10 @@ if (isset($_POST['guestdetailsubmit'])) {
     <div class="roombooktable" class="table-responsive-xl">
         <?php
 
-$roombooktablesql = $conn->prepare("SELECT * FROM roombook");
-$roombooktablesql->execute();
-$roombookresult = $roombooktablesql->fetchArray(PDO::FETCH_ASSOC);
-$nums = $roombookresult->columnCount();
+$rtsql = $conn->query("SELECT * FROM roombook");
+$rtsql->execute();
+$roombookresult = $rtsql->fetchColumn(PDO::FETCH_ASSOC);
+$nums = $roombookresult->count();
 
 
 ?>
@@ -292,7 +292,6 @@ $nums = $roombookresult->columnCount();
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Room Nº</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Country</th>
@@ -312,74 +311,45 @@ $nums = $roombookresult->columnCount();
 
             <tbody>
                 <?php
-     foreach($roombookresult as $res) {
-            $r2=$res['id'] + 6;
+            while ($res = $roombookresult) {
             ?>
-                    <tr>
-                        <td>
-                            <?php echo $res['id'] ?>
-                        </td>
-                        <td>
-                            <?php echo $r2 ?>
-                        </td>
-                        <td>
-                            <?php echo $res['Name'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['Email'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['Country'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['Phone'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['roomtype'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['Bed'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['NoofRoom'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['Meal'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['cin'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['cout'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['nodays'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['stat'] ?>
-                        </td>
-                        <td class="action">
-                            <?php
-                    if ($res['stat'] == "Confirm") {
-                        echo " ";
-                    } else {
-                        echo "<a href='roomconfirm.php?id=" . $res['id'] . "'><button class='btn btn-success'>Confirm</button></a>";
-                    }
+                <tr>
+                    <td><?php echo $res['id'] ?></td>
+                    <td><?php echo $res['Name'] ?></td>
+                    <td><?php echo $res['Email'] ?></td>
+                    <td><?php echo $res['Country'] ?></td>
+                    <td><?php echo $res['Phone'] ?></td>
+                    <td><?php echo $res['RoomType'] ?></td>
+                    <td><?php echo $res['Bed'] ?></td>
+                    <td><?php echo $res['NoofRoom'] ?></td>
+                    <td><?php echo $res['Meal'] ?></td>
+                    <td><?php echo $res['cin'] ?></td>
+                    <td><?php echo $res['cout'] ?></td>
+                    <td><?php echo $res['nodays'] ?></td>
+                    <td><?php echo $res['stat'] ?></td>
+                    <td class="action">
+                        <?php
+                            if($res['stat'] == "Confirm")
+                            {
+                                echo " ";
+                            }
+                            else
+                            {
+                                echo "<a href='roomconfirm.php?id=". $res['id'] ."'><button class='btn btn-success'>Confirm</button></a>";
+                            }
+                        ?>
+                        <a href="roombookedit.php?id=<?php echo $res['id'] ?>"><button class="btn btn-primary">Edit</button></a>
+                        <a href="roombookdelete.php?id=<?php echo $res['id'] ?>"><button class='btn btn-danger'>Delete</button></a>
+                    </td>
+                </tr>
+            <?php
+            }
             ?>
-                            <a href="roombookedit.php?id=<?php echo $res['id'] ?>"><button
-                                    class="btn btn-primary">Edit</button></a>
-                            <a href="roombookdelete.php?id=<?php echo $res['id'] ?>"><button
-                                    class='btn btn-danger'>Delete</button></a>
-                        </td>
-                    </tr>
-                    <?php
-        }
-?>
             </tbody>
         </table>
     </div>
 </body>
-<script type="module" src="javascript/roombook.js"></script>
+<script src="javascript/roombook.js"></script>
 
 
 

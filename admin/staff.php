@@ -1,5 +1,6 @@
 <?php
-include '../config.php';
+session_start();
+require_once '../config.php';
 ?>
 
 <!DOCTYPE html>
@@ -48,26 +49,25 @@ include '../config.php';
             $staffname = $_POST['staffname'];
             $staffwork = $_POST['staffwork'];
 
-            $sql = $conn->prepare("INSERT INTO staff[(name,work)] VALUES ('$staffname', '$staffwork')");
+            $sql = $conn->query("INSERT INTO staff VALUES ('$staffname', '$staffwork')");
             $sql->execute();
-            $resultStaffAdd = $sql->fetchColumn(PDO::FETCH_ASSOC);
-            if ($resultStaffAdd > 0)
+            $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
+            if ($result > 0){
                 header("Location:staff.php");
            }
         }
         ?>
     </div>
 
-
-    <!-- here room add because room and staff both css is similar -->
     <div class="room">
         <?php
-        $sql = $conn->prepare("SELECT * FROM staff");
-        $sql->execute()
+        $sql = $conn->query("SELECT * FROM staff");
+        $sql->execute();
         $re = $sql->fetchColumn(PDO::FETCH_ASSOC);
-        ?>
-        <?php
-        foreach (array($sql->fetchArray()) as $row) {
+	?>
+	<?php
+        while ($row = $re) {
+	   $id = $row['name'];
             echo "<div class='roombox'>
 						<div class='text-center no-boder'>
                             <i class='fa fa-users fa-5x'></i>

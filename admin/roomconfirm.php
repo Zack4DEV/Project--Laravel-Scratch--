@@ -4,7 +4,7 @@ inlcude '../config.php';
 $sql = $conn->prepare("SELECT * FROM roombook where id = '$id'");
 $sql->execute();
 $re = $sql->fetchColumn(PDO::FETCH_ASSOC);
-foreach (array($sql->fetchArray()) as $row) {
+foreach ($re as $row) {
     $id = $row['id'];
     $idRoom = $row['idroom'];
     $Name = $row['Name'];
@@ -34,9 +34,9 @@ while ($stat == "NotConfirm") {
     $sql = $conn->prepare("UPDATE roombook SET stat = '$st'  WHERE id = '$id'");
     $sql->execute();
 
-    $resultConfirmBooking = $sql->fetchColumn(PDO::FETCH_ASSOC);
+    $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
 
-    if (array($sql->fetchArray())) {
+    if ($result) {
 
         $type_of_room = 0;
         if ($Roomtype == "Superior Room") {

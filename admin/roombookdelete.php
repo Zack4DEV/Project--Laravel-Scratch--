@@ -2,13 +2,12 @@
 inlcude '../config.php';
 
 $id = $_GET['id'];
-$idRoom = $_GET['idroom'];
 
-$deletesql = $conn->prepare("DELETE FROM roombook WHERE id = $id");
+$deletesql = $conn->query("DELETE FROM roombook WHERE id = $id");
 $deletesql->execute();
 
-$resultDeleteBooking = $deletesql->fetchColumn();
-if($resultDeleteBooking > 0){
+$result = $deletesql->fetchColumn();
+if($result > 0){
 header("Location: roombook.php");
 }
 ?>

@@ -1,4 +1,7 @@
 <?php
+include '../config.php';
+session_start();
+
 // page redirect
 $usermail="";
 $usermail=$_SESSION['usermail'];
@@ -38,7 +41,7 @@ if($usermail == true){
             <p>Hotel</p>
         </div>
         <div class="logout">
-        <a href="logout"><button class="btn btn-primary">Logout</button></a>
+        <a href="../logout.php"><button class="btn btn-primary">Logout</button></a>
         </div>
     </nav>
     <nav class="sidenav">
@@ -53,14 +56,14 @@ if($usermail == true){
 
     <!-- main section -->
     <div class="mainscreen">
-        <iframe class="frames frame1 active" src="dashboard.php" frameborder="0"></iframe>
-        <iframe class="frames frame2" src="roombook.php" frameborder="0"></iframe>
-        <iframe class="frames frame3" src="payment.php" frameborder="0"></iframe>
-        <iframe class="frames frame4" src="room.php" frameborder="0"></iframe>
-        <iframe class="frames frame4" src="staff.php" frameborder="0"></iframe>
+        <iframe class="frames frame1 active" src="./dashboard.php" frameborder="0"></iframe>
+        <iframe class="frames frame2" src="./roombook.php" frameborder="0"></iframe>
+        <iframe class="frames frame3" src="./payment.php" frameborder="0"></iframe>
+        <iframe class="frames frame4" src="./room.php" frameborder="0"></iframe>
+        <iframe class="frames frame4" src="./staff.php" frameborder="0"></iframe>
     </div>
 </body>
 
-<script  type="module" src="javascript/script.js"></script>
+<script src="javascript/script.js"></script>
 
 </html>

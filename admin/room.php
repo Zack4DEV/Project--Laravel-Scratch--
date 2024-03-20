@@ -1,5 +1,6 @@
 <?php
-include('../config.php');
+require_once '../config.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -47,24 +48,24 @@ include('../config.php');
             $typeofroom = $_POST['troom'];
             $typeofbed = $_POST['bed'];
 
-            $sql = $conn->prepare("INSERT INTO room[(type,bedding)] VALUES ('$typeofroom', '$typeofbed')");
-            $sql->execute([$_POST['addroom']]);
-            $resultRoomAdd = $sql->fetchColumn(PDO::FETCH_ASSOC);
-            if( $resultRoomAdd > 0)){
+            $sql = $conn->query("INSERT INTO room VALUES ('$typeofroom', '$typeofbed')");
+            $sql->execute();
+            $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
+            if( $result > 0){
             header("Location: room.php");
             }
-        }
+       	}
         ?>
     </div>
 
     <div class="room">
         <?php
-        $sql = $conn->prepare("SELECT * FROM room");
-        $sql->execute([$_POST['addroom']]);
+        $sql = $conn->query("SELECT * FROM room");
+        $sql->execute();
         $re = $sql->fetchColumn(PDO::FETCH_ASSOC);
         ?>
         <?php
-        foreach (Array($sql->fetchArray()) as $row) {
+        foreach ($re as $row) {
             $id = $row['type'];
             if ($id == "Superior Room") {
                 echo "<div class='roombox roomboxsuperior'>

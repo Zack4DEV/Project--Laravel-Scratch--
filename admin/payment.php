@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../config.php';
 ?>
 
@@ -32,16 +33,15 @@ include '../config.php';
 
     <div class="roombooktable" class="table-responsive-xl">
         <?php
-        $paymenttablesql = $conn->prepare("SELECT * FROM payment");
-        $paymenttablesql->execute();
-        $paymentResult = $paymenttablesql->fetchArray(PDO::FETCH_ASSOC);
-        $nums = $paymentResult->columnCount();
+        $ptsql = $conn->query("SELECT * FROM payment");
+        $ptsql->execute();
+        $result = $ptsql->fetchAll(PDO::FETCH_ASSOC);
+        $nums = $result->count();
         ?>
         <table class="table table-bordered" id="table-data">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Room Nº</th>
                     <th scope="col">Name</th>
                     <th scope="col">Room Type</th>
                     <th scope="col">Bed Type</th>
@@ -61,61 +61,30 @@ include '../config.php';
 
             <tbody>
                 <?php
-            foreach ($paymentresult as res) {
-                        $r2=$res['id'] + 6;
+            while ($res = $result) {
             ?>
-                    <tr>
-                        <td>
-                            <?php echo $res['id'] ?>
-                        </td>
-                        <td>
-                            <?php echo $r2 ?>
-                        </td>
-                        <td>
-                            <?php echo $res['Name'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['roomtype'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['Bed'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['cin'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['cout'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['noofdays'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['NoofRoom'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['meal'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['roomtotal'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['bedtotal'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['mealtotal'] ?>
-                        </td>
-                        <td>
-                            <?php echo $res['finaltotal'] ?>
-                        </td>
-                        <td class="action">
-                            <a href="invoiceprint.php?id= <?php echo $res['id'] ?>"><button class="btn btn-primary"><i
-                                        class="fa-solid fa-print"></i>Print</button></a>
-                            <!-- <a href="paymantdelete.php?id=<?php echo $res['id'] ?>"><button class="btn btn-danger">Delete</button></a> -->
-                        </td>
-                    </tr>
-                    <?php
-        }
-?>
+                <tr>
+                    <td><?php echo $res['id'] ?></td>
+                    <td><?php echo $res['Name'] ?></td>
+                    <td><?php echo $res['RoomType'] ?></td>
+                    <td><?php echo $res['Bed'] ?></td>
+					<td><?php echo $res['cin'] ?></td>
+                    <td><?php echo $res['cout'] ?></td>
+					<td><?php echo $res['noofdays'] ?></td>
+                    <td><?php echo $res['NoofRoom'] ?></td>
+                    <td><?php echo $res['meal'] ?></td>
+                    <td><?php echo $res['roomtotal'] ?></td>
+					<td><?php echo $res['bedtotal'] ?></td>
+					<td><?php echo $res['mealtotal'] ?></td>
+					<td><?php echo $res['finaltotal'] ?></td>
+                    <td class="action">
+                        <a href="invoiceprint.php?id= <?php echo $res['id']?>"><button class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button></a>
+						<a href="paymantdelete.php?id=<?php echo $res['id']?>"><button class="btn btn-danger">Delete</button></a>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
             </tbody>
         </table>
     </div>
