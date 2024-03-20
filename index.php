@@ -1,13 +1,7 @@
 <?php
 include './config.php';
-global  $IsAdminEntry ,$IsUserEntry;
-/**
-if($IsAdminEntry == true){
-    header("Location: admin/admin.php");
-}else if($IsUserEntry == true){
-    header("Location: home.php");
-}
-*/
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,23 +68,28 @@ if($IsAdminEntry == true){
                     </div>
                     <button type="submit" name="Emp_login_submit" class="auth_btn">Log in</button>
                 </form>
+		<!-- Employee Login-->
                 <?php
                 if (isset($_POST['Emp_login_submit'])) {
                     $Email = $_POST['Emp_Email'];
                     $Password = $_POST['Emp_Password'];
 
-                    $sqlResultEmployee = $conn->prepare("SELECT * FROM emp_login WHERE Emp_Email = '$Email' AND Emp_Password = BINARY'$Password'");
+                    $sqlResultEmployee = $conn->prepare("SELECT * FROM emp_login WHERE Emp_Email = '$Email'");
                     $sqlResultEmployee->execute();
-                    $resultEmployee = $sqlResultEmployee->fetchColumn(PDO::FETCH_ASSOC);
-                    while($resultEmployee > 0){
-                    $IsAdminEntry = true;
-                    if (empty($_POST['Emp_login_submit'])) {
-                        $_SESSION['usermail'] = $Email;
-                        $Email = "";
-                        $Password = "";
-                  }
-                }
-                }
+                    $resultEmployeeFetch = $sqlResultEmployee->fetchColumn(PDO::FETCH_ASSOC);
+                    if($resultEmployeeFetch > 0){
+                            $_SESSION['usermail']=$Email;
+                            $Email = "";
+                            $Password = "";
+                            header("Location: admin/admin.php");
+			} else {
+                            echo "<script>swal({
+                                title: 'Something went wrong',
+                                icon: 'error',
+                            });
+                            </script>";
+                        }
+                    }
                 ?>                
                 <form class="user_login authsection active" id="userlogin" action="" method="POST">
                 <div class="form-floating">
@@ -140,39 +139,20 @@ if($IsAdminEntry == true){
                     </div>
         </form>
 
-                    <?php
-                    if (isset($_POST['user_login_submit'])) {
-                        $Email = $_POST['Email'];
-                        $Password = $_POST['Password'];
-
-                        $sqlResultUser = $conn->prepare("SELECT * FROM signup  WHERE Email = '$Email'");
-                        $sqlResultUser->execute();
-                        $resultUser = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
-
-                        $IsUserEntry = true;
-
-                        if (!empty($_POST['user_login_submit'])) {
-                            echo "<script>swal({
-                                title: 'Something went wrong',
-                                icon: 'error',
-                            });
-                            </script>";
-
-
-                        } else {
-                            $_SESSION['usermail'] = $Email;
-                            $Email = "";
-                            $Password = "";
-                        }
-                    }
-                    if (null !== isset($_POST['user_signup_submit'])) {
+		   <!-- SignUp -->
+    if (isset($_POST['user_signup_submit'])) {
                             $Username = $_POST['Username'];
                             $Email = $_POST['Email'];
                             $Password = $_POST['Password'];
                             $CPassword = $_POST['CPassword'];
 
-                            if ($Username != "" && $Email != "" && $Password != "") {
-                                if ($Password == $CPassword) {
+                            if ($Username == "" || $Email == "" || $Password == "") {
+                                echo "<script>swal({
+                            title: 'Fill the proper details',
+                            icon: 'error',
+                        });
+                        </script>";
+				}else if($Password == $CPassword) {
                                     $sqlResultUser = $conn->prepare("SELECT * FROM signup WHERE Email = '$Email'");
                                     $sqlResultUser->execute();
                                     $resultUserSignup = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
@@ -184,39 +164,58 @@ if($IsAdminEntry == true){
                                             });
                                             </script>";
                                     } else {
-                                        $sqlResultUser = $conn->prepare("INSERT INTO signup[(Username,Email,Password)] VALUES ('$Username', '$Email', '$Password')");
-                                        $sqlResultUser->execute();
-                                        $resultUserLogin = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
+                                        $sqlInserUser = $conn->prepare("INSERT INTO signup[(Username,Email,Password)] VALUES ('$Username', '$Email', '$Password')");
+                                        $sqlInsertExec = $sqlInsertUser->execute();
 
-                                        //$IsUserEntry =true;
-
-                                        if (!empty($_POST['user_login_submit'])) {
-                                            echo "<script>swal({
-                                                title: 'Something went wrong',
-                                                icon: 'error',
-                                            });
-                                            </script>";
-
-
-                                        } else {
-                                            $_SESSION['usermail'] = $Email;
-                                            $Username = "";
-                                            $Email = "";
-                                            $Password = "";
-                                            $CPassword = "";
-                                            //exit;
-                                        }
-                                    }
-                                } else {
+				    if ($sqlInsertExec) {
+                                    $_SESSION['usermail']=$Email;
+                                    $Username = "";
+                                    $Email = "";
+                                    $Password = "";
+                                    $CPassword = "";
+                                    header("Location: home.php");
+				    } else {
                                     echo "<script>swal({
-                                            title: 'Password does not matched',
-                                            icon: 'error',
-                                        });
-                                        </script>";
+                                        title: 'Something went wrong',
+                                        icon: 'error',
+                                    });
+                                    </script>";
                                 }
                             }
+                        } else {
+                            echo "<script>swal({
+                                title: 'Password does not matched',
+                                icon: 'error',
+                            });
+                            </script>";
                         }
-                        ?>
+                    }
+                    
+                }
+		   <!--  User Login -->                   
+		    <?php
+                    if (isset($_POST['user_login_submit'])) {
+                        $Email = $_POST['Email'];
+                        $Password = $_POST['Password'];
+
+                        $sqlResultUser = $conn->prepare("SELECT * FROM signup  WHERE Email = '$Email'");
+                        $sqlResultUser->execute();
+                        $resultUserFetch = $sqlResultUser->fetchColumn(PDO::FETCH_ASSOC);
+			if ($resultUserFetch) {
+                        $_SESSION['usermail']=$Email;
+                        $Email = "";
+                        $Password = "";
+                        header("Location: home.php");
+                        } else {
+                        echo "<script>swal({
+                            title: 'Something went wrong',
+                            icon: 'error',
+                        });
+                        </script>";                           
+                        }
+                    }
+                    
+                     ?>
                 </div>
      </section>
 </body>
