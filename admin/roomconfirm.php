@@ -1,17 +1,17 @@
 <?php
-inlcude '../config.php';
+include '../config.php';
+require_once 'roombook.php';
 
-$sql = $conn->prepare("SELECT * FROM roombook where id = '$id'");
+$sql = $conn->query("SELECT * FROM roombook");
 $sql->execute();
-$re = $sql->fetchColumn(PDO::FETCH_ASSOC);
+$re = $sql->fetchAll(PDO::FETCH_ASSOC);
 foreach ($re as $row) {
-    $id = $row['id'];
-    $idRoom = $row['idroom'];
+   // $id = $_POST[$_SESSION['id']];
     $Name = $row['Name'];
     $Email = $row['Email'];
     $Country = $row['Country'];
     $Phone = $row['Phone'];
-    $Roomtype = $row['roomtype'];
+    $RoomType = $row['RoomType'];
     $Bed = $row['Bed'];
     $NoofRoom = $row['NoofRoom'];
     $Meal = $row['Meal'];
@@ -19,33 +19,26 @@ foreach ($re as $row) {
     $cout = $row['cout'];
     $noofday = $row['nodays'];
     $stat = $row['stat'];
-}
 
 
-while ($stat == "NotConfirm") {
+if ($stat == "NotConfirm") {
 
-    $datetime2 = new DateTime("now");
-    $datetime1 = date_create($cout);
-    if ($datetime1<$datetime2) {
-        $st = "Closed";
-    } else {
-        $st = "Confirm";
-    }
-    $sql = $conn->prepare("UPDATE roombook SET stat = '$st'  WHERE id = '$id'");
-    $sql->execute();
+    $st = "Confirm";
+    $id = $_GET['id'];
 
-    $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
+    $rsql = $conn->prepare("UPDATE roombook SET stat = '$st'  WHERE id = '$id'")->execute();
+    //$rsqlf = $rsql->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($result) {
+	if ($rsql) {
 
         $type_of_room = 0;
-        if ($Roomtype == "Superior Room") {
+        if ($RoomType == "Superior Room") {
             $type_of_room = 3000;
-        } elseif ($Roomtype == "Deluxe Room") {
+        } elseif ($RoomType == "Deluxe Room") {
             $type_of_room = 2000;
-        } elseif ($Roomtype == "Guest House") {
+        } elseif ($RoomType == "Guest House") {
             $type_of_room = 1500;
-        } elseif ($Roomtype == "Single Room") {
+        } elseif ($RoomType == "Single Room") {
             $type_of_room = 1000;
         }
 
@@ -77,13 +70,13 @@ while ($stat == "NotConfirm") {
 
         $fintot = $ttot + $mepr + $btot;
 
-        $psql = $conn->("INSERT INTO payment VALUES ('$id','$idRoom', '$Name', '$Email', '$Roomtype', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot')");
-        $psql->execute();
-        $psqlresult = $psql->fetchColumn();
-        if ($psqlresult > 0){
+        $psql = $conn->query("INSERT INTO payment VALUES('$id','$Name', '$Email', '$RoomType', '$Bed', '$NoofRoom', '$cin', '$cout', '$noofday', '$ttot', '$btot', '$Meal', '$mepr', '$fintot')")->execute();
+        //$psql->execute();
+
         header("Location: roombook.php");
     }
-    }
+}
+
 }
 
 

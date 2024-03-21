@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../config.php';
+include '../config.php';
 ?>
 
 <!DOCTYPE html>
@@ -49,10 +49,10 @@ require_once '../config.php';
             $staffname = $_POST['staffname'];
             $staffwork = $_POST['staffwork'];
 
-            $sql = $conn->query("INSERT INTO staff VALUES ('$staffname', '$staffwork')");
-            $sql->execute();
-            $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
-            if ($result > 0){
+            //$sql = $conn->query("INSERT INTO staff VALUES ('','$staffname', '$staffwork')");
+            //$sql->execute();
+            $sresult = $conn->prepare("INSERT INTO staff VALUES ('','$staffname', '$staffwork')")->execute();
+            if ($sresult > 0){
                 header("Location:staff.php");
            }
         }
@@ -63,17 +63,16 @@ require_once '../config.php';
         <?php
         $sql = $conn->query("SELECT * FROM staff");
         $sql->execute();
-        $re = $sql->fetchColumn(PDO::FETCH_ASSOC);
-	?>
-	<?php
-        while ($row = $re) {
-	   $id = $row['name'];
+        $st = $sql->fetchAll(PDO::FETCH_ASSOC);
+	foreach ($st as $row) {
+	    $name = $row['name'];
+	    $id = $row['id'];
             echo "<div class='roombox'>
 						<div class='text-center no-boder'>
                             <i class='fa fa-users fa-5x'></i>
-							<h3>" . $row['name'] . "</h3>
+							<h3>" . $name . "</h3>
                             <div class='mb-1'>" . $row['work'] . "</div>
-                            <a href='staffdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                            <a href='staffdelete.php?id=" . $id . "'><button class='btn btn-danger'>Delete</button></a>
 						</div>
                     </div>";
         }

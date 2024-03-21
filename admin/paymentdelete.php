@@ -2,11 +2,12 @@
 include '../config.php';
 
 $id = $_GET['id'];
+$query="DELETE FROM payment WHERE id = ?";
 
-$deletesql = $conn->query("DELETE FROM payment WHERE id = $id");
-$deletesql->execute();
-$result = $deletesql->fetchColumn(PDO::FETCH_ASSOC);
-if($result > 0){
+//$sql = $conn->query($query);
+$delete = $conn->prepare($query);
+$result = $delete->execute(array($id));
+
 header("Location: payment.php");
-}
+
 ?>

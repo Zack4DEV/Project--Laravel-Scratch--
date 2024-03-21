@@ -387,10 +387,9 @@
 
 	$sql = $conn->query("SELECT * FROM payment  where id = '$id' ");
 	$sql->execute();
-	$re = $sql->fetchColumn(PDO::FETCH_ASSOC);
+	$re = $sql->fetchAll(PDO::FETCH_ASSOC);
 	foreach ($re as $row) {
 	    $id = $row['id'];
-	    $idroom = $row['idroom'];
 	    $Name = $row['Name'];
 	    $troom = $row['roomtype'];
 	    $bed = $row['Bed'];
@@ -444,7 +443,7 @@
 			<p>HOTEL,</p>
 			<p>(+33)5-00000000</p>
 		</address>
-		<span><img alt="" src="../image/logo.jpg"></span>
+		<!-- <span><img alt="" src="../image/logo.jpg"></span> -->
 	</header>
 	<article>
 		<h1>Recipient</h1>
@@ -490,7 +489,7 @@
 				<tr>
 					<td><span><?php echo $meal; ?> </span></td>
 					<td><span><?php echo $days; ?></span></td>
-					<td><span data-prefix>$</span><span><?php echo $type_of_meal; ?></span></td>
+					<td><span data-prefix>$</span><span><?php echo $type_of_meal ?></span></td>
 					<td><span><?php echo $nroom; ?> </span></td>
 					<td><span data-prefix>$</span><span><?php echo $mepr; ?></span></td>
 				</tr>

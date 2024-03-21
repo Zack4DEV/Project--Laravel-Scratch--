@@ -1,7 +1,6 @@
 <?php
 include 'config.php';
 session_start();
-$id = $_SESSION['id'];
 // page redirect
 $usermail = "";
 $usermail = $_SESSION['usermail'];
@@ -157,6 +156,7 @@ if ($usermail == true) {
         <!-- ==== room book php ====-->
         <?php
         if (isset($_POST['guestdetailsubmit'])) {
+	  $id = $_SESSION['id'];
 	  $Name = $_POST['Name'];
           $Email = $_POST['Email'];
           $Country = $_POST['Country'];
@@ -176,10 +176,12 @@ if ($usermail == true) {
                     </script>';
           } else {
             $sta = "NotConfirm";
-                  $sql = $conn->query("INSERT INTO roombook  VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',date_diff('$cout','$cin'))");
-		 $sql->execute();
-	   $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
-            if ($result > 0) {
+	    //$nodays = datediff('$cout','$cin');
+            //$sql = $conn->query("INSERT INTO roombook  VALUES ('$id','$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout',datediff('$cout','$cin'),'$sta')");
+            //$sql->execute();
+	   $result = $conn->prepare("INSERT INTO roombook  VALUES ('$id','$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout',datediff('$cout','$cin'),'$sta')")->execute();
+            
+	if ($result > 0) {
               echo '<script>swal({
                                 title: "Reservation successful",
                                 icon: "success",

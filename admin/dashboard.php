@@ -1,58 +1,68 @@
 <?php
+include '../config.php';
 session_start();
-require_once '../config.php';
+$id = $_SESSION['id'];
 
 // roombook
-$roombooksql = $conn->query("SELECT * FROM roombook");
-$roombooksql->execute();
-$roombookre =  $roombooksql->fetchColumn(PDO::FETCH_ASSOC);
-$roombookrow = $roombookre->count();
+$roombooksql = $conn->prepare("SELECT * FROM roombook WHERE id = '?'");
+$roombookre = $roombooksql->execute();
+$roombookrow = (int)  $roombookre->fetch(PDO::FETCH_NUM);
+
+//$roombookrow = (int) $conn->prepare("SELECT * FROM roombook WHERE id = '?'")->execute()->fetch(PDO::FETCH_NUM);
 
 // staff
-$staffsql = $conn->query("SELECT * FROM staff");
-$staffsql->execute();
-$staffre = $staffsql->fetchColumn(PDO::FETCH_ASSOC);
-$staffrow = $staffre->count();
+$staffsql = $conn->prepare("SELECT * FROM staff WHERE id = '?'");
+$staffre = $staffsql->execute();
+$staffrow = (int) $staffre->fetch(PDO::FETCH_NUM);
+
+
+//$staffrow = (int)  $conn->prepare("SELECT * FROM staff WHERE id = '?'")->execute()->fetch(PDO::FETCH_NUM);
 
 // room
-$roomsql = $conn->query("SELECT * FROM room");
-$roomsql->execute();
-$roomre = $roomsqlsql->fetchColumn(PDO::FETCH_ASSOC);
-$roomrow = $roomre->count();
+$roomsql = $conn->prepare("SELECT * FROM room WHERE id = '?'");
+$roomre = $roomsql->execute();
+$roomrow = (int) $roomre->fetch(PDO::FETCH_NUM);
 
-//roombook roomtype
-$chartroom1 = $conn->query("SELECT * FROM roombook WHERE roomtype = 'Superior Room'");
-$chartroom1->execute();
-$chartroom1re = $chartroom1->fetchColumn(PDO::FETCH_ASSOC);
-$chartroom1row = $chartroom1re->count();
+//$roomrow = (int) $conn->prepare("SELECT * FROM room WHERE id = '?'")->execute()->fetch(PDO::FETCH_NUM);
 
-$chartroom2 = $conn->query("SELECT * FROM roombook WHERE roomtype = 'Deluxe Room'");
-$chartroom2->execute();
-$chartroom2re = $chartroom2->fetchColumn(PDO::FETCH_ASSOC);
-$chartroom2row = $chartroom2re->count();
 
-$chartroom3 = $conn->query("SELECT * FROM roombook WHERE roomtype = 'Guest House'");
-$chartroom3->execute();
-$chartroom3re = $chartroom3->fetchColumn(PDO::FETCH_ASSOC);
-$chartroom3row = $chartroom3re->count();
+//roombook RoomType
+$chartroom1 = $conn->prepare("SELECT * FROM roombook WHERE RoomType = 'Superior Room' AND id = '?'");
+$chartroom1re = $chartroom1->execute();
+$chartroom1row = (int) $chartroom1re->fetch(PDO::FETCH_NUM);
 
-$chartroom4 = $conn->query("SELECT * FROM roombook WHERE roomtype = 'Single Room'");
-$chartroom4->execute();
-$chartroom4re = $chartroom4->fetchColumn(PDO::FETCH_ASSOC);
-$chartroom4row = $chartroom4re->count();
+//$chartroom1row = (int) $conn->prepare("SELECT * FROM roombook WHERE RoomType = 'Superior Room' AND id = '?'")->execute()->fetch(PDO::FETCH_NUM);
+
+
+$chartroom2 = $conn->prepare("SELECT * FROM roombook WHERE RoomType = 'Deluxe Room' AND id = '?'");
+$chartroom2re = $chartroom2->execute();
+$chartroom2row = (int) $chartroom2re->fetch(PDO::FETCH_NUM);
+
+//$chartroom2row = (int)  $conn->prepare("SELECT * FROM roombook WHERE RoomType = 'Deluxe Room' AND id = '?'")->execute()->fetch(PDO::FETCH_NUM);
+
+$chartroom3 = $conn->prepare("SELECT * FROM roombook WHERE RoomType = 'Guest House' AND id = '?'");
+$chartroom3re = $chartroom3re->execute();
+$chartroom3row = (int) $chartroom3re->fetch(PDO::FETCH_NUM);
+//$chartroom3row = (int) $conn->prepare("SELECT * FROM roombook WHERE RoomType = 'Guest House' AND id = '?'")->execute()->fetch(PDO::FETCH_NUM);
+
+$chartroom4 = $conn->prepare("SELECT * FROM roombook WHERE RoomType = 'Single Room' AND id = '?'");
+$chartroom4re = $chartroom4->execute();
+$chartroom4row = (int) $chartroom4re->fetch(PDO::FETCH_NUM);
+
+//$chartroom4row = (int) $conn->prepare("SELECT * FROM roombook WHERE RoomType = 'Single Room' AND id = '?'")->execute()->fetch(PDO::FETCH_NUM);
+
 ?>
-<!--moriss profit -->
+
 <?php
-$query = $conn->query("SELECT * FROM payment");
-$query->execute();
-$result = $query->fetchColumn(PDO::FETCH_ASSOC);
+$query = $conn->prepare("SELECT * FROM payment");
+$res = $query->execute();
+$result = $res->fetch(PDO::FETCH_NUM);
 $chart_data = '';
 $tot = 0;
 foreach ($result as $row) {
     $chart_data .= "{ date:'" . $row["cout"] . "', profit:" . $row["finaltotal"] * 10 / 100 . "}, ";
     $tot = $tot + $row["finaltotal"] * 10 / 100;
 }
-
 
 $chart_data = substr($chart_data, 0, -2);
 

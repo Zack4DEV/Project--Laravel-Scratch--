@@ -1,12 +1,13 @@
 <?php
-inlcude '../config.php';
+include '../config.php';
 
 $id = $_GET['id'];
+$query = "DELETE FROM room WHERE id = ?";
 
-$roomdeletesql = $conn->query("DELETE FROM room WHERE id = $id");
-$roomdeletesql->execute();
-$result = $roomdeletesql->fetchColumn(PDO::FETCH_ASSOC);
-if($result > 0){
+//$sql = $conn->query($query);
+$delete = $conn->prepare($query);
+$result = $delete->execute(array($id));
+
 header("Location: room.php");
-}
+
 ?>

@@ -36,7 +36,7 @@ include '../config.php';
         $ptsql = $conn->query("SELECT * FROM payment");
         $ptsql->execute();
         $result = $ptsql->fetchAll(PDO::FETCH_ASSOC);
-        $nums = $result->count();
+      # $nums = rowCount($ptsql);
         ?>
         <table class="table table-bordered" id="table-data">
             <thead>
@@ -55,14 +55,13 @@ include '../config.php';
                     <th scope="col">Meals</th>
                     <th scope="col">Total Bill</th>
                     <th scope="col">Action</th>
-                    <!-- <th>Delete</th> -->
                 </tr>
             </thead>
 
             <tbody>
                 <?php
-            while ($res = $result) {
-            ?>
+            foreach ($result as $res) {
+		?>
                 <tr>
                     <td><?php echo $res['id'] ?></td>
                     <td><?php echo $res['Name'] ?></td>
@@ -78,12 +77,14 @@ include '../config.php';
 					<td><?php echo $res['mealtotal'] ?></td>
 					<td><?php echo $res['finaltotal'] ?></td>
                     <td class="action">
-                        <a href="invoiceprint.php?id= <?php echo $res['id']?>"><button class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button></a>
-						<a href="paymantdelete.php?id=<?php echo $res['id']?>"><button class="btn btn-danger">Delete</button></a>
+                        <a href="invoiceprint.php?id=". $res['id'] ."><button class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button></a>
+			<!--
+			<a href="paymentdelete.php?id=". $res['id'] ."><button class="btn btn-danger">Delete</button></a>
+			-->
                     </td>
                 </tr>
-            <?php
-            }
+	    <?php      
+		}
             ?>
             </tbody>
         </table>

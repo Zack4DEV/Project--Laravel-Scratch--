@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../config.php';
+include '../config.php';
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +61,7 @@ require_once '../config.php';
 
                 <div class="reservationinfo">
                     <h4>Reservation information</h4>
-                    <select name="roomtype" class="form-controls">
+                    <select name="RoomType" class="form-controls">
                         <option value selected>Type Of Room</option>
                         <option value="Superior Room">SUPERIOR ROOM</option>
                         <option value="Deluxe Room">DELUXE ROOM</option>
@@ -108,16 +108,16 @@ require_once '../config.php';
 
         <?php
 
-$rsql = $conn->query("SELECT type FROM room");
+$rsql = $conn->query("SELECT * FROM room");
 $rsql->execute();
-$rre = $rsql->fetchColumn(PDO::FETCH_ASSOC);
+$rre = $rsql->fetchAll(PDO::FETCH_ASSOC);
 $r = 0;
 $sc = 0;
 $gh = 0;
 $sr = 0;
 $dr = 0;
 ?>
-<?
+<?php
 foreach ($rre as $rrow ) {
     $r = $r + 1;
     $s = $rrow['type'];
@@ -135,9 +135,10 @@ foreach ($rre as $rrow ) {
     }
 }
 
-$csql = $conn->query("SELECT roomtype FROM payment");
+$csql = $conn->query("SELECT * FROM payment");
 $csql->execute();
-$cre = $csql->fetchColumn(PDO::FETCH_ASSOC);
+$cre = $csql->fetchAll(PDO::FETCH_ASSOC);
+
 $cr = 0;
 $csc = 0;
 $cgh = 0;
@@ -145,7 +146,7 @@ $csr = 0;
 $cdr = 0;
 foreach ($cre as $crow) {
     $cr = $cr + 1;
-    $cs = $crow['roomtype'];
+    $cs = $crow['RoomType'];
 
     if ($cs == "Superior Room") {
         $csc = $csc + 1;
@@ -161,43 +162,36 @@ foreach ($cre as $crow) {
         $cdr = $cdr + 1;
     }
 }
-// room availablity
-// Superior Room =>
+
 $f1 = $sc - $csc;
 if ($f1 <= 0) {
     $f1 = "NO";
 }
-// Guest House =>
 $f2 = $gh - $cgh;
 if ($f2 <= 0) {
     $f2 = "NO";
 }
-// Single Room =>
 $f3 = $sr - $csr;
 if ($f3 <= 0) {
     $f3 = "NO";
 }
-// Deluxe Room =>
 $f4 = $dr - $cdr;
 if ($f4 <= 0) {
     $f4 = "NO";
 }
-//total available room =>
 $f5 = $r - $cr;
 if ($f5 <= 0) {
     $f5 = "NO";
 }
 ?>
-        <!-- room availablity end-->
-
-        <!-- ==== room book php ====-->
-        <?php
+<?php
 if (isset($_POST['guestdetailsubmit'])) {
+//    $id = $_POST[$_SESSION['id']];
     $Name = $_POST['Name'];
     $Email = $_POST['Email'];
     $Country = $_POST['Country'];
     $Phone = $_POST['Phone'];
-    $Roomtype = $_POST['roomtype'];
+    $RoomType = $_POST['RoomType'];
     $Bed = $_POST['Bed'];
     $NoofRoom = $_POST['NoofRoom'];
     $Meal = $_POST['Meal'];
@@ -212,56 +206,16 @@ if (isset($_POST['guestdetailsubmit'])) {
                     </script>';
     } else {
         $sta = "NotConfirm";
-        $sql = $conn->query("INSERT INTO roombook  VALUES ('$Name','$Email','$Country','$Phone','$Roomtype','$Bed','$NoofRoom','$Meal','$cin','$cout','$sta',date_diff('$cout','$cin'))");
-        $sql->execute();
-        $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
-
-        // if($f1=="NO")
-        // {
-        //     echo "<script>swal({
-        //         title: 'Superior Room is not available',
-        //         icon: 'error',
-        //     });
-        //     </script>";
-        // }
-        // else if($f2=="NO")
-        // {
-        //     echo "<script>swal({
-        //         title: 'Guest House is not available',
-        //         icon: 'error',
-        //     });
-        //     </script>";
-        // }
-        // else if($f3 == "NO")
-        // {
-        //     echo "<script>swal({
-        //         title: 'Si Room is not available',
-        //         icon: 'error',
-        //     });
-        //     </script>";
-        // }
-        // else if($f4 == "NO")
-        // {
-        //     echo "<script>swal({
-        //         title: 'Deluxe Room is not available',
-        //         icon: 'error',
-        //     });
-        //     </script>";
-        // }
-        if ($result || $ires) {
+        
+	$result = $conn->query("INSERT INTO roombook  VALUES ('$id','$Name','$Email','$Country','$Phone','$RoomType','$Bed','$Meal','$NoofRoom','$cin','$cout',datediff('$cout','$cin'),'$sta')");
+	
+        while ($result) {
             echo '<script>swal({
                                 title: "Reservation successful",
                                 icon: "success",
                             });
                         </script>';
-        } else {
-            echo '<script>swal({
-                                    title: "Something went wrong",
-                                    icon: "error",
-                                });
-                        </script>';
-        }
-        // }
+        } 
     }
 }
 ?>
@@ -283,8 +237,8 @@ if (isset($_POST['guestdetailsubmit'])) {
 
 $rtsql = $conn->query("SELECT * FROM roombook");
 $rtsql->execute();
-$roombookresult = $rtsql->fetchColumn(PDO::FETCH_ASSOC);
-$nums = $roombookresult->count();
+$roombookresult = $rtsql->fetchAll(PDO::FETCH_ASSOC);
+#$nums = rowCount($rtsql);
 
 
 ?>
@@ -311,7 +265,7 @@ $nums = $roombookresult->count();
 
             <tbody>
                 <?php
-            while ($res = $roombookresult) {
+            foreach ($roombookresult as $res) {
             ?>
                 <tr>
                     <td><?php echo $res['id'] ?></td>
@@ -338,8 +292,8 @@ $nums = $roombookresult->count();
                                 echo "<a href='roomconfirm.php?id=". $res['id'] ."'><button class='btn btn-success'>Confirm</button></a>";
                             }
                         ?>
-                        <a href="roombookedit.php?id=<?php echo $res['id'] ?>"><button class="btn btn-primary">Edit</button></a>
-                        <a href="roombookdelete.php?id=<?php echo $res['id'] ?>"><button class='btn btn-danger'>Delete</button></a>
+                        <a href="roombookedit.php?id=". $res['id'] ."><button class="btn btn-primary">Edit</button></a>
+                        <a href="roombookdelete.php?id=". $res['id'] ."><button class='btn btn-danger'>Delete</button></a>
                     </td>
                 </tr>
             <?php

@@ -1,13 +1,13 @@
 <?php
-inlcude '../config.php';
+include '../config.php';
 
 $id = $_GET['id'];
+$query = "DELETE FROM staff WHERE id = ?";
 
-$roomdeletesql = $conn->query("DELETE FROM staff WHERE id = $id");
-$roomdeletesql->execute();
+//$sql = $conn->query($query);
+$delete = $conn->prepare($query);
+$result = $delete->execute(array($id));
 
-$result = $roomdeletesql->fetchColumn(PDO::FETCH_ASSOC);
-if ($result > 0){
 header("Location: staff.php");
-}
+
 ?>

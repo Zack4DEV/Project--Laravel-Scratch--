@@ -3,7 +3,7 @@ include '../config.php';
 
 $sqlq = $conn->query("SELECT * FROM roombook");
 $sqlq->execute();
-$result = $sqlq->fetchColumn(PDO::FETCH_ASSOC);
+$result = $sqlq->fetchAll(PDO::FETCH_ASSOC);
 $roombook_record = array();
 
 foreach( $result as $rows){

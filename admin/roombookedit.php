@@ -1,13 +1,11 @@
 <?php
 
-inlcude '../config.php';
-
-// fetch room data
+include '../config.php';
 $id = $_GET['id'];
 
 $sql = $conn->query("SELECT * FROM roombook WHERE id = '$id'");
 $sql->execute();
-$re = $sql->fetchColumn();
+$re = $sql->fetchAll();
 foreach ($re as $row) {
     $Name = $row['Name'];
     $Email = $row['Email'];
@@ -19,31 +17,28 @@ foreach ($re as $row) {
     $stat = $row['stat'];
 }
 if (isset($_POST['guestdetailedit'])) {
-    $EditId = $_SESSION['id'];
+    //$EditId = $_SESSION['id'];
     $EditName = $_POST['Name'];
     $EditEmail = $_POST['Email'];
     $EditCountry = $_POST['Country'];
     $EditPhone = $_POST['Phone'];
-    $Editroomtype = $_POST['roomtype'];
+    $EditRoomType = $_POST['RoomType'];
     $EditBed = $_POST['Bed'];
     $EditNoofRoom = $_POST['noofroom'];
     $EditMeal = $_POST['Meal'];
     $Editcin = $_POST['cin'];
     $Editcout = $_POST['cout'];
 
-    $sql = $conn->query("UPDATE roombook SET id = '$EditId' Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = datediff('$Editcout','$Editcin') WHERE id = '$id'");
-
-    $sql->execute();
-    $result = $sql->fetchColumn();
+    $sql = $conn->query("UPDATE roombook SET Name = '$EditName',Email = '$EditEmail',Country='$EditCountry',Phone='$EditPhone',RoomType='$EditRoomType',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',nodays = datediff('$Editcout','$Editcin') WHERE id = '$id'")->execute();
 
     $type_of_room = 0;
-    if ($Editroomtype == "Superior Room") {
+    if ($EditRoomType == "Superior Room") {
         $type_of_room = 3000;
-    } elseif ($Editroomtype == "Deluxe Room") {
+    } elseif ($EditRoomType == "Deluxe Room") {
         $type_of_room = 2000;
-    } elseif ($Editroomtype == "Guest House") {
+    } elseif ($EditRoomType == "Guest House") {
         $type_of_room = 1500;
-    } elseif ($Editroomtype == "Single Room") {
+    } elseif ($EditRoomType == "Single Room") {
         $type_of_room = 1000;
     }
 
@@ -69,31 +64,22 @@ if (isset($_POST['guestdetailedit'])) {
     }
 
     // noofday update
-    $psql = $conn->query("SELECT * FROM roombook WHERE id = '$id'");
-    $psql->execute();
-    $presult = $psql->fetchColumn();
-    $prow = $presult;
-    $ndays = $conn->query("SELECT * FROM roombook where id = '$id'");
-    $ndays->execute();
-    $ndaysedited = $ndays->fetchColumn(PDO::FETCH_ASSOC);
-    $Editnoofday = $prow[$ndaysedited];
-    $nroom = $conn->query("SELECT roomtotal FROM roombook");
-    $nroom->execute();
-    $nroomedited = $nroom->fetchColumn(PDO::FETCH_ASSOC);
-    $EditNoofRoom = $prow[$nroomedited];
 
-    $editttot = $type_of_room * $Editnoofday * $EditNoofRoom;
-    $editmepr = $type_of_meal * $Editnoofday;
-    $editbtot = $type_of_bed * $Editnoofday;
+    $psql = $conn->query("SELECT * FROM roombook WHERE id = '$id'");
+    $presult = $psql->execute();
+
+
+    $editttot = $type_of_room*$Editnoofday * $EditNoofRoom;
+    $editmepr = $type_of_meal*$Editnoofday;
+    $editbtot = $type_of_bed*$Editnoofday;
 
     $editfintot = $editttot + $editmepr + $editbtot;
 
-    $psql = $conn->query("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',roomtype='$Editroomtype',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'");
-    $psql->execute();
-    $paymentResult = $psql->fetchColumn(PDO::FETCH_ASSOC);
-     if($paymentResult > 0){
-        header("Location: roombook.php");
-}
+
+    $psql = $conn->query("UPDATE payment SET Name = '$EditName',Email = '$EditEmail',RoomType='$EditRoomType',Bed='$EditBed',noofroom='$EditNoofRoom',Meal='$EditMeal',cin='$Editcin',cout='$Editcout',noofdays = '$Editnoofday',roomtotal = '$editttot',bedtotal = '$editbtot',mealtotal = '$editmepr',finaltotal = '$editfintot' WHERE id = '$id'")->execute();
+      
+  header("Location: roombook.php");
+
 }
 ?>
 
@@ -177,7 +163,7 @@ if (isset($_POST['guestdetailedit'])) {
 
                 <div class="reservationinfo">
                     <h4>Reservation information</h4>
-                    <select name="roomtype" class="form-controls">
+                    <select name="RoomType" class="form-controls">
                         <option value selected>Type Of Room</option>
                         <option value="Superior Room">SUPERIOR ROOM</option>
                         <option value="Deluxe Room">DELUXE ROOM</option>

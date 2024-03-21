@@ -1,6 +1,6 @@
 <?php
-require_once '../config.php';
 session_start();
+include '../config.php';
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +20,19 @@ session_start();
 </head>
 
 <body>
+ <?php
+        if (isset($_POST['addroom'])) {
+            $typeofroom = $_POST['troom'];
+            $typeofbed = $_POST['bed'];
+
+            //$sql = $conn->query("INSERT INTO room VALUES ('','$typeofroom', '$typeofbed')");
+            //$sql->execute();
+            $rresult = $conn->prepare("INSERT INTO room VALUES ('','$typeofroom', '$typeofbed')")->execute();
+            if( $rresult > 0){
+            header("Location:room.php");
+            }
+       	}
+        ?>
     <div class="addroomsection">
         <form action="" method="POST">
             <label for="troom">Type of Room :</label>
@@ -43,37 +56,23 @@ session_start();
             <button type="submit" class="btn btn-success" name="addroom">Add Room</button>
         </form>
 
-        <?php
-        if (isset($_POST['addroom'])) {
-            $typeofroom = $_POST['troom'];
-            $typeofbed = $_POST['bed'];
-
-            $sql = $conn->query("INSERT INTO room VALUES ('$typeofroom', '$typeofbed')");
-            $sql->execute();
-            $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
-            if( $result > 0){
-            header("Location: room.php");
-            }
-       	}
-        ?>
+       
     </div>
 
     <div class="room">
         <?php
         $sql = $conn->query("SELECT * FROM room");
         $sql->execute();
-        $re = $sql->fetchColumn(PDO::FETCH_ASSOC);
-        ?>
-        <?php
+        $re = $sql->fetchAll(PDO::FETCH_ASSOC);
         foreach ($re as $row) {
-            $id = $row['type'];
-            if ($id == "Superior Room") {
+	    $id = $row['type'];
+	      if ($id == "Superior Room") {
                 echo "<div class='roombox roomboxsuperior'>
 						<div class='text-center no-boder'>
                             <i class='fa-solid fa-bed fa-4x mb-2'></i>
 							<h3>" . $row['type'] . "</h3>
                             <div class='mb-1'>" . $row['bedding'] . "</div>
-                            <a href='roomdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                            <a href='roomdelete.php?id=". $row['id'] ."'><button class='btn btn-danger'>Delete</button></a>
 						</div>
                     </div>";
             } else if ($id == "Deluxe Room") {
@@ -82,7 +81,7 @@ session_start();
                         <i class='fa-solid fa-bed fa-4x mb-2'></i>
                         <h3>" . $row['type'] . "</h3>
                         <div class='mb-1'>" . $row['bedding'] . "</div>
-                        <a href='roomdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                        <a href='roomdelete.php?id=". $row['id'] ."'><button class='btn btn-danger'>Delete</button></a>
                     </div>
                     </div>";
             } else if ($id == "Guest House") {
@@ -91,7 +90,7 @@ session_start();
                 <i class='fa-solid fa-bed fa-4x mb-2'></i>
 							<h3>" . $row['type'] . "</h3>
                             <div class='mb-1'>" . $row['bedding'] . "</div>
-                            <a href='roomdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                            <a href='roomdelete.php?id=". $row['id'] ."'><button class='btn btn-danger'>Delete</button></a>
 					</div>
             </div>";
             } else if ($id == "Single Room") {
@@ -100,7 +99,7 @@ session_start();
                         <i class='fa-solid fa-bed fa-4x mb-2'></i>
                         <h3>" . $row['type'] . "</h3>
                         <div class='mb-1'>" . $row['bedding'] . "</div>
-                        <a href='roomdelete.php?id=" . $row['id'] . "'><button class='btn btn-danger'>Delete</button></a>
+                        <a href='roomdelete.php?id=". $row['id'] ."'><button class='btn btn-danger'>Delete</button></a>
                     </div>
                     </div>";
             }

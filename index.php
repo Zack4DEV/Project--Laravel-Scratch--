@@ -65,7 +65,7 @@
 
                                     $sql = $conn->query("SELECT * FROM signup  WHERE Email = '$Email' AND Password = '$Password'");
                                     $sql->execute();
-                                    $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
+                                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
                         if ($result) {
                                     $_SESSION['usermail']=$Email;
                                     $Email = "";
@@ -107,7 +107,7 @@
                                 $Password = $_POST['Emp_Password'];
                                 $sql = $conn->query("SELECT * FROM emp_login WHERE Emp_Email = '$Email' AND Emp_Password =  '$Password'");
                                 $result = $sql->execute();
-                                $sql->fetchColumn(PDO::FETCH_ASSOC);
+                                $sql->fetchAll(PDO::FETCH_ASSOC);
                                 if($result){
                                         $_SESSION['usermail']=$Email;
                                         $Email = "";
@@ -152,7 +152,7 @@
                             }else if($Password == $CPassword) {
                                                 $sql = $conn->query("SELECT * FROM signup WHERE Email = '$Email' AND Password = '$Password'");
                                                 $sql->execute();
-                                                $result = $sql->fetchColumn(PDO::FETCH_ASSOC);
+                                                $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                                                 if ($result) {
                                                     echo "<script>swal({
@@ -161,11 +161,13 @@
                                                         });
                                                         </script>";
                                                 } else {
-                                                    $sqlInsertUser = $conn->query("INSERT INTO signup VALUES ('$Username', '$Email', '$Password')");
-                                                    $sqlInsertExec = $sqlInsertUser->execute();
+						    //$id = $_SESSION['UserID'];
+                              //$sql = $conn->query("INSERT INTO signup VALUES ('','$Username', '$Email', '$Password')");
+			      $result = $conn->prepare("INSERT INTO signup VALUES ('','$Username', '$Email', '$Password')")->execute();
 
-                                if ($sqlInsertExec) {
+                                if ($result) {
                                                 $_SESSION['usermail']=$Email;
+						//$id = "";
                                                 $Username = "";
                                                 $Email = "";
                                                 $Password = "";
