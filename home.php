@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-session_start();
+//session_start();
 // page redirect
 $usermail = "";
 $usermail = $_SESSION['usermail'];

@@ -1,10 +1,12 @@
 run = "php -S 0.0.0.0:8080 -t ."
+#run = "npm run dev"
 
 [nix]
 channel = "stable-22_11"
 
 [deployment]
 run = ["sh", "-c", "php -S 0.0.0.0:8080 -t ."]
+#run = ["sh", "-c", "npm run dev"]
 deploymentTarget = "cloudrun"
 
 [[ports]]

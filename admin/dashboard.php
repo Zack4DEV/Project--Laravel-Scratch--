@@ -1,7 +1,7 @@
 <?php
 include '../config.php';
-session_start();
-$id = $_SESSION['id'];
+//session_start();
+//$id = $_SESSION['id'];
 
 // roombook
 $roombooksql = $conn->prepare("SELECT * FROM roombook WHERE id = '?'");
