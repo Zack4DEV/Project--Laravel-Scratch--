@@ -2,13 +2,21 @@
     "name": "project-app-scratch",
     "private": true,
     "type": "module",
+    "files": ["dist"],
+    "main": "index.js",
+    "module": "index.mjs",
+    "types": "index.d.ts",
     "scripts": {
         "dev": "vite",
         "build": "vite build"
     },
     "devDependencies": {
-        "axios": "^1.1.2",
-        "vite-plugin-php": "^1.0.5",
-        "vite": "^4.0.0"
+        "axios": "^1.6.8",
+        "glob": "^10.3.10",
+        "vite": "^5.2.3",
+        "vite-plugin-php": "^1.0.5"
+    },
+    "dependencies": {
+        "@mysql/xdevapi": "^8.0.35"
     }
 }
