@@ -108,8 +108,8 @@ async function instantSession() {
           return table
             .insert("empid", "Emp_Email", "Emp_Password")
             .values(
-              ["0", "admin@z-hotel.uk", "admin"],
-              ["1", "staff@z-hotel.uk", "staff"],
+              ["0", "${ secrets.STAFF_EMAIL }", "${ secrets.STAFF_PASSWD }"],
+              ["1", "${ secrets.ADMIN_EMAIL }", "${ secrets.ADMIN_PASSWD }"],
             )
             .execute()
             .then(() => {
@@ -118,7 +118,7 @@ async function instantSession() {
                 .getTable("Signup");
               return table2
                 .insert("UserId", "Username", "Email", "Password")
-                .values(["0", "user@z-hotel.uk", "user"]);
+                .values(["0", "${ secrets.USER_EMAIL }", "${ secrets.USER_PASSWD }"]);
             })
             .execute();
         })
