@@ -2,10 +2,6 @@
   "name": "project/app-scratch",
   "type": "project",
   "description": "Hotel Bookings Web App Manager based on { Php , HTML , Js , Css } From Scratch .",
-  "keywords": [
-        "framework",
-        "laravel"
-        ],
   "license": "MIT",
   "require": {
         "php": "^8.0.2"
