@@ -61,7 +61,7 @@ jobs:
 
       - name:  Env Prepare
         run: |
-             composer post-prepare-test post-create-project
+             composer post-prepare-test && composer post-create-project
 
       - name:  Unit Test
         run: | 
