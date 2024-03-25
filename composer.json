@@ -20,9 +20,6 @@
 	],
     "post-prepare-test": [
         "@php testbench package:discover --ansi"
-        ],
-    "post-test-project": [
-        "@php vendor/bin/phpunit"
         ]
         },
   "autoload-dev": {
