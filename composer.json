@@ -43,7 +43,7 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env', '.env.testing');\" && @chmod('.env', 0777)"
+            "@php -r \"file_exists('.env.testing') || copy('.env.testing', '.env');\" && @chmod('.env', 0777)"
         ],
         "post-create-project": [
             "@php artisan key:generate --no-ansi",
