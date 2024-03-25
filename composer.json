@@ -17,11 +17,8 @@
         ],
     "post-serve-project": [
 	"@php -S 0.0.0.0:8080 -t ."
-	],
-    "post-prepare-test": [
-        "@php testbench package:discover --ansi"
-        ]
-        },
+	]        
+  },
   "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
