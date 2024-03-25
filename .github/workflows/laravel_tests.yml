@@ -37,24 +37,16 @@ jobs:
           php-version: 8.3
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, sqlite3, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
 
-      - name: Setup problem matchers
-        run: |
-          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-      - name: Copy ENV Laravel Configuration for CI
-        run:  "cp -rf .env.testing .env"
-
       - name: Install PHPUnit ${{ matrix.phpunit }}
         run: |
           composer require "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
 
-      - name: Install dependencies
-        run: |
-          composer require --no-interaction --with-all-dependencies
-          composer update --no-interaction  --prefer-dist
-
       - name: Install NPM Dependencies
         run: npm install glob -D --force
+
+      - name: Directory Permissions
+        run: |
+          chmod -R 777 storage bootstrap/cache
 
       - name: Compile Assets
         run: npm run build
@@ -62,12 +54,13 @@ jobs:
       - name: Copy environment file
         run: cp .env.testing .env
 
+      - name: Install dependencies
+        run: |
+          composer require --no-interaction --with-all-dependencies
+          composer update --no-interaction  --prefer-dist
+
       - name: Generate Key
         run: composer post-create-project
-
-      - name: Directory Permissions
-        run: |
-          chmod -R 777 storage bootstrap/cache
 
       - name: Prepare Test
         run: composer post-prepare-test
