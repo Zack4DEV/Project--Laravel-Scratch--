@@ -39,14 +39,18 @@ jobs:
 
       - name: Install PHPUnit ${{ matrix.phpunit }}
         run: |
-          composer require "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
+            composer require "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
 
       - name: Install dependencies
         run: |
-          composer require   --no-interaction --with-all-dependencies
-          composer update  --no-interaction --with-all-dependencies --prefer-dist 
+            composer require   --no-interaction --with-all-dependencies
+            composer update  --no-interaction --with-all-dependencies --prefer-dist 
 
-      - name:  PHPUnit Test
+      - name: Workbench Package Discover
+	      run: |
+	          composer run post-prepare-test
+           
+      - name: PHPUnit Test
         run: |
-          "'/vendor/bin/phpunit'  --testsuite=Unit" | php
+            " "'/vendor/bin/phpunit'  --testsuite=Unit" | php 
  
