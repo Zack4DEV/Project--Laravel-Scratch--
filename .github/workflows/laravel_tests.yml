@@ -64,4 +64,4 @@ jobs:
 
       - name: Prepare Test
         run: |
-          "@php /r __DIRNAME__.'/vendor/bin/phpunit'  --testsuite=Unit --bootstrap /vendor/autoload.php tests"
+          "@php /r __DIRNAME__.'/vendor/bin/phpunit'  --testsuite=Unit --bootstrap __DIRNAME__.'vendor/autoload.php' tests"
