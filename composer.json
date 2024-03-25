@@ -16,7 +16,7 @@
         "composer dump-autoload -o"
         ],
     "post-serve-project": [
-	"@php -S 0.0.0.0:8000 -t ."
+	"@php -S 0.0.0.0:8080 -t ."
 	],
     "post-prepare-test": [
         "@php testbench package:discover --ansi"
