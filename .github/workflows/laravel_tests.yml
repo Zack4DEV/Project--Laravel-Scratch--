@@ -65,4 +65,4 @@ jobs:
 
       - name:  Unit Test
         run: | 
-            "'/vendor/bin/phpunit'  --testsuite=Unit --bootstrap 'vendor/autoload.php' tests" | php
+            '/vendor/bin/phpunit'  --testsuite=Unit --bootstrap 'vendor/autoload.php' tests | php
