@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: '0 0 * * *'
 jobs:
-  build:
+  test:
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     strategy:
@@ -73,7 +73,7 @@ jobs:
       - name: Prepare Test
         run: composer post-prepare-test
 
-     - name: PHPUnit Test
-       uses: chindit/actions-phpunit@3.0.0
+     -  name: PHPUnit Test
+        uses: chindit/actions-phpunit@3.0.0
 #      - name: PHPUnit Test
 #        run: composer post-test-project
