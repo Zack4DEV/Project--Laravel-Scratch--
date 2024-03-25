@@ -12,7 +12,7 @@ jobs:
     strategy:
        matrix:
         os: [ubuntu-latest]
-        php: [8.3]
+        php: [8.2]
         phpunit: [11.0.x-dev]
         laravel: [11.x-dev]
         include:
@@ -34,7 +34,7 @@ jobs:
       - name: Setup PHP
         uses: nanasess/setup-php@v4.0.2
         with:
-          php-version: 8.3
+          php-version: 8.2
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, sqlite3, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
 
       - name: Install PHPUnit ${{ matrix.phpunit }}
