@@ -12,7 +12,7 @@ jobs:
     strategy:
        matrix:
         os: [ubuntu-latest]
-        php: [8.2.4]
+        php: [8.2]
         phpunit: [11.0.x-dev]
         laravel: [11.x-dev]
         include:
@@ -32,11 +32,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2.30.0
+        uses: nanasess/setup-php@v4.0.1
         with:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, sqlite3, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-          coverage: none
 
       - name: Setup problem matchers
         run: |
