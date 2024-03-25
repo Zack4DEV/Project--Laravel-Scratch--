@@ -63,7 +63,5 @@ jobs:
         run: composer post-create-project
 
       - name: Prepare Test
-        run: composer post-prepare-test
-        
-      - name: PHPUnit Test
-        run: composer post-test-project
+        run: |
+          "@php /r /vendor/bin/phpunit  --testsuite=Unit --bootstrap /vendor/autoload.php tests"
