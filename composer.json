@@ -56,9 +56,6 @@
         "post-prepare-test": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php testbench package:discover --ansi"
-        ],
-        "post-test-project": [
-            "@php /vendor/bin/phpunit"
         ]
     },
     "extra": {
