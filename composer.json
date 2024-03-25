@@ -9,18 +9,19 @@
     "license": "MIT",
     "require": {
         "php": ">=8.2",
-        "laravel/framework": "11-x.dev",
-        "laravel/tinker": "3.x-dev"
+        "laravel/framework": "11.0.8",
+        "laravel/tinker": ">=2.9"
     },
     "require-dev": {
         "laravel/pint": ">=1.14",
         "laravel/sail": ">=1.29.1",
+        "laravel/sanctum": "4.x-dev",
         "mockery/mockery": ">=1.6.11",
         "nunomaduro/collision": ">=8.1.1",
         "nunomaduro/termwind": ">=2.0.1",
         "phpunit/phpunit": "11.0.x-dev",
-        "spatie/laravel-ignition": "2.x-dev",
-        "orchestra/testbench": "10.x-dev"
+        "spatie/laravel-ignition": "dev-main",
+        "orchestra/testbench": ">=9.0.1"
 
     },
     "autoload": {
@@ -42,7 +43,7 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env', '.env.testing');\" && @chmod('.env', 0777)"
         ],
         "post-create-project": [
             "@php artisan key:generate --no-ansi",

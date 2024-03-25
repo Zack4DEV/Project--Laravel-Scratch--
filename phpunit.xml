@@ -20,7 +20,7 @@
     </source>
     -->
     <php>
-        <env name="APP_ENV" value=""/>
+        <env name="APP_ENV" value="testing"/>
         <env name="APP_URL" value="http://localhost"/>
        <!-- <env name="APP_KEY" value="App under test"/> -->
         <env name="BCRYPT_ROUNDS" value="4"/>
