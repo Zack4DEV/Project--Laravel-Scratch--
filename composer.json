@@ -47,7 +47,6 @@
         ],
         "post-create-project": [
             "@php artisan key:generate --no-ansi",
-            "@php -r \"file_exists('public/database/create_SQLite.db) || touch('public/database/create_SQLite.db');\"",
             "@php artisan migrate --graceful --ansi"
 
         ],
