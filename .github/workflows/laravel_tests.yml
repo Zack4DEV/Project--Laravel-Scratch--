@@ -25,7 +25,7 @@ jobs:
         experimental:
           - false
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
+    name: ${{ matrix.php }} - ${{ matrix.laravel }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -74,6 +74,6 @@ jobs:
         run: composer post-prepare-test
 
       - name: PHPUnit Test
-        uses: chindit/actions-phpunit@3.0.0
+        uses: chindit/actions-phpunit@1.0.0
 #      - name: PHPUnit Test
 #        run: composer post-test-project
