@@ -55,7 +55,7 @@ jobs:
           composer update --no-interaction  --prefer-dist
 
       - name: Install NPM Dependencies
-        run: npm install --lock
+        run: npm install glob -D --force
 
       - name: Compile Assets
         run: npm run build
