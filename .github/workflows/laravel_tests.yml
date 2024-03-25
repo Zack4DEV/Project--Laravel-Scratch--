@@ -43,7 +43,7 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - name: Copy ENV Laravel Configuration for CI
-        run:  "@php -r \"file_exists('.env.testing') || copy('.env.testing', '.env');\ && @chmod('.env', '0777');" "
+        run:  "@php -r \"file_exists('.env.testing') || copy('.env.testing', '.env');"
 
       - name: Install PHPUnit ${{ matrix.phpunit }}
         run: |
