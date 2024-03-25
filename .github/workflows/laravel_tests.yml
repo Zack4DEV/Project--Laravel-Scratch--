@@ -43,7 +43,7 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - name: Copy ENV Laravel Configuration for CI
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run: php -r "@php -r \"file_exists('.env') || copy('.env', '.env.testing');\" && @chmod('.env', 0777)"
 
       - name: Install PHPUnit ${{ matrix.phpunit }}
         run: |
@@ -55,13 +55,13 @@ jobs:
           composer update --no-interaction  --prefer-dist
 
       - name: Install NPM Dependencies
-        run: npm install
+        run: npm install --lock
 
       - name: Compile Assets
         run: npm run build
 
       - name: Copy environment file
-        run: cp .env.example .env
+        run: cp .env.testing .env
 
       - name: Generate Key
         run: composer post-create-project
