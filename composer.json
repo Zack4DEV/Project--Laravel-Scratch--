@@ -22,7 +22,7 @@
         "@php testbench package:discover --ansi"
         ],
     "post-test-project": [
-        "@php /vendor/bin/phpunit  --testsuite=Unit"
+        "@php /vendor/bin/phpunit  --testSuite=Unit"
         ]
         },
   "autoload-dev": {
