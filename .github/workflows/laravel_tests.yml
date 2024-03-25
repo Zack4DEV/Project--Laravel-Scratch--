@@ -56,7 +56,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-             composer require --no-interaction --with-all-dependencies |
+             composer require --no-interaction --with-all-dependencies
              composer update --no-interaction  --prefer-dist
 
       - name:  Env Prepare
