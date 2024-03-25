@@ -8,26 +8,20 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "8.x-dev",
-        "laravel/sanctum": "^2.8",
-        "laravel/tinker": "3.x-dev",
-        "laravel/ui": "^3.4.6",
-        "orchestra/testbench": "^6.40.0"
+        "php": ">=8.2",
+        "laravel/framework": "11-x.dev",
+        "laravel/tinker": "3.x-dev"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
-        "laravel/sail": "^1.18",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^5.4.28",
-        "nunomaduro/termwind": "^1.13",
-        "mikey179/vfsstream": "2.0.x-dev",
-        "phpunit/phpunit": "9.6.x-dev",
-        "spatie/laravel-ignition": "1.x-dev",
-        "facade/ignition": "^2.5"
+        "laravel/pint": ">=1.14",
+        "laravel/sail": ">=1.29.1",
+        "mockery/mockery": ">=1.6.11",
+        "nunomaduro/collision": ">=8.1.1",
+        "nunomaduro/termwind": ">=2.0.1",
+        "phpunit/phpunit": "11.0.x-dev",
+        "spatie/laravel-ignition": "2.x-dev",
+        "orchestra/testbench": "10.x-dev"
+
     },
     "autoload": {
         "psr-4": {
@@ -51,7 +45,10 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project": [
-            "@php artisan key:generate --no-ansi"
+            "@php artisan key:generate --no-ansi",
+            "@php -r \"file_exists('public/database/create_SQLite.db) || touch('public/database/create_SQLite.db');\"",
+            "@php artisan migrate --graceful --ansi"
+
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -65,16 +62,15 @@
         ]
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "8.x-dev"
-        },
         "laravel": {
             "dont-discover": []
         }
     },
     "config": {
         "optimize-autoloader": true,
-        "prefer-lowest": true,
+        "minimum-stability": "stable",
+        "prefer-stable": false,
+        "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
