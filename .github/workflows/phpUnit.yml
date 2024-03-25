@@ -12,10 +12,10 @@ jobs:
     strategy:
        matrix:
         os: [ubuntu-latest]
-        php: [8.0.2]
-        phpunit: [9.6.x-dev]
-    #    include:
-    #       - testbench: 6.x-dev
+        php: [8.2]
+        phpunit: [11.0.x-dev]
+        include:
+           - testbench: 9.0.1
         dependencies:
           - "locked"
           - "lowest"
@@ -23,16 +23,16 @@ jobs:
         experimental:
           - false
 
-    name: P${{ matrix.php }} - ${{ matrix.os }}
+    name: ${{ matrix.php }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: nanasess/setup-php@v4.0.2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: 8.2
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, sqlite3, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
