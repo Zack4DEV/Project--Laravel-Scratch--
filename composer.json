@@ -58,7 +58,7 @@
             "@php testbench package:discover --ansi"
         ],
         "post-test-project": [
-            "@php /vendor/bin/phpunit  --testsuite=Unit --bootstrap /vendor/autoload.php tests"
+            "@php /vendor/bin/phpunit  --testSuite=Unit --bootstrap /vendor/autoload.php tests"
         ]
     },
     "extra": {
