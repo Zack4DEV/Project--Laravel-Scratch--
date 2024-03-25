@@ -56,13 +56,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require --no-interaction --with-all-dependencies
-          composer update --no-interaction  --prefer-dist
+             composer require --no-interaction --with-all-dependencies |
+             composer update --no-interaction  --prefer-dist
 
-      - name: Generate Key
-        run: composer post-create-project
-
-      - name:  PHPUnit Test
+      - name:  Env Prepare
         run: |
-          "'/vendor/bin/phpunit'  --testsuite=Unit --bootstrap 'vendor/autoload.php' tests" | php
- 
+             composer post-prepare-test post-create-project
+
+      - name:  Unit Test
+        run: | 
+            "'/vendor/bin/phpunit'  --testsuite=Unit --bootstrap 'vendor/autoload.php' tests" | php
