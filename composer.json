@@ -4,7 +4,7 @@
   "description": "Hotel Bookings Web App Manager based on { Php , HTML , Js , Css } From Scratch .",
   "license": "MIT",
   "require": {
-        "php": ">=8.0.2"
+        "php": ">=8.2"
        }, 	
   "require-dev": {
 		"mikey179/vfsstream": "2.0.x-dev",
