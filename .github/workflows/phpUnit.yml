@@ -46,6 +46,4 @@ jobs:
           composer update  --no-interaction --with-all-dependencies --prefer-dist 
 
       - name: PHPUnit Test
-        uses: chindit/actions-phpunit@1.0.0
-   #   - name: PHPUnit Test
-   #     run: composer post-test-project
+        run: composer post-test-project
