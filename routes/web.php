@@ -12,7 +12,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//<!-- Vue-router Routes -->
 
+Route::get('{any?}', function() {
+    return view('Application');
+})->where('any', '.*');
+
+/**
+<!--- Laravel Routes --->
 Route::get('/', 'App\Http\Controllers\Welcome@welcome_Form_Login')->name('login_form_welcome');
 Route::get('/', 'App\Http\Controllers\Welcome@welcome_Login_To')->name('login_to_welcome');
 
@@ -71,3 +78,4 @@ Route::group(
     }
 );
 
+*/
