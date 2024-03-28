@@ -151,10 +151,9 @@
         'rgba(153, 102, 255, 1)',
       ],
       borderColor: 'black',
-      data: [<?php echo $chartroom1row ?>, <?php echo $chartroom2row ?>, <?php echo $chartroom3row ?>, <?php echo $chartroom4row ?>],
-    }]
+  }]
   };
-
+  
   const doughnutchart = {
     type: 'doughnut',
     data: data,
@@ -167,7 +166,6 @@
 
   Morris.Bar({
     element: 'profitchart',
-    data: [<?php echo $chart_data; ?>],
     xkey: 'date',
     ykeys: ['profit'],
     labels: ['Profit'],
@@ -215,5 +213,3 @@
     </div>
 </div>
 </template>
-
-

@@ -367,20 +367,20 @@
 	</style>
 
 <script setup lang="ts">
-    var detailpanel = document.getElementById("guestdetailpanel");
+    var detailpanel = global.Document.getElementById("guestdetailpanel");
 
-    adduseropen = () => {
+		const adduseropen = () => {
       detailpanel.style.display = "flex";
     };
-    adduserclose = () => {
+		const adduserclose = () => {
       detailpanel.style.display = "none";
     };
 
     //search bar logic using js
     const searchFun = () => {
-      let filter = document.getElementById("search_bar").value.toUpperCase();
+      let filter = global.Document.getElementById("search_bar").value.toUpperCase();
 
-      let myTable = document.getElementById("table-data");
+      let myTable = global.Document.getElementById("table-data");
 
       let tr = myTable.getElementsByTagName("tr");
 
