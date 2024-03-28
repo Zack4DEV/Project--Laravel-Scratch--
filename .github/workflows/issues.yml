@@ -9,4 +9,4 @@ permissions:
 
 jobs:
   help-wanted:
-    uses: .github/workflows/issues.yml@origin
+    uses: ./.github/workflows/issues.yml@origin

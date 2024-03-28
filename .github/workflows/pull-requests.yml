@@ -8,5 +8,6 @@ permissions:
   pull-requests: write
 
 jobs:
-  uneditable:
-    uses: .github/workflows/pull-requests.yml@origin
+  pull:
+    uneditable:
+    uses: ./.github/workflows/pull-requests.yml@origin
