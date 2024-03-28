@@ -367,22 +367,13 @@
 	</style>
 
 <script setup lang="ts">
-    var detailpanel = global.Document.getElementById("guestdetailpanel");
-
-		const adduseropen = () => {
-      detailpanel.style.display = "flex";
-    };
-		const adduserclose = () => {
-      detailpanel.style.display = "none";
-    };
 
     //search bar logic using js
-    const searchFun = () => {
-      let filter = global.Document.getElementById("search_bar").value.toUpperCase();
+			var filter	= document.getElementById("search_bar").value.toUpperCase();
 
-      let myTable = global.Document.getElementById("table-data");
+			var myTable	= document.getElementById("table-data");
 
-      let tr = myTable.getElementsByTagName("tr");
+      var tr = myTable.getElementsByTagName("tr");
 
       for (var i = 0; i < tr.length; i++) {
         let td = tr[i].getElementsByTagName("td")[1];
@@ -396,8 +387,7 @@
             tr[i].style.display = "none";
           }
         }
-      }
-    };
+      };
 </script>    
 
 <template>
