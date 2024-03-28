@@ -1,4 +1,4 @@
-<script scoped>
+<style>
 
     #guestdetailpanel {
         display: none;
@@ -214,16 +214,16 @@
     }
 
     .h1 {
-      background-image: url(../../images/hotel1photo.jpg);
+      background-image: url(../../assets/images/hotel1photo.jpg);
     }
     .h2 {
-      background-image: url(../../images/hotel2photo.jpg);
+      background-image: url(../../assets/images/hotel2photo.jpg);
     }
     .h3 {
-      background-image: url(../../images/hotel3photo.jpg);
+      background-image: url(../../assets/images/hotel3photo.jpg);
     }
     .h4 {
-      background-image: url(../../images/hotel4photo.jpg);
+      background-image: url(../../assets/images/hotel4photo.jpg);
     }
 
     .roomdata {
@@ -293,19 +293,19 @@
     }
 
     .box:nth-child(1) {
-      background-image: url(../../images/swimingpool.jpg);
+      background-image: url(../../assets/images/swimingpool.jpg);
       background-size: cover;
     }
     .box:nth-child(2) {
-      background-image: url(../../images/food.jpg);
+      background-image: url(../../assets/images/food.jpg);
       background-size: cover;
     }
     .box:nth-child(3) {
-      background-image: url(../../images/gym.jpg);
+      background-image: url(../../assets/images/gym.jpg);
       background-size: cover;
     }
     .box:nth-child(4) {
-      background-image: url(../../images/spa.jpg);
+      background-image: url(../../assets/images/spa.jpg);
       background-size: cover;
     }
 
@@ -414,12 +414,15 @@
       }
     }
 
-</script>
+</style>
 
 <template>
+  <?php 
+  require(__DIRNAME__.'/resources/views/User.blade.php'); 
+  ?>
 <nav>
     <div class="logo">
-        <img class="hotellogo" src="../../images/hotellogo.jpg" alt="">
+        <img class="hotellogo" src="../../assets/images/hotellogo.jpg" alt="">
         <p>Hotel</p>
     </div>
     <ul>
@@ -433,13 +436,13 @@
 <div id="first_div" class="carousel slide carousel_section" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="carousel-image" src="../../images/__hotel4.jpg">
+            <img class="carousel-image" src="../../assets/images/__hotel4.jpg">
         </div>
         <div class="carousel-item">
-            <img class="carousel-image" src="../../images/__hotel5.jpg">
+            <img class="carousel-image" src="../../assets/images/__hotel5.jpg">
         </div>
         <div class="carousel-item">
-            <img class="carousel-image" src="../../images/__hotel6.jpg">
+            <img class="carousel-image" src="../../assets/images/__hotel6.jpg">
         </div>
 
         <div class="welcomeline">
@@ -448,7 +451,7 @@
 
         <!-- bookbox -->
         <div id="guestdetailpanel">
-            <form action="" method="POST" class="guestdetailpanelform">
+            <form action="/resources/views/User.blade.php" method="POST" class="guestdetailpanelform">
                 <div class="head">
                     <h3>RESERVATION</h3>
                     <i class="fa-solid fa-circle-xmark" onclick="closebox()"></i>
@@ -459,15 +462,14 @@
                         <input class="form-controls" type="text" name="Name" placeholder="Enter Full name">
                         <input class="form-controls" type="email" name="Email" placeholder="Enter Email">
 
-                        @php $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Congo, the Democratic Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and Mc Donald Islands", "Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic of", "Korea, Republic of", "Kuwait", "Kyrgyzstan", "Lao, People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia, The Former Yugoslav Republic of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of", "Moldova, Republic of", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia (Slovak Republic)", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbard and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan, Province of China", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe"); @endphp
-
+                     
                         <select name="Country" class="form-controls">
                             <option value selected>Select your country</option>
-                            @foreach ($countries as $value)
-                            echo '<option value="' . $value . '">' . {{ $value  }} . '</option>';
-                            @endforeach;
-
-                        </select>
+                            <option value="' . $value . '">
+                              <?php 
+                              ' . $value . ' 
+                              ?></option>';
+                           </select>
                         <input class="form-controls" type="text" name="Phone" placeholder="Enter Phoneno">
                     </div>
 
@@ -524,7 +526,7 @@
     </div>
 </div>
 <div id="second_div">
-    <img src="../../images/homeanimatebg.svg">
+    <img src="../../assets/images/homeanimatebg.svg">
     <div class="ourroom">
         <h1 class="head">≼ Our room ≽</h1>
         <div class="roomselect">

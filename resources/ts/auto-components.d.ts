@@ -7,6 +7,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    locale: type_of_import('./components/Utils/ChangeLocale.vue')['default']
+    
     index: type_of_import('./components/Index.vue')['default']
     user: type_of_import('./components/User.vue')['default']
     admin: type_of_import('./components/Admin/Admin.vue')['default']

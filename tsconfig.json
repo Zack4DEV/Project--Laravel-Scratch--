@@ -14,7 +14,7 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./resources/js/*"]
+      "@/*": ["./resources/ts/*"]
     },
     "types": ["node", "vite/client"],
     "resolveJsonModule": true,
@@ -41,11 +41,10 @@
     "skipLibCheck": true
   },
   "include": [
-    "public/js/**/*.ts",
-    "public/js/**/*.d.ts",
-    "resources/js/**/*.tsx",
-    "resources/js/**/*.vue",
+    "resources/ts/**/*.tsx",
+    "resources/ts/**/*.vue",
     "vite.config.*"
   ],
-  "exclude": ["node_modules", "dist", "**/*.js"]
+  "exclude": ["node_modules", "dist", "**/*.ts"],
+  "allowJs": true
 }

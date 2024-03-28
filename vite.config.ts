@@ -1,16 +1,16 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import viteCompression from 'vite-plugin-compression2';
+import pkg from './package.json';
 import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import viteCompression from 'vite-plugin-compression2';
 import type { UserConfig, ConfigEnv } from 'vite';
 import { defineConfig, loadEnv } from 'vite';
-import pkg from './package.json';
-import dayjs from 'dayjs';
+import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import legacy from '@vitejs/plugin-legacy';
 import AutoComponents from 'unplugin-vue-components/vite';
-import { createHtmlPlugin } from 'vite-plugin-html';
+import dayjs from 'dayjs';
 
 const root: string = process.cwd();
 const assetsDir = './resources/js/assets';
@@ -37,11 +37,18 @@ export default defineConfig(({ mode }: ConfigEnv) : UserConfig => {
     return {
         base: './',
         plugins: [
-          vue(),
+          vue({
+            template: {
+              transformAssetUrls: {
+                base: null,
+                includeAbsolute: false,
+              },
+            },
+          }),
           vueJsx(),         
           viteCompression(),
           laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/ts/app.ts'],
             refresh: true,
           }),
           AutoComponents({
@@ -72,6 +79,7 @@ export default defineConfig(({ mode }: ConfigEnv) : UserConfig => {
           },
         },
         build: {
+          emptyOutDir: true,
           assetsDir: assetsDir,
           sourcemap: false,
           chunkSizeWarningLimit: 1500,

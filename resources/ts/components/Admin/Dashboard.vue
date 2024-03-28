@@ -1,4 +1,4 @@
-<style scoped>
+<style >
     const labels = [
             'Superior Room',
             'Deluxe Room',
@@ -131,27 +131,75 @@
       border-radius: 10px;
     }
 </style>
-<script setup lang="ts">
+
+<script>
+  const labels = [
+    'Superior Room',
+    'Deluxe Room',
+    'Guest House',
+    'Single Room',
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(153, 102, 255, 1)',
+      ],
+      borderColor: 'black',
+      data: [<?php echo $chartroom1row ?>, <?php echo $chartroom2row ?>, <?php echo $chartroom3row ?>, <?php echo $chartroom4row ?>],
+    }]
+  };
+
+  const doughnutchart = {
+    type: 'doughnut',
+    data: data,
+    options: {}
+  };
+
+  const myChart = new Chart(
+    document.getElementById('bookroomchart'),
+    doughnutchart);
+
+  Morris.Bar({
+    element: 'profitchart',
+    data: [<?php echo $chart_data; ?>],
+    xkey: 'date',
+    ykeys: ['profit'],
+    labels: ['Profit'],
+    hideHover: 'auto',
+    stacked: true,
+    barColors: [
+      'rgba(153, 102, 255, 1)',
+    ]
+  });
 </script>
 
 <template>
-<div class="databox">
+    <?php
+    require(__DIR__.'/resources/views/Admin/Dashboard.blade.php'); 
+    ?>
+    <div class="databox">
     <div class="box roombookbox">
         <h2>Total Booked Room</h1>
             <h1>
-                {{ $roombookrow / $roomrow }}
+                <?php  ' . $roombookrow / $roomrow . ' ?>
             </h1>
     </div>
     <div class="box guestbox">
         <h2>Total Staff</h1>
             <h1>
-                {{ $staffrow }}
+                <?php  ' . $staffrow . ' ?>
             </h1>
     </div>
     <div class="box profitbox">
         <h2>Profit</h1>
             <h2>
-                {{ $tot }}
+                <?php  ' . $tot . ' ?>
                 <span>$</span>
             </h2>
     </div>
@@ -166,15 +214,6 @@
         <h3 style="text-align: center;margin:10px 0;">Profit</h3>
     </div>
 </div>
-
-@foreach($result as $row)
-$chart_data = '';
-$tot = 0;
-$chart_data .= "{ date:'" . {{ $row["cout"] }} . "', profit:" . {{ $row["finaltotal"] }} * 10 / 100 . "}, ";
-$tot = $tot + $row["finaltotal"] * 10 / 100;
-$chart_data = substr($chart_data, 0, -2);
-@endforeach
-
 </template>
 
 

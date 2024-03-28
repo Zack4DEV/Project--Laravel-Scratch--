@@ -21,7 +21,8 @@
         "nunomaduro/termwind": ">=2.0.1",
         "phpunit/phpunit": "11.0.x-dev",
         "spatie/laravel-ignition": "dev-main",
-        "orchestra/testbench": ">=9.0.1"
+        "orchestra/testbench": ">=9.0.1",
+        "nette/database": ">=3.2.0"
 
     },
     "autoload": {
@@ -58,11 +59,7 @@
             "@php testbench package:discover --ansi"
         ]
     },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
+
     "config": {
         "optimize-autoloader": true,
         "minimum-stability": "stable",

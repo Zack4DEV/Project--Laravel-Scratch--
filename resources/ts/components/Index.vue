@@ -1,10 +1,9 @@
 <script setup lang="ts"> 
-    AOS.init();
 
     var login = document.getElementById('Log_in');
     var signup = document.getElementById('sign_up');
 
-     const signuppage = () => {
+    const signuppage = () => {
       login.style.display = 'none';
       signup.style.display = 'flex';
     };
@@ -36,7 +35,7 @@
 
 </script>
 
-<style scoped>
+<style>
     :root {
       --bg-text-shadow: 0 2px 4px rgb(13 0 77 / 8%), 0 3px 6px rgb(13 0 77 / 8%),
         0 8px 16px rgb(13 0 77 / 8%);
@@ -265,16 +264,19 @@
 </style>
 
 <template>
+    <?php 
+    require(__DIRNAME__.'/resources/views/Index.blade.php'); 
+    ?>
     <div id="carouselExampleControls" class="carousel slide carousel_section" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="carousel-image" src="../../images/__hotel1.jpg">
+                <img class="carousel-image" src="../../assets/images/__hotel1.jpg">
             </div>
             <div class="carousel-item">
-                <img class="carousel-image" src="../../images/__hotel2.jpg">
+                <img class="carousel-image" src="../../assets/images/__hotel2.jpg">
             </div>
             <div class="carousel-item">
-                <img class="carousel-image" src="../../images/__hotel3.jpg">
+                <img class="carousel-image" src="../../assets/images/__hotel3.jpg">
             </div>
         </div>
     </div>
@@ -298,7 +300,7 @@
 
             <div id="User_Log_In">
 
-                <form class="user_login authsection active" id="userlogin" action="" method="POST">
+                <form class="user_login authsection active" id="userlogin" action="/resources/views/Index.blade.php" method="POST">
 
                     <div class="form-floating">
                         <input type="text" class="form-control" name="Username" placeholder=" ">
@@ -325,7 +327,7 @@
 
             <div id="Employee_Log_In">
 
-                <form class="employee_login authsection" id="employeelogin" action="" method="POST">
+                <form class="employee_login authsection" id="employeelogin" action="/resources/views/Index.blade.php" method="POST">
                     <div class="form-floating">
                         <input type="email" class="form-control" name="Emp_Email" placeholder=" ">
                         <label for="floatingInput">Email</label>
@@ -341,7 +343,7 @@
         <div id="sign_up">
             <h2>Sign Up</h2>
 
-            <form class="user_signup" id="usersignup" action="" method="POST">
+            <form class="user_signup" id="usersignup" action="/resources/views/Index.blade.php" method="POST">
                 <div class="form-floating">
                     <input type="text" class="form-control" name="Username" placeholder=" ">
                     <label for="Username">Username</label>
@@ -368,6 +370,5 @@
             </form>
         </div>
     </div>
-    
     
 </template>

@@ -1,4 +1,4 @@
-<style>
+<style scoped>
     @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Cookie&family=Poppins:wght@600&display=swap");
     @import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400&display=swap");
 
@@ -30,7 +30,7 @@
       /* text-shadow: var(--bg-text-shadow); */
     }
 
-    .addroomsection {
+    .addstaffsection {
       height: 60px;
       width: 100%;
       background-color: #0a0d2d;
@@ -39,26 +39,26 @@
       z-index: 100;
     }
 
-    .addroomsection form {
+    .addstaffsection form {
       height: 100%;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
     }
 
-    .addroomsection form label {
+    .addstaffsection form label {
       color: white;
     }
 
-    .addroomsection form select {
+    .addstaffsection form select {
       width: 300px;
     }
 
-    .addroomsection form input {
+    .addstaffsection form input {
       width: 300px;
     }
 
-    .room {
+    .staff {
       display: flex;
       position: relative;
       top: 60px;
@@ -67,7 +67,7 @@
       justify-content: space-evenly;
       flex-wrap: wrap;
     }
-    .roombox {
+    .staffbox {
       height: 230px;
       width: 230px;
       margin: 20px;
@@ -79,30 +79,35 @@
       border-radius: 10px;
     }
 
-    .roomboxsuperior {
+    .staffboxsuperior {
       background-color: #2407fc8e;
     }
 
-    .roomboxdelux {
+    .staffboxdelux {
       background-color: #fa8393c8;
     }
 
-    .roomboguest {
+    .staffboguest {
       background-color: #19cf1069;
     }
 
-    .roomboxsingle {
+    .staffboxsingle {
       background-color: #07fcdb8e;
     }
 </style>
 
 <template>
-<div class="addstaffsection">
-    <form action="" method="POST">
-        <label for="nstaff">Name :</label>
+  <?php 
+  require(__DIRNAME__.'/resources/views/Admin/Staff.blade.php');
+  ?> 
+  <div class="staff">
+    <!-- Staff To Add -->
+    <div class="addstaffsection">
+    <form action="/resources/views/Admin/Staff.blade.php" method="POST">
+        <label for="tstaff">Name :</label>
         <input type="text" name="staffname" class="form-control">
 
-        <label for="wstaff">Work :</label>
+        <label for="bed">Work :</label>
         <select name="staffwork" class="form-control">
             <option value selected></option>
             <option value="Manager">Manager</option>
@@ -111,18 +116,16 @@
             <option value="cleaner">Cleaner</option>
             <option value="weighter">weighter</option>
         </select>
-
         <button type="submit" class="btn btn-success" name="addstaff">Add Staff</button>
     </form>
+   </div>  
+    <div class='staffbox'>
+      <div class='text-center no-boder'>
+                      <i class='fa fa-users fa-5x'></i>
+                      <h3><?php " . $name . " ?></h3>
+                      <div class='mb-1'><?php " . $work . " ?></div>
+                      <a href="staffdelete.php?id='<?php . $id .  ?>'"><button class='btn btn-danger'>Delete</button></a>
+      </div>
+      </div>
 </div>
-
-<div class="staffbox">
-    <div class="text-center no-border">
-        <i class="fa fa-users fa-5x"></i>
-        <h3>{{ $row['name'] }}</h3>
-        <div class="mb-1">{{ $row['work'] }}</div>
-        <a src=""><button class="btn btn-danger">Delete</button></a>
-    </div>
-</div>
-
 </template>    

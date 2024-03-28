@@ -1,4 +1,4 @@
-<style scoped>
+<style>
     .pace {
       -webkit-pointer-events: none;
       pointer-events: none;
@@ -243,113 +243,36 @@
       });
     });
   
-  Vue.component('i-frame', {
-
-    render(h) {
-      return  h('iframe', {
-        on: { load: this.renderChildren }
-      })
-    },
-    beforeUpdate() {
-      //freezing to prevent unnessessary Reactifiation of vNodes
-      this.iApp.children = Object.freeze(this.$slots.default)
-    },  
-    methods: {
-      renderChildren() {
-        const children = this.$slots.default
-        const body = this.$el.contentDocument.body      
-        const el = document.createElement('DIV') // we will mount or nested app to this element
-        body.appendChild(el)
-
-        const iApp = new Vue({
-          name: 'iApp',
-          //freezing to prevent unnessessary Reactifiation of vNodes
-          data: { children: Object.freeze(children) }, 
-          render(h) {
-            return h('div', this.children)
-          },
-        })
-
-        iApp.$mount(el) // mount into iframe
-
-        this.iApp = iApp // cache instance for later updates
-
-
-      }
-    }
-  })
-
-  Vue.component('test-child', {
-    template: `<div>
-      <h3>{{ title }}</h3>
-      <p>
-        <slot/>
-      </p>
-    </div>`,
-    props: ['title'],
-    methods: {
-      log:  _.debounce(function() {
-        console.log('resize!')
-      }, 200)
-    },
-    mounted() {
-      this.$nextTick(() => {
-        const doc = this.$el.ownerDocument
-        const win = doc.defaultView
-        win.addEventListener('resize', this.log)
-      })
-    },
-    beforeDestroy() {
-      const doc = this.$el.ownerDocument
-      const win = doc.defaultView
-      win.removeEventListener('resize', this.log)
-    }
-  })
-
-  new Vue({
-    el: '#app',
-    data: {
-      dynamicPart: 'InputContent',
-      show: false,
-    }
-  })
 </script>
 <template>
+  
 <nav class="uppernav">
         <div class="logo">
             <p>Hotel</p>
         </div>
         <div class="logout">
-        <a src=""><button class="btn btn-primary">Logout</button></a>
+        <a src="/resources/views/Admin/Logout.blade.php" class="btn btn-primary""><button class="btn btn-primary">Logout</button></a>
     </div>
 </nav>
 
 <nav class="sidenav">
         <ul>
-            <li class="pagebtn active"><img src="../../images/icon/dashboard.png">Dashboard</li>
-            <li class="pagebtn"><img src="../../images/icon/bed.png">Room Booking</li>
-            <li class="pagebtn"><img src="../../images/icon/wallet.png">Payment</li>
-            <li class="pagebtn"><img src="../../images/icon//bedroom.png">Rooms</li>
-            <li class="pagebtn"><img src="../../images/icon/staff.png">Staff</li>
+            <li class="pagebtn active"><img src="/resources/assets/images/icon/dashboard.png">Dashboard</li>
+            <li class="pagebtn"><img src="/resources/assets/images/icon/bed.png">Room Booking</li>
+            <li class="pagebtn"><img src="/resources/assets/images/icon/wallet.png">Payment</li>
+            <li class="pagebtn"><img src="/resources/assets/images/icon//bedroom.png">Rooms</li>
+            <li class="pagebtn"><img src="/resources/assets/images/icon/staff.png">Staff</li>
         </ul>
 </nav>
 
-<div id="app">
-    <label for="">
-      <br>
-      <input type="text" v-model="dynamicPart">  
-    </label>
-
-    <div>
-     <i-frame class="frames frame1 active" frameborder="0">
-      <test-child title="">
-     </test-child>
-    </i-frame> 
-    </div>
-</div>
-
-  
-<div id="mobileview">
+  <div class="mainscreen">
+      <iframe class="frames frame1 active" src="/resources/views/Admin/Dashboard.blade.php" frameborder="0"></iframe>
+      <iframe class="frames frame2" src="/resources/views/Admin/Roombook.blade.php" frameborder="0"></iframe>
+      <iframe class="frames frame3" src="/resources/views/AdminPayment.blade.php" frameborder="0"></iframe>
+      <iframe class="frames frame4" src="/resources/views/Admin/Room.blade.php" frameborder="0"></iframe>
+      <iframe class="frames frame4" src="/resources/views/Admin/Staff.blade.php" frameborder="0"></iframe>
+  </div>
+  <div id="mobileview">
         <h5>Admin panel doesn't show in mobile view</h4>
 </div>
 
