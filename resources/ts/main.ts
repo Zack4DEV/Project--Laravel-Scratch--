@@ -1,10 +1,10 @@
-/* eslint-disable import/order */
+import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import vuetify from 'vuetify'
-import { createApp } from 'vue'
-import { createI18n } from 'vue-i18n'
+import { setupPageStackRouter } from './router/pageStack';
+import { setupHotel } from './hotel';
 import lang from './lang'
+import { createI18n } from 'vue-i18n'
 
 
 loadFonts()
@@ -12,12 +12,11 @@ loadFonts()
 
 // Create vue app
 const app = createApp(App)
-const i18n = createI18n(lang)
+const i18n = createI18n(app)
 
 // Use plugins
-app.use(vuetify)
-app.use(router)
-app.use(i18n)
+router(app)
+setupHotel(app)
 
 // Mount vue app
 app.mount('#app')
